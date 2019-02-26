@@ -63,7 +63,7 @@ suite('d2l-outcome', function() {
 		function waitForLoad(e) {
 			if (e.detail.entity.getLinkByRel('self').href === href) {
 				element.removeEventListener('d2l-siren-entity-changed', waitForLoad);
-				done();
+				setTimeout(done,0);
 			}
 		}
 		element.addEventListener('d2l-siren-entity-changed', waitForLoad);
@@ -192,12 +192,36 @@ suite('d2l-outcome', function() {
 
 		suite('outcome without notation', function() {
 			suiteSetup(function(done) {
-				setupInputData({description: 'Simple Description', subjects:  ['Subject 1'], label: 'A Label'});
+				setupInputData({description: 'Simple Description', subjects: ['Subject 1'], label: 'A Label'});
 				element = getLoadedElement('outcomes/test-outcome', done);
 			});
 			test('correctly render outcome identifier for outcomes with a subject, label, or listId, but no notation', function() {
 				var content = element.$$('.d2l-outcome-identifier').textContent;
 				assert.equal('Subject 1 A Label', content);
+			});
+		});
+	});
+
+	suite('Data Driven Tests', function() {
+		var element;
+		suite('Notation changes', function() {
+			var index=0;
+			var notations_arr = ['A–1.1.a', '1', '3A/E1', '1.1.1', 'S1.E7.K.b', 'A-ESS1-1AR',
+				'aamc-pcrs-comp-c0102', 'ELBWS072','CCR.R.1','6.1.1/6.2.1','1.PS4.1','K-2.1.1.1',
+				'SCAS_A2017-4_4a1', 'KCS.HST.K-5.5'];
+			setup(function(done) {
+				setupInputData({description: 'Simple Description', notation: notations_arr[index], 
+					subjects: ["Subject 1"], label: 'A Label'});
+				element = getLoadedElement('outcomes/test-outcome', done);
+			});
+
+			notations_arr.forEach(function(item) {
+				test(`check ${item}`, function() {
+					// console.log(element.$$('.d2l-outcome-text'))
+					index += 1;
+					var content = element.$$('.d2l-outcome-identifier').textContent;
+					assert.equal(notations_arr[index-1] + ' - Subject 1 A Label', content)
+				});
 			});
 		});
 	});
