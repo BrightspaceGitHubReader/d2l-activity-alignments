@@ -82,9 +82,9 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 	constructor() {
 		super();
 		const userAgent = window.navigator.userAgent;
-		if (userAgent.indexOf( 'Trident/' ) >= 0) {
+		if (userAgent.indexOf('Trident/') >= 0) {
 			this._iconStyle = 'transform: translateY( -0.6rem );';
-		} else if(
+		} else if (
 			window.navigator.userAgent.indexOf('Edge/') >= 0 ||
 			window.navigator.userAgent.indexOf('WebKit') < 0
 		) {
@@ -175,4 +175,4 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 
 }
 
-customElements.define( 'd2l-activity-alignment-tag-list', ActivityAlignmentTagList );
+customElements.define('d2l-activity-alignment-tag-list', ActivityAlignmentTagList);
