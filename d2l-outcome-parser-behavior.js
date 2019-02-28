@@ -2,6 +2,7 @@ const _trim = function( str ) {
 	return str ? str.trim() : str;
 };
 
+/** @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehaviorImpl */
 const OutcomeParserBehavior = {
 
 	_fromTrustedSource: function(outcomeEntity) {
@@ -107,4 +108,4 @@ const OutcomeParserBehavior = {
 
 };
 
-export default OutcomeParserBehavior;
+export default [ OutcomeParserBehavior ];
