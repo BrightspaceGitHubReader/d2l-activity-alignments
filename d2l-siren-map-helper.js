@@ -4,7 +4,7 @@ import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 
 class SirenMapHelper extends mixinBehaviors([
 	D2L.PolymerBehaviors.Siren.EntityBehavior
-], PolymerElement ) {
+], PolymerElement) {
 
 	static get properties() {
 		return {
@@ -26,7 +26,7 @@ class SirenMapHelper extends mixinBehaviors([
 		`;
 	}
 
-	_onEntityChanged( entity ) {
+	_onEntityChanged(entity) {
 		if (entity && entity.links) {
 			this.map[this.href] = entity;
 		} else if (this.map[this.href]) {
@@ -41,4 +41,4 @@ class SirenMapHelper extends mixinBehaviors([
 
 }
 
-customElements.define( 'd2l-siren-map-helper', SirenMapHelper );
+customElements.define('d2l-siren-map-helper', SirenMapHelper);

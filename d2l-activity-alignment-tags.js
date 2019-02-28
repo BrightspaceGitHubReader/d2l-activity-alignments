@@ -1,6 +1,5 @@
 import { PolymerElement, html } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
-import { DomIf } from '@polymer/polymer/lib/elements/dom-if.js';
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import 'd2l-hypermedia-constants/d2l-hypermedia-constants.js';
 import 'd2l-alert/d2l-alert.js';
@@ -11,7 +10,7 @@ class ActivityAlignmentTags extends mixinBehaviors([
 	D2L.PolymerBehaviors.Siren.EntityBehavior,
 	D2L.Hypermedia.HMConstantsBehavior,
 	D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior
-], PolymerElement ) {
+], PolymerElement) {
 
 	static get is() {
 		return 'd2l-activity-alignment-tags';
@@ -69,7 +68,7 @@ class ActivityAlignmentTags extends mixinBehaviors([
 	_handleError() {
 		this._showError = true;
 	}
-	
+
 	_getAlignments(entity) {
 		return entity
 			&& entity.hasLinkByRel(this.HypermediaRels.Alignments.alignments)
@@ -78,4 +77,4 @@ class ActivityAlignmentTags extends mixinBehaviors([
 
 }
 
-customElements.define( ActivityAlignmentTags.is, ActivityAlignmentTags );
+customElements.define(ActivityAlignmentTags.is, ActivityAlignmentTags);

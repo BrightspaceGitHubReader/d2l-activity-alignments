@@ -1,4 +1,4 @@
-const _trim = function( str ) {
+const _trim = function(str) {
 	return str ? str.trim() : str;
 };
 
@@ -35,7 +35,7 @@ const OutcomeParserBehavior = {
 		}
 
 		const properties = outcomeEntity.properties;
-		const notation = _trim(properties.notation) || _trim(properties.altNotation)
+		const notation = _trim(properties.notation) || _trim(properties.altNotation);
 
 		let primarySubject = null;
 		if (properties.subjects && properties.subjects.length) {
@@ -51,7 +51,7 @@ const OutcomeParserBehavior = {
 			primarySubject,
 			_trim(properties.label),
 			_trim(properties.listId)
-		].filter( id => id ).join(' ');
+		].filter(id => id).join(' ');
 
 		if (outcomeInfo) {
 			return notation ? (notation + ' - ' + outcomeInfo) : outcomeInfo;
@@ -97,9 +97,9 @@ const OutcomeParserBehavior = {
 			return '';
 		}
 
-		let descriptionHtml = this.getOutcomeDescriptionHtml(outcomeEntity);
+		const descriptionHtml = this.getOutcomeDescriptionHtml(outcomeEntity);
 		if (descriptionHtml) {
-			const virtualElement = document.createElement( 'div' );
+			const virtualElement = document.createElement('div');
 			virtualElement.innerHTML = descriptionHtml;
 			return virtualElement.innerText;
 		}

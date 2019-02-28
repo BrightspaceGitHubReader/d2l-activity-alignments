@@ -1,7 +1,5 @@
 import { PolymerElement, html } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
-import { DomRepeat } from '@polymer/polymer/lib/elements/dom-repeat.js';
-import { DomIf } from '@polymer/polymer/lib/elements/dom-if.js';
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import 'd2l-polymer-siren-behaviors/store/siren-action-behavior.js';
 import OutcomeParserBehavior from './d2l-outcome-parser-behavior.js';
@@ -19,8 +17,8 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 	D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior,
 	D2L.Hypermedia.HMConstantsBehavior,
 	OutcomeParserBehavior
-], PolymerElement ) {
-	
+], PolymerElement) {
+
 	static get properties() {
 		return {
 			readOnly: {
@@ -84,11 +82,11 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 	constructor() {
 		super();
 		const userAgent = window.navigator.userAgent;
-		if( userAgent.indexOf( 'Trident/' ) >= 0 ) {
+		if (userAgent.indexOf( 'Trident/' ) >= 0) {
 			this._iconStyle = 'transform: translateY( -0.6rem );';
 		} else if(
-			window.navigator.userAgent.indexOf( 'Edge/' ) >= 0 ||
-			window.navigator.userAgent.indexOf( 'WebKit' ) < 0
+			window.navigator.userAgent.indexOf('Edge/') >= 0 ||
+			window.navigator.userAgent.indexOf('WebKit') < 0
 		) {
 			this._iconStyle = 'transform: translateY( -2px );';
 		}
@@ -97,7 +95,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 	_getAlignmentHrefs(entity) {
 		if (!entity) return [];
 		const alignmentEntities = entity.getSubEntitiesByClass('alignment');
-		return alignmentEntities.map( alignment => alignment.href );
+		return alignmentEntities.map(alignment => alignment.href);
 	}
 
 	_getIntentHrefs(alignmentMap) {
