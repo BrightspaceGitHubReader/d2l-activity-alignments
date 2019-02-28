@@ -76,7 +76,7 @@ const OutcomeParserBehavior = {
 	},
 
 	getOutcomeDescriptionHtml: function(outcomeEntity) {
-		if (!this._fromTrustedSource(outcomeEntity) || !outcomeEntity.properties.description) {
+		if (!outcomeEntity || !this._fromTrustedSource(outcomeEntity) || !outcomeEntity.properties.description) {
 			return '';
 		}
 
@@ -92,6 +92,10 @@ const OutcomeParserBehavior = {
 	},
 
 	getOutcomeDescriptionPlainText: function(outcomeEntity) {
+		if (!outcomeEntity) {
+			return '';
+		}
+
 		let descriptionHtml = this.getOutcomeDescriptionHtml(outcomeEntity);
 		if (descriptionHtml) {
 			const virtualElement = document.createElement( 'div' );
