@@ -2,7 +2,7 @@ const _trim = function( str ) {
 	return str ? str.trim() : str;
 };
 
-/** @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehaviorImpl */
+/** @polymerBehavior OutcomeParserBehavior */
 const OutcomeParserBehavior = {
 
 	_fromTrustedSource: function(outcomeEntity) {
