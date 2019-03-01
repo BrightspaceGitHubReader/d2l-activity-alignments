@@ -1,0 +1,27 @@
+{
+    "class": [
+        "collection",
+        "alignments"
+    ],
+    "links": [
+        {
+            "rel": [
+                "self"
+            ],
+            "href": "static-data/alignments/activity_usage.json"
+        },
+        {
+            "rel": [
+                "https://activities.api.brightspace.com/rels/activity-usage"
+            ],
+            "href": "static-data/alignments/activity_usage.json"
+        }
+    ],
+    "actions": [
+        {
+            "href": "https://0f8cbea5-ca29-4f00-be1c-e03cf56d506a.alignments.api.dev.brightspace.com/activity-usage/6606_2000_1091/131621/update",
+            "name": "start-update-alignments",
+            "method": "POST"
+        }
+    ]
+}
