@@ -88,7 +88,8 @@ D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest = function(request) {
 		case 'https://15215d45-f7e9-4967-bf9b-13a685538829.alignments.api.proddev.d2l/activity/6606_3000_1/6609':
 			return Promise.resolve(SirenParse({
 				'class': [
-					'collection'
+					'collection',
+					'alignments'
 				],
 				'links': [
 					{
@@ -102,6 +103,18 @@ D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest = function(request) {
 							'https://activities.api.brightspace.com/rels/activity-usage'
 						],
 						'href': 'https://15215d45-f7e9-4967-bf9b-13a685538829.activities.api.proddev.d2l/activities/6606_3000_1/usages/6609'
+					}
+				],
+				'entities': [
+					{
+						'class': [ 'alignment' ],
+						'rel': [ 'item' ],
+						'href': 'https://15215d45-f7e9-4967-bf9b-13a685538829.alignments.api.proddev.d2l/activity-usage/6606_3000_1/6609/49c0c89e-eb55-43ce-80c7-b4e5d44c3a5a/e3797193-22d0-45ca-ac20-9b718675f991'
+					},
+					{
+						'class': [ 'alignment' ],
+						'rel': [ 'item' ],
+						'href': 'https://15215d45-f7e9-4967-bf9b-13a685538829.alignments.api.proddev.d2l/activity-usage/6606_3000_1/6609/49c0c89e-eb55-43ce-80c7-b4e5d44c3a5a/af009bad-9991-4a32-847b-14fd9812c633'
 					}
 				],
 				'actions': [
@@ -205,6 +218,48 @@ D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest = function(request) {
 							'about'
 						],
 						'href': 'http://asn.desire2learn.com/resources/S2686684'
+					}
+				]
+			}));
+			
+		case 'https://15215d45-f7e9-4967-bf9b-13a685538829.alignments.api.proddev.d2l/activity-usage/6606_3000_1/6609/49c0c89e-eb55-43ce-80c7-b4e5d44c3a5a/e3797193-22d0-45ca-ac20-9b718675f991':
+			return Promise.resolve(SirenParse({
+				'class': [
+					'alignment'
+				],
+				'links': [
+					{
+						rel: [ 'collection' ],
+						href: 'https://15215d45-f7e9-4967-bf9b-13a685538829.alignments.api.proddev.d2l/activity/6606_3000_1/6609'
+					},
+					{
+						rel: [ 'self' ],
+						href: 'https://15215d45-f7e9-4967-bf9b-13a685538829.alignments.api.proddev.d2l/activity-usage/6606_3000_1/6609/49c0c89e-eb55-43ce-80c7-b4e5d44c3a5a/e3797193-22d0-45ca-ac20-9b718675f991'
+					},
+					{
+						rel: [ 'https://outcomes.api.brightspace.com/rels/intent' ],
+						href: 'https://15215d45-f7e9-4967-bf9b-13a685538829.outcomes.api.proddev.d2l/registries/697a50cf-9c30-4a8c-970a-b67fa0807ef8/d31d0671-bdad-4f08-9da9-65351e3b250a'
+					}
+				]
+			}));
+			
+		case 'https://15215d45-f7e9-4967-bf9b-13a685538829.alignments.api.proddev.d2l/activity-usage/6606_3000_1/6609/49c0c89e-eb55-43ce-80c7-b4e5d44c3a5a/af009bad-9991-4a32-847b-14fd9812c633':
+			return Promise.resolve(SirenParse({
+				'class': [
+					'alignment'
+				],
+				'links': [
+					{
+						rel: [ 'collection' ],
+						href: 'https://15215d45-f7e9-4967-bf9b-13a685538829.alignments.api.proddev.d2l/activity/6606_3000_1/6609'
+					},
+					{
+						rel: [ 'self' ],
+						href: 'https://15215d45-f7e9-4967-bf9b-13a685538829.alignments.api.proddev.d2l/activity-usage/6606_3000_1/6609/49c0c89e-eb55-43ce-80c7-b4e5d44c3a5a/af009bad-9991-4a32-847b-14fd9812c633'
+					},
+					{
+						rel: [ 'https://outcomes.api.brightspace.com/rels/intent' ],
+						href: 'https://15215d45-f7e9-4967-bf9b-13a685538829.outcomes.api.proddev.d2l/registries/697a50cf-9c30-4a8c-970a-b67fa0807ef8/edcdd008-20f2-4934-9017-e53650505eae'
 					}
 				]
 			}));
