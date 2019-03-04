@@ -50,7 +50,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 				<template is="dom-repeat" items="[[_getAlignmentToOutcomeMap(_alignmentMap,_intentMap,_outcomeMap)]]">
 					<d2l-multi-select-list-item
 						text="[[_getOutcomeTextDescription(item)]]"
-						short-text="[[_getOutcomeTagText(item)]]"
+						short-text="[[_getOutcomeShortDescription(item)]]"
 						max-chars="40"
 						deletable="[[_canDelete(item,readOnly)]]"
 						on-d2l-multi-select-list-item-deleted="_removeOutcome"
@@ -127,14 +127,14 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 		return mappings;
 	}
 
-	_getOutcomeTagText(outcomeMapping) {
+	_getOutcomeShortDescription(outcomeMapping) {
 		const outcome = outcomeMapping.outcomeEntity;
 		if (this.outcomeHasNotation(outcome)) {
 			return outcome.properties.notation || outcome.properties.altNotation;
 		} else if (this.outcomeHasNotationOrLabel(outcome)) {
 			return this.getOutcomeIdentifier(outcome);
 		} else {
-			return this.getOutcomeDescriptionPlainText(outcome);
+			return undefined;
 		}
 	}
 
