@@ -44,3 +44,32 @@ Your application is already set up to be tested via [web-component-tester](https
 	</template>
 </demo-snippet>
 ```
+
+### Display outcome alignments in tag viewed
+
+#### Read-Only View
+
+```html
+<d2l-activity-alignment-tags
+	href="<activity usage URL>"
+	token="<auth token>"
+	read-only
+></d2l-activity-alignment-tags>
+```
+
+#### Editable View
+
+```html
+<d2l-activity-alignment-tags
+	id="my-alignments"
+	href="<activity usage URL>"
+	token="<auth token>"
+></d2l-activity-alignment-tags>
+
+<script>
+document.getElementById( 'my-alignments' ).addEventListener( 'd2l-activity-alignment-tags-update', function( event ) {
+	var sirenAction = event.sirenAction;
+	// ...
+});
+</script>
+```

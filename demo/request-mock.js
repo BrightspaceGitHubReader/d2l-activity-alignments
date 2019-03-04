@@ -221,7 +221,7 @@ D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest = function(request) {
 					}
 				]
 			}));
-			
+
 		case 'https://15215d45-f7e9-4967-bf9b-13a685538829.alignments.api.proddev.d2l/activity-usage/6606_3000_1/6609/49c0c89e-eb55-43ce-80c7-b4e5d44c3a5a/e3797193-22d0-45ca-ac20-9b718675f991':
 			return Promise.resolve(SirenParse({
 				'class': [
@@ -242,7 +242,7 @@ D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest = function(request) {
 					}
 				]
 			}));
-			
+
 		case 'https://15215d45-f7e9-4967-bf9b-13a685538829.alignments.api.proddev.d2l/activity-usage/6606_3000_1/6609/49c0c89e-eb55-43ce-80c7-b4e5d44c3a5a/af009bad-9991-4a32-847b-14fd9812c633':
 			return Promise.resolve(SirenParse({
 				'class': [
