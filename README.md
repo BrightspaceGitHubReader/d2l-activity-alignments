@@ -45,7 +45,7 @@ Your application is already set up to be tested via [web-component-tester](https
 </demo-snippet>
 ```
 
-### Display outcome alignments in tag viewed
+### Display outcome alignments in tag view
 
 #### Read-Only View
 
@@ -69,6 +69,7 @@ Your application is already set up to be tested via [web-component-tester](https
 <script>
 document.getElementById( 'my-alignments' ).addEventListener( 'd2l-activity-alignment-tags-update', function( event ) {
 	var sirenAction = event.sirenAction;
+	// Event fired when the Add button is clicked
 	// ...
 });
 </script>

@@ -1,0 +1,15 @@
+{
+  "class": ["outcome"],
+  "properties": {
+    "notation": "L.K.41",
+    "description": "Use words and phrases acquired through conversations, reading and being read to, and responding to texts."
+  },
+  "links": [{
+    "rel": ["about"],
+    "type": "text/html",
+    "href": "http://asn.desire2learn.com/resources/S2844217"
+  }, {
+    "rel": ["self"],
+    "href": "static-data/outcomes/c297b02c-19b1-485a-92db-e598316271c8/577540e3-8871-4a7a-a866-084174089284.json"
+  }]
+}

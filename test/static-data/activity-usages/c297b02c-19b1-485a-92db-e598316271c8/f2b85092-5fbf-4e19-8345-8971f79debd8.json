@@ -1,0 +1,13 @@
+{
+	"class": [ "activity" ],
+	"links": [
+		{
+			"rel": [ "self" ],
+			"href": "static-data/activity-usages/c297b02c-19b1-485a-92db-e598316271c8/f2b85092-5fbf-4e19-8345-8971f79debd8.json"
+		},
+		{
+			"rel": [ "https://alignments.api.brightspace.com/rels/alignments" ],
+			"href": "static-data/alignment-collections/c297b02c-19b1-485a-92db-e598316271c8/f2b85092-5fbf-4e19-8345-8971f79debd8.json"
+		}
+	]
+}

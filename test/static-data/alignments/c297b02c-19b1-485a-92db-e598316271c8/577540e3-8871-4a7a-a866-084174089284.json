@@ -1,0 +1,10 @@
+{
+  "class": ["alignment"],
+  "links": [{
+    "rel": ["self"],
+    "href": "static-data/alignments/c297b02c-19b1-485a-92db-e598316271c8/577540e3-8871-4a7a-a866-084174089284.json"
+  }, {
+    "rel": ["https://outcomes.api.brightspace.com/rels/intent"],
+    "href": "static-data/intents/c297b02c-19b1-485a-92db-e598316271c8/577540e3-8871-4a7a-a866-084174089284.json"
+  }]
+}
