@@ -11,6 +11,7 @@
 	<script src="./utilities/fetch-siren-entity-whitelist.js"></script>
 
 	<script type="module" src="../d2l-outcome.js"></script>
+	<script type="module" src="../../d2l-fetch-siren-entity-behavior/d2l-fetch-siren-entity-behavior.js"></script>
   </head>
   <body>
 	<test-fixture id="basic">
@@ -22,132 +23,206 @@
 	<script type="module">
 import '../d2l-outcome.js';
 import { dom } from '@polymer/polymer/lib/legacy/polymer.dom.js';
-/* global suite, test, assert, fixture, setup, stubWhitelist */
-var runTest = function(testName, href, testFunction) {
-	var element;
-	setup(function(done) {
-		element = fixture('basic');
-		function waitForLoad(entity, error) {
-			window.D2L.Siren.EntityStore.removeListener(
-				href,
-				'',
-				waitForLoad
-			);
-			if (error) {
-				done(error);
-				return;
-			}
-			setTimeout(function() {
-				done();
-			});
-		}
-		stubWhitelist();
-		window.D2L.Siren.EntityStore.addListener(
-			href,
-			'',
-			waitForLoad
-		);
-		element.href = href;
-		element.token = '';
-	});
+var input_data = 'global';
 
-	test(testName, function() {
-		testFunction(element);
-	});
+//setup mock server
+import SirenParse from 'siren-parser';
+window.d2lfetch.fetch = function(href) {
+	return D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest({ url: href, formData: function() { return Promise.resolve(); } })
+		.then(function(body) {
+			return {
+				ok: true,
+				json: function() {
+					return Promise.resolve(body);
+				}
+			};
+		})
+		.catch(function(err) {
+			return {
+				ok: false,
+				text: function() {
+					return Promise.resolve(err.message);
+				}
+			};
+		});
 };
 
+D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest = function(request) {
+	var href = request.url && request.url.href || request.url;
+	switch (href) {
+		case 'outcomes/test-outcome':
+			return Promise.resolve(SirenParse(input_data));
+	}
+};
+
+/* global suite, test, assert, fixture */
 suite('d2l-outcome', function() {
+	var getLoadedElement = function(href, done) {
+		var element;
+		element = fixture('basic');
+		function waitForLoad(e) {
+			if (e.detail.entity.getLinkByRel('self').href === href) {
+				element.removeEventListener('d2l-siren-entity-changed', waitForLoad);
+				setTimeout(done, 0);
+			}
+		}
+		element.addEventListener('d2l-siren-entity-changed', waitForLoad);
+		element.href = href;
+		element.token = 'foozleberries';
+		return element;
+	};
+
+	input_data = {
+		'class': ['outcome'],
+		'properties': {
+			'notation': '',
+			'altNotation': '',
+			'label': '',
+			'listId': '',
+			'description': '',
+			'subjects':'',
+			'source': ''
+		},
+		'links': [
+			{
+				'rel': ['about'],
+				'type': 'text/html',
+				'href': 'http://www.example.com'
+			}, {
+				'rel': ['self'],
+				'href': 'outcomes/test-outcome'
+			}
+		]
+	};
+
+	var setupInputData = function({notation = '', altNotation = '', label = '', listId = '', description = '', subjects = [], source = ''} = {}) {
+		input_data.properties.notation = notation;
+		input_data.properties.altNotation = altNotation;
+		input_data.properties.label = label;
+		input_data.properties.listId = listId;
+		input_data.properties.description = description;
+		input_data.properties.subjects = subjects;
+		input_data.properties.source = source;
+	};
+
 	test('instantiating the element works', function() {
 		var element = fixture('basic');
 		assert.equal(element.is, 'd2l-outcome');
 	});
 
-	suite('smoke test', function() {
-		runTest(
-			'renders outcome',
-			'static-data/outcomes/c297b02c-19b1-485a-92db-e598316271c8/5f4d6901-7c10-4edc-b2e1-821efc5c3708.json',
-			function(element) {
-				var content = dom(element.$$('siren-entity-loading')).textContent.trim();
-				assert.equal(content, 'Interpret words and phrases as they are used in a text, including determining technical, connotative, and figurative meanings, and analyze how specific word choices shape meaning or tone.');
-			}
-		);
-	});
+	suite('asn lists', function() {
+		var element;
 
-	suite('asn basic list', function() {
-		runTest(
-			'flattens a single list in ASN outcomes',
-			'static-data/outcomes/asn-outcome-with-list.json',
-			function(element) {
+		suite('single list ASN', function() {
+			suiteSetup(function(done) {
+				setupInputData({source: 'asn', description :'Prefix <ul><li>One</li><li style=\'color: red;\'>Two</li><li >Three</li ></ul> Suffix'});
+				element = getLoadedElement('outcomes/test-outcome', done);
+			});
+
+			test('flattens a single list in ASN outcomes', function() {
 				var content = element.$$('.d2l-outcome-text s-html').html;
 				assert.equal('Prefix <span> One, Two, Three </span> Suffix', content);
-			}
-		);
-	});
+			});
+		});
 
-	suite('asn multiple lists', function() {
-		runTest(
-			'flattens multiple lists in ASN outcomes',
-			'static-data/outcomes/asn-outcome-with-two-lists.json',
-			function(element) {
+		suite('multiple list ASN', function() {
+			suiteSetup(function(done) {
+				setupInputData({source: 'asn', description: 'A <ul><li>1</li><li>2</li><li>3</li></ul> B <ul><li>i</li><li>ii</li><li>iii</li></ul> C'});
+				done();
+			});
+			test('test', function(done) {
+				element = getLoadedElement('outcomes/test-outcome', done);
+			});
+			test('flattens multiple lists in ASN outcomes', function() {
 				var content = element.$$('.d2l-outcome-text s-html').html;
 				assert.equal('A <span> 1, 2, 3 </span> B <span> i, ii, iii </span> C', content);
-			}
-		);
-	});
+			});
+		});
 
-	suite('asn malformed list', function() {
-		runTest(
-			'flattens lists in ASN outcomes that are missing closing tags',
-			'static-data/outcomes/asn-outcome-with-malformed-list.json',
-			function(element) {
+		suite('asn malformed list', function() {
+			suiteSetup(function(done) {
+				setupInputData({source:'asn', description: 'Prefix <ul><li>One<li>Two<li>Three'});
+				element = getLoadedElement('outcomes/test-outcome', done);
+			});
+			test('flattens lists in ASN outcomes that are missing closing tags', function() {
 				var content = element.$$('.d2l-outcome-text s-html').html;
 				assert.equal('Prefix <span> One, Two, Three </span>', content);
-			}
-		);
+			});
+		});
 	});
 
-	suite('outcome with notation and label', function() {
-		runTest(
-			'shows the outcome notation, primary subject, label, and listId',
-			'static-data/outcomes/outcome-with-notation-and-subject.json',
-			function(element) {
+	suite('Notations and labels', function() {
+		var element;
+		suite('Full Data', function() {
+			suiteSetup(function(done) {
+				setupInputData({description: 'Simple Description', notation: 'aamc-pcrs-comp-c0101',
+					subjects:  ['Career Education'], label: 'Competency', listId: '1234'});
+				element = getLoadedElement('outcomes/test-outcome', done);
+			});
+
+			test('shows the outcome notation, primary subject, label, and description', function() {
+				var content = dom(element.$$('siren-entity-loading')).textContent.trim();
+				assert.equal(content, 'aamc-pcrs-comp-c0101 - Career Education Competency 1234Simple Description');
+			});
+		});
+
+		suite('outcome with altNotation but no notation', function() {
+			suiteSetup(function(done) {
+				setupInputData({description: 'Simple Description', subjects:  ['Career Education'],
+					altNotation: 'Alternative Notation'});
+				element = getLoadedElement('outcomes/test-outcome', done);
+			});
+
+			test('use altNotation if notation is null, empty, or only whitespace', function() {
 				var content = element.$$('.d2l-outcome-identifier').textContent;
-				assert.equal('notation - subject label listId', content);
-			}
-		);
+				assert.equal('Alternative Notation - Career Education', content);
+			});
+		});
+
+		suite('outcome with notation only', function() {
+			suiteSetup(function(done) {
+				setupInputData({description: 'Simple Description', notation: 'A Notiation'});
+				element = getLoadedElement('outcomes/test-outcome', done);
+			});
+			test('correctly render outcome identifier for outcomes with a notation, but no subject, label, or listId', function() {
+				var content = element.$$('.d2l-outcome-identifier').textContent;
+				assert.equal('A Notiation', content);
+			});
+		});
+
+		suite('outcome without notation', function() {
+			suiteSetup(function(done) {
+				setupInputData({description: 'Simple Description', subjects: ['Subject 1'], label: 'A Label'});
+				element = getLoadedElement('outcomes/test-outcome', done);
+			});
+			test('correctly render outcome identifier for outcomes with a subject, label, or listId, but no notation', function() {
+				var content = element.$$('.d2l-outcome-identifier').textContent;
+				assert.equal('Subject 1 A Label', content);
+			});
+		});
 	});
 
-	suite('outcome with altNotation but no notation', function() {
-		runTest(
-			'use altNotation if notation is null, empty, or only whitespace',
-			'static-data/outcomes/outcome-with-alt-notation-but-no-notation.json',
-			function(element) {
-				var content = element.$$('.d2l-outcome-identifier').textContent;
-				assert.equal('altNotation - subject', content);
-			}
-		);
-	});
+	suite('Data Driven Tests', function() {
+		var element;
+		suite('Notation changes', function() {
+			var index = 0;
+			var notations_arr = ['A–1.1.a', '1', '3A/E1', '1.1.1', 'S1.E7.K.b', 'A-ESS1-1AR',
+				'aamc-pcrs-comp-c0102', 'ELBWS072', 'CCR.R.1', '6.1.1/6.2.1', '1.PS4.1', 'K-2.1.1.1',
+				'SCAS_A2017-4_4a1', 'KCS.HST.K-5.5'];
+			setup(function(done) {
+				setupInputData({description: 'Simple Description', notation: notations_arr[index],
+					subjects: ['Subject 1'], label: 'A Label'});
+				element = getLoadedElement('outcomes/test-outcome', done);
+			});
 
-	suite('outcome with notation only', function() {
-		runTest(
-			'correctly render outcome identifier for outcomes with a notation, but no subject, label, or listId',
-			'static-data/outcomes/outcome-with-notation-only.json',
-			function(element) {
-				var content = element.$$('.d2l-outcome-identifier').textContent;
-				assert.equal('notation', content);
-			}
-		);
-	});
-
-	suite('outcome without notation', function() {
-		runTest(
-			'correctly render outcome identifier for outcomes with a subject, label, or listId, but no notation',
-			'static-data/outcomes/outcome-with-no-notation.json',
-			function(element) {
-				var content = element.$$('.d2l-outcome-identifier').textContent;
-				assert.equal('subject label', content);
-			}
-		);
+			notations_arr.forEach(function(item) {
+				test(`check ${item}`, function() {
+					index += 1;
+					var content = element.$$('.d2l-outcome-identifier').textContent;
+					assert.equal(notations_arr[index - 1] + ' - Subject 1 A Label', content);
+				});
+			});
+		});
 	});
 
 });

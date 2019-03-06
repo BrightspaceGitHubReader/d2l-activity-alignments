@@ -2,6 +2,7 @@
   "description": "",
   "homepage": "https://github.com/Brightspace/d2l-activity-alignments",
   "name": "d2l-activity-alignments",
+  "version": "1.1.0",
   "main": "index.js",
   "scripts": {
     "test": "npm run test:lint && polymer test --skip-plugin sauce",
@@ -21,7 +22,7 @@
     "eslint": "^5.14.1",
     "eslint-config-brightspace": "^0.4.1",
     "eslint-plugin-html": "^5.0.3",
-    "polymer-cli": "^1.9.5",
+    "polymer-cli": "^1.9.6",
     "wct-browser-legacy": "^1.0.1",
     "whatwg-fetch": "^2.0.4"
   },
