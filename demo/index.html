@@ -14,6 +14,7 @@
 	<script type="module" src="./request-mock.js"></script>
 	<script type="module" src="../../d2l-typography/d2l-typography.js"></script>
 	<script type="module" src="../d2l-select-outcomes.js"></script>
+	<script type="module" src="../d2l-activity-alignment-tags.js"></script>
   </head>
   <body class="d2l-typography">
 	<!-- FIXME(polymer-modulizer):
@@ -49,6 +50,13 @@ $_documentContainer.innerHTML = `<div class="vertical-section-container centered
 	  <demo-snippet>
 		<template>
 		  <d2l-outcome href="https://15215d45-f7e9-4967-bf9b-13a685538829.outcomes.api.proddev.d2l/outcomes/d31d0671-bdad-4f08-9da9-65351e3b250a" token="1234a"></d2l-outcome>
+		</template>
+	  </demo-snippet>
+	  
+	  <h3>Tag View (Read Only)</h3>
+	  <demo-snippet>
+		<template>
+		  <d2l-activity-alignment-tags href="https://15215d45-f7e9-4967-bf9b-13a685538829.activities.api.proddev.d2l/activities/6606_3000_1/usages/6609" token="1234a" read-only></d2l-activity-alignment-tags>
 		</template>
 	  </demo-snippet>
 	</div>`;

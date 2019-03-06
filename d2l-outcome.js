@@ -15,6 +15,7 @@ import 'd2l-polymer-siren-behaviors/siren-entity-loading.js';
 import 'd2l-typography/d2l-typography-shared-styles.js';
 import 's-html/s-html.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import OutcomeParserBehavior from './d2l-outcome-parser-behavior.js';
 const $_documentContainer = document.createElement('template');
 
 $_documentContainer.innerHTML = `<dom-module id="d2l-outcome">
@@ -55,11 +56,11 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-outcome">
 		<siren-entity-loading href="[[href]]" token="[[token]]">
 			<div class="d2l-outcome-wrap">
 				<template is="dom-if" if="[[_hasOutcomeIdentifier(entity)]]">
-					<div class="d2l-outcome-identifier">[[_getOutcomeIdentifier(entity)]]</div>
+					<div class="d2l-outcome-identifier">[[getOutcomeIdentifier(entity)]]</div>
 				</template>
 				<div class="d2l-outcome-text">
-					<s-html hidden="[[!_fromTrustedSource(entity)]]" html="[[_getDescriptionHtml(entity)]]"></s-html>
-					<span hidden="[[_fromTrustedSource(entity)]]">[[entity.properties.description]]</span>
+					<s-html hidden="[[!_fromTrustedSource(entity)]]" html="[[getOutcomeDescriptionHtml(entity)]]"></s-html>
+					<span hidden="[[_fromTrustedSource(entity)]]">[[getOutcomeDescriptionPlainText(entity)]]</span>
 				</div>
 			</div>
 
@@ -77,81 +78,11 @@ Polymer({
 
 	behaviors: [
 		D2L.PolymerBehaviors.Siren.EntityLoadingBehavior,
+		OutcomeParserBehavior
 	],
 
 	_hasOutcomeIdentifier: function(entity) {
-		return !!this._getOutcomeIdentifier(entity);
-	},
-
-	_fromTrustedSource: function(entity) {
-		return entity && entity.properties.source === 'asn';
-	},
-
-	_flattenList: function(doc, listElement) {
-		var flattenedList = doc.createElement('span');
-		flattenedList.appendChild(doc.createTextNode(' '));
-		for (var i = 0; i < listElement.childNodes.length; i++) {
-			var child = listElement.childNodes[i];
-			if (!child.tagName || child.tagName.toLowerCase() !== 'li') {
-				continue;
-			}
-
-			while (child.firstChild) {
-				flattenedList.appendChild(child.firstChild);
-			}
-			flattenedList.appendChild(doc.createTextNode(', '));
-		}
-
-		flattenedList.replaceChild(doc.createTextNode(' '), flattenedList.lastChild);
-		flattenedList.normalize();
-		return flattenedList;
-	},
-
-	_getDescriptionHtml: function(entity) {
-		if (!this._fromTrustedSource(entity) || !entity.properties.description) {
-			return '';
-		}
-
-		var parsedHtml = new DOMParser().parseFromString(entity.properties.description, 'text/html');
-		var listElements = parsedHtml.body.querySelectorAll('ul, ol, dl');
-
-		for (var i = 0; i < listElements.length; i++) {
-			var list = listElements[i];
-			list.parentElement.replaceChild(this._flattenList(parsedHtml, list), list);
-		}
-
-		return parsedHtml.body.innerHTML;
-	},
-
-	_getOutcomeIdentifier: function(entity) {
-		if (!entity) {
-			return;
-		}
-
-		var properties = entity.properties;
-
-		var notation = (properties.notation && properties.notation.trim()) || (properties.altNotation && properties.altNotation.trim());
-		var primarySubject = null;
-
-		if (properties.subjects && properties.subjects.length) {
-			for (var i = 0; i < properties.subjects.length; i++) {
-				if (properties.subjects[i] && properties.subjects[i].trim()) {
-					primarySubject = properties.subjects[i];
-					break;
-				}
-			}
-		}
-
-		var outcomeInfo = [
-			primarySubject,
-			properties.label && properties.label.trim(),
-			properties.listId && properties.listId.trim()
-		].filter(function(id) { return id; }).join(' ');
-
-		if (outcomeInfo) {
-			return notation ? (notation + ' - ' + outcomeInfo) : outcomeInfo;
-		}
-
-		return notation || '';
+		return !!this.getOutcomeIdentifier(entity);
 	}
+
 });

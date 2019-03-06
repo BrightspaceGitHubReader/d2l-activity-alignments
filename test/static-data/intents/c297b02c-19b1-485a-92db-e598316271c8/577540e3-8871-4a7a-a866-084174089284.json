@@ -1,0 +1,13 @@
+{
+  "class": ["intent"],
+  "links": [{
+    "rel": ["collection"],
+    "href": "https://15215d45-f7e9-4967-bf9b-13a685538829.outcomes.api.dev.brightspace.com/intents/c297b02c-19b1-485a-92db-e598316271c8"
+  }, {
+    "rel": ["https://outcomes.api.brightspace.com/rels/outcome"],
+    "href": "static-data/outcomes/c297b02c-19b1-485a-92db-e598316271c8/577540e3-8871-4a7a-a866-084174089284.json"
+  }, {
+    "rel": ["self"],
+    "href": "static-data/intents/c297b02c-19b1-485a-92db-e598316271c8/577540e3-8871-4a7a-a866-084174089284.json"
+  }]
+}

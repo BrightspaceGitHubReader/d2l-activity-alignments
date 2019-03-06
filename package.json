@@ -2,13 +2,15 @@
   "description": "",
   "homepage": "https://github.com/Brightspace/d2l-activity-alignments",
   "name": "d2l-activity-alignments",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "main": "index.js",
   "scripts": {
     "test": "npm run test:lint && polymer test --skip-plugin sauce",
     "test:lint": "npm run test:lint:wc && npm run test:lint:js",
     "test:lint:js": "eslint . --ext .js,.html test/**/*.js test/**/*.html demo/**/*.js demo/**/*.html",
-    "test:lint:wc": "polymer lint"
+    "test:lint:wc": "polymer lint",
+    "serve": "FOR /F \"tokens=*\" %F IN ('hostname') DO polymer serve --hostname %F.desire2learn.d2l",
+    "serve:local": "polymer serve"
   },
   "author": "D2L Corporation",
   "license": "Apache-2.0",
@@ -21,7 +23,8 @@
     "eslint-config-brightspace": "^0.4.1",
     "eslint-plugin-html": "^5.0.3",
     "polymer-cli": "^1.9.6",
-    "wct-browser-legacy": "^1.0.1"
+    "wct-browser-legacy": "^1.0.1",
+    "whatwg-fetch": "^2.0.4"
   },
   "resolutions": {
     "inherits": "2.0.3",
@@ -35,6 +38,7 @@
     "d2l-localize-behavior": "BrightspaceUI/localize-behavior#semver:^2",
     "d2l-polymer-siren-behaviors": "Brightspace/polymer-siren-behaviors#semver:^1",
     "d2l-button": "BrightspaceUI/button#semver:^5",
+    "d2l-colors": "BrightspaceUI/colors#semver:^4",
     "d2l-icons": "BrightspaceUI/icons#semver:^6",
     "d2l-inputs": "BrightspaceUI/inputs#semver:^2",
     "d2l-offscreen": "BrightspaceUI/offscreen#semver:^4",
@@ -43,6 +47,7 @@
     "d2l-alert": "BrightspaceUI/alert#semver:^4",
     "d2l-typography": "BrightspaceUI/typography#semver:^7",
     "d2l-outcomes-level-of-achievements": "Brightspace/outcomes-level-of-achievement-ui#semver:^2",
+    "d2l-multi-select": "git://github.com/BrightspaceUI/multi-select.git",
     "s-html": "Brightspace/s-html#semver:^2"
   }
 }

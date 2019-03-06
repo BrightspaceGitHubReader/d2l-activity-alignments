@@ -1,0 +1,28 @@
+{
+	"class": [
+		"collection",
+		"alignments"
+	],
+	"links": [
+		{
+			"rel": [ "self" ],
+			"href": "static-data/alignment-collections/c297b02c-19b1-485a-92db-e598316271c8/f2b85092-5fbf-4e19-8345-8971f79debd8.json"
+		},
+		{
+			"rel": [ "https://activities.api.brightspace.com/rels/activity-usage" ],
+			"href": "static-data/activity-usages/c297b02c-19b1-485a-92db-e598316271c8/f2b85092-5fbf-4e19-8345-8971f79debd8.json"
+		}
+	],
+	"entities": [
+		{
+			"class": [ "alignment" ],
+			"rel": [ "item" ],
+			"href": "static-data/alignments/c297b02c-19b1-485a-92db-e598316271c8/5f4d6901-7c10-4edc-b2e1-821efc5c3708.json"
+		},
+		{
+			"class": [ "alignment" ],
+			"rel": [ "item" ],
+			"href": "static-data/alignments/c297b02c-19b1-485a-92db-e598316271c8/577540e3-8871-4a7a-a866-084174089284.json"
+		}
+	]
+}

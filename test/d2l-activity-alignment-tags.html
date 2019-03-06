@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+	<title>d2l-alignment test</title>
+
+	<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+	<script src="../../wct-browser-legacy/browser.js"></script>
+	<script src="./utilities/fetch-siren-entity-whitelist.js"></script>
+
+	<script type="module" src="../d2l-alignment.js"></script>
+  </head>
+  <body>
+	<test-fixture id="basic">
+	  <template>
+		<d2l-activity-alignment-tags read-only></d2l-activity-alignment-tags>
+	  </template>
+	</test-fixture>
+
+	<script type="module">
+import '../d2l-activity-alignment-tags.js';
+/* global suite, test, assert, fixture, setup, stubWhitelist */
+suite('d2l-alignment', function() {
+
+	suite('smoke test', function() {
+		var element;
+		setup(function(done) {
+			element = fixture('basic');
+			var href = 'static-data/activity-usages/c297b02c-19b1-485a-92db-e598316271c8/f2b85092-5fbf-4e19-8345-8971f79debd8.json';
+			function waitForLoad(entity, error) {
+				window.D2L.Siren.EntityStore.removeListener(
+					href,
+					'',
+					waitForLoad
+				);
+				if (error) {
+					done(error);
+					return;
+				}
+				setTimeout(function() {
+					done();
+				});
+			}
+			stubWhitelist();
+			window.D2L.Siren.EntityStore.addListener(
+				href,
+				'',
+				waitForLoad
+			);
+			element.href = 'static-data/activity-usages/c297b02c-19b1-485a-92db-e598316271c8/f2b85092-5fbf-4e19-8345-8971f79debd8.json';
+			element.token = '';
+		});
+
+		test('verify outcome tags', function(done) {
+			var runTest = function() {
+				var tagList, selectList, listItems;
+				var tagsLoaded = (
+					(tagList = element.$$('d2l-activity-alignment-tag-list')) &&
+					(selectList = tagList.$$('d2l-multi-select-list')) &&
+					(listItems = selectList.querySelectorAll('d2l-multi-select-list-item')) &&
+					listItems.length >= 2
+				);
+
+				if (!tagsLoaded) {
+					setTimeout(runTest, 0);
+					return;
+				}
+
+				assert.equal(
+					listItems[0].$.tag.querySelector('div').innerText,
+					'Interpret words and phrases as they are ...'
+				);
+				assert.equal(
+					listItems[0].$$('d2l-tooltip').innerText,
+					'Interpret words and phrases as they are used in a text, including determining technical, connotative, and figurative meanings, and analyze how specific word choices shape meaning or tone.'
+				);
+
+				assert.equal(
+					listItems[1].$.tag.querySelector('div').innerText,
+					'L.K.41'
+				);
+				assert.equal(
+					listItems[1].$$('d2l-tooltip').innerText,
+					'Use words and phrases acquired through conversations, reading and being read to, and responding to texts.'
+				);
+
+				done();
+			};
+
+			runTest();
+		});
+	});
+});
+</script>
+  </body>
+</html>
