@@ -25,8 +25,16 @@ const $_documentContainer = document.createElement('template');
 $_documentContainer.innerHTML = `<dom-module id="d2l-alignment">
 	<template strip-whitespace="">
 		<style>
-			:host > div {
+			div.outer-container {
 				display: flex;
+				flex-direction: row;
+				align-items: center;
+				margin-bottom: 1.5rem;
+			}
+
+			div.alignment-container {
+				display: flex;
+				flex: 1;
 			}
 
 			d2l-alignment-intent {
@@ -43,20 +51,52 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-alignment">
 			}
 
 			d2l-outcomes-level-of-achievements {
-				margin-top: 0.6rem;
-				margin-bottom: 1.5rem;
+				flex: 1;
+			}
+
+			@media screen and (min-width: 616px) {
+				div.alignment-container {
+					padding-right: 15px;
+				}
+
+				:host-context([dir="rtl"]) div.alignment-container {
+					padding-right: 0px;
+					padding-left: 15px;
+				}
+
+				d2l-outcomes-level-of-achievements {
+					padding-left: 15px;
+				}
+
+				:host-context([dir="rtl"]) d2l-outcomes-level-of-achievements {
+					padding-left: 0px;
+					padding-right: 15px;
+				}
+			}
+
+			@media screen and (max-width: 615px) {
+				div.outer-container {
+					flex-direction: column;
+					align-items: stretch;
+				}
+
+				d2l-outcomes-level-of-achievements {
+					margin-top: 0.6rem;
+				}
 			}
 		</style>
 
-		<div>
-			<d2l-alignment-intent href="[[_getIntent(entity)]]" token="[[token]]"></d2l-alignment-intent>
-			<template is="dom-if" if="[[_isRemovable(entity, readOnly)]]">
-				<d2l-button-icon icon="d2l-tier1:close-default" text="[[localize('removeAlignment')]]" on-click="_remove"></d2l-button-icon>
+		<div class="outer-container">
+			<div class="alignment-container">
+				<d2l-alignment-intent href="[[_getIntent(entity)]]" token="[[token]]"></d2l-alignment-intent>
+				<template is="dom-if" if="[[_isRemovable(entity, readOnly)]]">
+					<d2l-button-icon icon="d2l-tier1:close-default" text="[[localize('removeAlignment')]]" on-click="_remove"></d2l-button-icon>
+				</template>
+			</div>
+			<template is="dom-if" if="[[_hasDemonstrations(entity)]]">
+				<d2l-outcomes-level-of-achievements token="[[token]]" href="[[_getDemonstrations(entity)]]" read-only$="[[readOnly]]"></d2l-outcomes-level-of-achievements>
 			</template>
 		</div>
-		<template is="dom-if" if="[[_hasDemonstrations(entity)]]">
-			<d2l-outcomes-level-of-achievements token="[[token]]" href="[[_getDemonstrations(entity)]]" read-only$="[[readOnly]]"></d2l-outcomes-level-of-achievements>
-		</template>
 	</template>
 
 
