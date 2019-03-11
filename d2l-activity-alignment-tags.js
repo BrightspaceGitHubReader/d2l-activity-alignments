@@ -19,9 +19,19 @@ class ActivityAlignmentTags extends mixinBehaviors([
 	static get properties() {
 		return {
 			readOnly: Boolean,
+			empty: {
+				type: Boolean,
+				notify: true,
+				readOnly: true,
+				computed: '_isEmpty(entity, _tagListIsEmpty)'
+			},
 			_showError: {
 				type: Boolean,
 				value: false
+			},
+			_tagListIsEmpty: {
+				type: Boolean,
+				value: true
 			}
 		};
 	}
@@ -40,6 +50,7 @@ class ActivityAlignmentTags extends mixinBehaviors([
 					href="[[_getAlignments(entity)]]"
 					token="[[token]]"
 					read-only="[[readOnly]]"
+					empty="{{_tagListIsEmpty}}"
 				></d2l-activity-alignment-tag-list>
 			</template>
 			<template is="dom-if" if="[[_showError]]">
@@ -73,6 +84,10 @@ class ActivityAlignmentTags extends mixinBehaviors([
 		return entity
 			&& entity.hasLinkByRel(this.HypermediaRels.Alignments.alignments)
 			&& entity.getLinkByRel(this.HypermediaRels.Alignments.alignments).href;
+	}
+
+	_isEmpty(entity, tagListIsEmpty) {
+		return !this._getAlignments(entity) || tagListIsEmpty;
 	}
 
 }

@@ -31,7 +31,13 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 			},
 			_alignmentMap: Object,
 			_intentMap: Object,
-			_outcomeMap: Object
+			_outcomeMap: Object,
+			empty: {
+				type: Boolean,
+				notify: true,
+				readOnly: true,
+				computed: '_isEmptyList(_alignmentMap, _intentMap, _outcomeMap)'
+			}
 		};
 	}
 
@@ -120,6 +126,10 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 			});
 		});
 		return mappings;
+	}
+
+	_isEmptyList(alignmentMap, intentMap, outcomeMap) {
+		return this._getAlignmentToOutcomeMap(alignmentMap, intentMap, outcomeMap).length === 0;
 	}
 
 	_getOutcomeShortDescription(outcomeMapping) {
