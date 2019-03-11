@@ -10,8 +10,7 @@ class SirenMapHelper extends mixinBehaviors([
 		return {
 			map: {
 				type: Object,
-				notify: true,
-				value: {}
+				notify: true
 			}
 		};
 	}
@@ -24,6 +23,11 @@ class SirenMapHelper extends mixinBehaviors([
 				}
 			</style>
 		`;
+	}
+
+	constructor() {
+		super();
+		this.map = {};
 	}
 
 	_onEntityChanged(entity) {

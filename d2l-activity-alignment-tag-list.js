@@ -25,22 +25,13 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 				type: Boolean,
 				value: false
 			},
-			_alignmentMap: {
-				type: Object,
-				value: {}
-			},
-			_intentMap: {
-				type: Object,
-				value: {}
-			},
-			_outcomeMap: {
-				type: Object,
-				value: {}
-			},
 			_iconStyle: {
 				type: String,
 				value: null
-			}
+			},
+			_alignmentMap: Object,
+			_intentMap: Object,
+			_outcomeMap: Object
 		};
 	}
 
@@ -81,6 +72,10 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 
 	constructor() {
 		super();
+		this._alignmentMap = {};
+		this._intentMap = {};
+		this._outcomeMap = {};
+
 		const userAgent = window.navigator.userAgent;
 		if (userAgent.indexOf('Trident/') >= 0) {
 			this._iconStyle = 'transform: translateY( -0.6rem );';
