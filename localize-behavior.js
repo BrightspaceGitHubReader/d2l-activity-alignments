@@ -25,7 +25,9 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehaviorImpl = {
 						cancelLabel: 'Cancel selection',
 						error: 'An error has occured',
 						removeAlignment: 'Remove alignment',
-						alignmentRemoved: 'Alignment removed'
+						alignmentRemoved: 'Alignment removed',
+						directAlignments: 'Outcomes Aligned Directly to This Activity',
+						indirectAlignments: 'Outcomes Aligned to Rubric Criteria'
 					},
 					'fr': {
 						add: 'Inclure',

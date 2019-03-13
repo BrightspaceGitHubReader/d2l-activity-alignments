@@ -29,7 +29,6 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-alignment">
 				display: flex;
 				flex-direction: row;
 				align-items: center;
-				margin-bottom: 1.5rem;
 			}
 
 			div.alignment-container {
