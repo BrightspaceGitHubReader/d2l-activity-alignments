@@ -23,6 +23,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-select-outcomes">
 		<style>
 			:host {
 				display: flex;
+				overflow: hidden;
 			}
 
 			.d2l-select-outcomes-main {
