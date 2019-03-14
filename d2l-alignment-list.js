@@ -211,8 +211,8 @@ Polymer({
 		if (!entity || !entity.entities || !entity.entities.length) {
 			return [];
 		}
-		
-		return entity.entities.map( subentity => subentity.href );
+
+		return entity.entities.map(subentity => subentity.href);
 	},
 
 	_getDirectAlignments: function(alignmentMap) {
