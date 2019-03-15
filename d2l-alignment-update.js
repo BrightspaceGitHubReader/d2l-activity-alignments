@@ -24,7 +24,7 @@ import './localize-behavior.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 const $_documentContainer = document.createElement('template');
 
-$_documentContainer.innerHTML = `<dom-module id="d2l-alignment-update">
+$_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-update">
 	<template strip-whitespace="">
 		<style>
 			:host {
@@ -164,6 +164,11 @@ Polymer({
 
 	properties: {
 		candidates: Object,
+		empty: {
+			type: Boolean,
+			notify: true,
+			value: true,
+		},
 		_candidatesSelfHref: {
 			type: String,
 			computed: '_getSelfLink(candidates)'
@@ -269,6 +274,7 @@ Polymer({
 								self.__promises = 0;
 								self.__promise = null;
 								self.candidateEntities = candidates.entities;
+								self.empty = candidates.entities.length > 0 ? false : true;
 							}
 						});
 				}

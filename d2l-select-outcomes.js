@@ -18,7 +18,7 @@ import './localize-behavior.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 const $_documentContainer = document.createElement('template');
 
-$_documentContainer.innerHTML = `<dom-module id="d2l-select-outcomes">
+$_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes">
 	<template strip-whitespace="">
 		<style>
 			:host {
@@ -34,7 +34,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-select-outcomes">
 			}
 		</style>
 		<div class="d2l-select-outcomes-main">
-			<d2l-alignment-update href="[[_getAlignments(entity)]]" token="[[token]]"></d2l-alignment-update>
+			<d2l-alignment-update empty="{{_alignmentsIsEmpty}}" href="[[_getAlignments(entity)]]" token="[[token]]"></d2l-alignment-update>
 			<template is="dom-if" if="[[_showError]]">
 				<d2l-alert type="error">[[localize('error')]]</d2l-alert>
 			</template>
@@ -53,7 +53,18 @@ Polymer({
 		_showError: {
 			type: Boolean,
 			value: false
-		}
+		},
+		_alignmentsIsEmpty: {
+			type: Boolean,
+			value: true
+		},
+		isAlignmentsEmpty: {
+			type: Boolean,
+			notify: true,
+			readOnly: true,
+			computed: '_isAlignmentsEmpty(entity, _alignmentsIsEmpty)'
+		},
+
 	},
 
 	behaviors: [
@@ -80,6 +91,10 @@ Polymer({
 
 	_getAlignments: function(entity) {
 		return entity && entity.hasLinkByRel(Rels.Alignments.alignments) && entity.getLinkByRel(Rels.Alignments.alignments).href;
+	},
+
+	_isAlignmentsEmpty: function(entity, _alignmentsIsEmpty) {
+		return !this._getAlignments(entity) || _alignmentsIsEmpty;
 	}
 
 });
