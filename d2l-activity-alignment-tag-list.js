@@ -29,6 +29,10 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 				type: String,
 				value: null
 			},
+			_alignmentHrefs: {
+				type: Array,
+				computed: '_getAlignmentHrefs(entity)'
+			},
 			_alignmentMap: Object,
 			_intentMap: Object,
 			_outcomeMap: Object,
@@ -36,7 +40,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 				type: Boolean,
 				notify: true,
 				readOnly: true,
-				computed: '_isEmptyList(_alignmentMap, _intentMap, _outcomeMap)'
+				computed: '_isEmptyList(_alignmentHrefs, _alignmentMap, _intentMap, _outcomeMap)'
 			}
 		};
 	}
@@ -44,7 +48,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 	static get template() {
 		return html`
 			<d2l-multi-select-list>
-				<template is="dom-repeat" items="[[_getAlignmentToOutcomeMap(_alignmentMap,_intentMap,_outcomeMap)]]">
+				<template is="dom-repeat" items="[[_getAlignmentToOutcomeMap(_alignmentHrefs,_alignmentMap,_intentMap,_outcomeMap)]]">
 					<d2l-multi-select-list-item
 						text="[[_getOutcomeTextDescription(item)]]"
 						short-text="[[_getOutcomeShortDescription(item)]]"
@@ -63,7 +67,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 				</template>
 			</d2l-multi-select-list>
 			<div style="display: none;">
-				<template is="dom-repeat" items="[[_getAlignmentHrefs(entity)]]">
+				<template is="dom-repeat" items="[[_alignmentHrefs]]">
 					<d2l-siren-map-helper href="[[item]]" token="[[token]]" map="{{_alignmentMap}}"></d2l-siren-map-helper>
 				</template>
 				<template is="dom-repeat" items="[[_getIntentHrefs(_alignmentMap)]]">
@@ -111,9 +115,9 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 		);
 	}
 
-	_getAlignmentToOutcomeMap(alignmentMap, intentMap, outcomeMap) {
+	_getAlignmentToOutcomeMap(alignmentHrefs, alignmentMap, intentMap, outcomeMap) {
 		const mappings = [];
-		Object.keys(alignmentMap).forEach(alignmentHref => {
+		alignmentHrefs.forEach(alignmentHref => {
 			const alignment = alignmentMap[alignmentHref];
 			if (!alignment) return;
 			const intent = intentMap[alignment.getLinkByRel(this.HypermediaRels.Outcomes.intent).href];
@@ -128,8 +132,8 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 		return mappings;
 	}
 
-	_isEmptyList(alignmentMap, intentMap, outcomeMap) {
-		return this._getAlignmentToOutcomeMap(alignmentMap, intentMap, outcomeMap).length === 0;
+	_isEmptyList(alignmentHrefs, alignmentMap, intentMap, outcomeMap) {
+		return this._getAlignmentToOutcomeMap(alignmentHrefs, alignmentMap, intentMap, outcomeMap).length === 0;
 	}
 
 	_getOutcomeShortDescription(outcomeMapping) {
