@@ -40,7 +40,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 				type: Boolean,
 				notify: true,
 				readOnly: true,
-				computed: '_isEmptyList(_alignmentMap, _intentMap, _outcomeMap)'
+				computed: '_isEmptyList(_alignmentHrefs, _alignmentMap, _intentMap, _outcomeMap)'
 			}
 		};
 	}
@@ -132,8 +132,8 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 		return mappings;
 	}
 
-	_isEmptyList(alignmentMap, intentMap, outcomeMap) {
-		return this._getAlignmentToOutcomeMap(alignmentMap, intentMap, outcomeMap).length === 0;
+	_isEmptyList(alignmentHrefs, alignmentMap, intentMap, outcomeMap) {
+		return this._getAlignmentToOutcomeMap(alignmentHrefs, alignmentMap, intentMap, outcomeMap).length === 0;
 	}
 
 	_getOutcomeShortDescription(outcomeMapping) {
