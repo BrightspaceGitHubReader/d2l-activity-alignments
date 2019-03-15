@@ -17,6 +17,7 @@ import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import 'd2l-polymer-siren-behaviors/store/siren-action-behavior.js';
 import { Actions, Rels } from 'd2l-hypermedia-constants';
 import 'd2l-outcomes-level-of-achievements/d2l-outcomes-level-of-achievements.js';
+import 'd2l-resize-aware/d2l-resize-aware.js';
 import './d2l-alignment-intent.js';
 import './localize-behavior.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
@@ -25,7 +26,7 @@ const $_documentContainer = document.createElement('template');
 $_documentContainer.innerHTML = `<dom-module id="d2l-alignment">
 	<template strip-whitespace="">
 		<style>
-			div.outer-container {
+			div#outer {
 				display: flex;
 				flex-direction: row;
 				align-items: center;
@@ -53,49 +54,46 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-alignment">
 				flex: 1;
 			}
 
-			@media screen and (min-width: 616px) {
-				div.alignment-container {
-					padding-right: 15px;
-				}
-
-				:host-context([dir="rtl"]) div.alignment-container {
-					padding-right: 0px;
-					padding-left: 15px;
-				}
-
-				d2l-outcomes-level-of-achievements {
-					padding-left: 15px;
-				}
-
-				:host-context([dir="rtl"]) d2l-outcomes-level-of-achievements {
-					padding-left: 0px;
-					padding-right: 15px;
-				}
+			div#outer.side-by-side div.alignment-container {
+				padding-right: 15px;
 			}
 
-			@media screen and (max-width: 615px) {
-				div.outer-container {
-					flex-direction: column;
-					align-items: stretch;
-				}
+			:host-context([dir="rtl"]) div#outer.side-by-side div.alignment-container {
+				padding-right: 0px;
+				padding-left: 15px;
+			}
 
-				d2l-outcomes-level-of-achievements {
-					margin-top: 0.6rem;
-				}
+			div#outer.side-by-side d2l-outcomes-level-of-achievements {
+				padding-left: 15px;
+			}
+
+			:host-context([dir="rtl"]) div#outer.side-by-side d2l-outcomes-level-of-achievements {
+				padding-left: 0px;
+				padding-right: 15px;
+			}
+
+			div#outer.stack {
+				flex-direction: column;
+				align-items: stretch;
+			}
+
+			div#outer.stack d2l-outcomes-level-of-achievements {
+				margin-top: 0.6rem;
 			}
 		</style>
-
-		<div class="outer-container">
-			<div class="alignment-container">
-				<d2l-alignment-intent href="[[_getIntent(entity)]]" token="[[token]]"></d2l-alignment-intent>
-				<template is="dom-if" if="[[_isRemovable(entity, readOnly)]]">
-					<d2l-button-icon icon="d2l-tier1:close-default" text="[[localize('removeAlignment')]]" on-click="_remove"></d2l-button-icon>
+		<d2l-resize-aware on-d2l-resize-aware-resized="_stack">
+			<div id="outer">
+				<div class="alignment-container">
+					<d2l-alignment-intent href="[[_getIntent(entity)]]" token="[[token]]"></d2l-alignment-intent>
+					<template is="dom-if" if="[[_isRemovable(entity, readOnly)]]">
+						<d2l-button-icon icon="d2l-tier1:close-default" text="[[localize('removeAlignment')]]" on-click="_remove"></d2l-button-icon>
+					</template>
+				</div>
+				<template is="dom-if" if="[[_hasDemonstrations(entity)]]">
+					<d2l-outcomes-level-of-achievements token="[[token]]" href="[[_getDemonstrations(entity)]]" read-only$="[[readOnly]]"></d2l-outcomes-level-of-achievements>
 				</template>
 			</div>
-			<template is="dom-if" if="[[_hasDemonstrations(entity)]]">
-				<d2l-outcomes-level-of-achievements token="[[token]]" href="[[_getDemonstrations(entity)]]" read-only$="[[readOnly]]"></d2l-outcomes-level-of-achievements>
-			</template>
-		</div>
+		</d2l-resize-aware>
 	</template>
 
 
@@ -115,6 +113,10 @@ Polymer({
 		D2L.PolymerBehaviors.Siren.SirenActionBehavior,
 		window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior,
 	],
+
+	ready: function() {
+		this._stack = this._stack.bind(this);
+	},
 
 	_getIntent: function(entity) {
 		return entity && entity.hasLinkByRel(Rels.Outcomes.intent) && entity.getLinkByRel(Rels.Outcomes.intent).href;
@@ -165,6 +167,17 @@ Polymer({
 						window.D2L.Siren.EntityStore.fetch(alignments.href, this.token, true);
 					}
 				}.bind(this));
+		}
+	},
+
+	_stack: function(e) {
+		var width = e.detail.current.width;
+		if (width > 630) {
+			this.$.outer.classList.add('side-by-side');
+			this.$.outer.classList.remove('stack');
+		} else {
+			this.$.outer.classList.add('stack');
+			this.$.outer.classList.remove('side-by-side');
 		}
 	}
 
