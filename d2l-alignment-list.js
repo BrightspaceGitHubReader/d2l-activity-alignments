@@ -52,7 +52,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-list">
 			siren-entity-loading {
 				overflow: hidden;
 				width: 100%;
-				margin: -var(--d2l-alignment-list-overflow-margin);
+				margin: var(--d2l-alignment-list-overflow-margin);
 
 				--siren-entity-loading-min-height: 10rem;
 			}
