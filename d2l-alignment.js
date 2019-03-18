@@ -80,6 +80,10 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-alignment">
 			div#outer.stack d2l-outcomes-level-of-achievements {
 				margin-top: 0.6rem;
 			}
+			
+			d2l-resize-aware {
+				width: 100%;
+			}
 		</style>
 		<d2l-resize-aware on-d2l-resize-aware-resized="_stack">
 			<div id="outer">

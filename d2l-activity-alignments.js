@@ -14,6 +14,7 @@ import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import { Rels } from 'd2l-hypermedia-constants';
 import 'd2l-alert/d2l-alert.js';
 import './d2l-alignment-list.js';
+import './d2l-user-alignment-list.js';
 import './localize-behavior.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 const $_documentContainer = document.createElement('template');
@@ -34,11 +35,20 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-activity-alignments
 			}
 		</style>
 		<div class="d2l-activity-alignments-main">
-			<d2l-alignment-list href="[[_getAlignments(entity)]]" token="[[token]]" read-only$="[[readOnly]]">
-				<slot name="outcomes-title" slot="outcomes-title"></slot>
-				<slot name="show-select-outcomes" slot="show-select-outcomes"></slot>
-				<slot name="describe-aligned-outcomes" slot="describe-aligned-outcomes"></slot>
-			</d2l-alignment-list>
+			<template is="dom-if" if="[[_isUserActivityUsage(entity)]]">
+				<d2l-user-alignment-list href="[[_getAlignments(entity)]]" token="[[token]]" read-only$="[[readOnly]]">
+					<slot name="outcomes-title" slot="outcomes-title"></slot>
+					<slot name="show-select-outcomes" slot="show-select-outcomes"></slot>
+					<slot name="describe-aligned-outcomes" slot="describe-aligned-outcomes"></slot>
+				</d2l-alignment-list>
+			</template>
+			<template is="dom-if" if="[[!_isUserActivityUsage(entity)]]">
+				<d2l-alignment-list href="[[_getAlignments(entity)]]" token="[[token]]" read-only$="[[readOnly]]">
+					<slot name="outcomes-title" slot="outcomes-title"></slot>
+					<slot name="show-select-outcomes" slot="show-select-outcomes"></slot>
+					<slot name="describe-aligned-outcomes" slot="describe-aligned-outcomes"></slot>
+				</d2l-alignment-list>
+			</template>
 			<template is="dom-if" if="[[_showError]]">
 				<d2l-alert type="error">[[localize('error')]]</d2l-alert>
 			</template>
@@ -86,6 +96,13 @@ Polymer({
 
 	_getAlignments: function(entity) {
 		return entity && entity.hasLinkByRel(Rels.Alignments.alignments) && entity.getLinkByRel(Rels.Alignments.alignments).href;
+	},
+
+	_isUserActivityUsage: function(entity) {
+		if (!entity) return undefined;
+		const selfLink = entity.getLinkByRel('self');
+		if (!selfLink) return undefined;
+		return selfLink.rel.some(rel => rel === Rels.Activities.userActivityUsage);
 	}
 
 });
