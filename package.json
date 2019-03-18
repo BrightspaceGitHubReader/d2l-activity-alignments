@@ -2,7 +2,7 @@
   "description": "",
   "homepage": "https://github.com/Brightspace/d2l-activity-alignments",
   "name": "d2l-activity-alignments",
-  "version": "1.4.2",
+  "version": "1.4.5",
   "main": "index.js",
   "scripts": {
     "test": "npm run test:lint && polymer test --skip-plugin sauce",
