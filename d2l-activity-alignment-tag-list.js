@@ -60,7 +60,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 				<template is="dom-if" if="[[_canUpdate(entity,readOnly)]]">
 					<d2l-button-icon
 						icon="d2l-tier1:add"
-						text="[[localize('removeAlignment')]]"
+						text="[[localize('browseOutcome')]]"
 						style$="[[_iconStyle]]"
 						on-click="_updateAlignments"
 					></d2l-button-icon>
