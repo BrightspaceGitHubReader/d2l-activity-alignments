@@ -28,7 +28,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-update">
 	<template strip-whitespace="">
 		<style>
 			:host {
-				display: flex;
+				display: block;
+				overflow: hidden;
 				width: 100%;
 				height: 100%;
 			}
@@ -46,6 +47,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-update">
 			siren-entity-loading {
 				overflow: hidden;
 				width: 100%;
+				height: 100%;
 
 				--siren-entity-loading-min-height: 10rem;
 			}
@@ -56,6 +58,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-update">
 
 			ul {
 				padding: 0;
+				flex: 1;
 				overflow: auto;
 				border: 1px solid transparent;
 				border-top-color: var(--d2l-color-gypsum);

@@ -27,10 +27,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes">
 			}
 
 			.d2l-select-outcomes-main {
-				flex: 1;
-				display: flex;
-				flex-direction: column;
-				height: 100%;
+				display: block;
+				position: relative;
 			}
 		</style>
 		<div class="d2l-select-outcomes-main">
