@@ -43,7 +43,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-activity-alignments
 				</d2l-alignment-list>
 			</template>
 			<template is="dom-if" if="[[!_isUserActivityUsage(entity)]]">
-				<d2l-alignment-list href="[[_getAlignments(entity)]]" token="[[token]]" read-only$="[[readOnly]]">
+				<d2l-alignment-list href="[[_getAlignments(entity)]]" token="[[token]]" read-only$="[[readOnly]]" header-title="[[headerTitle]]">
 					<slot name="outcomes-title" slot="outcomes-title"></slot>
 					<slot name="show-select-outcomes" slot="show-select-outcomes"></slot>
 					<slot name="describe-aligned-outcomes" slot="describe-aligned-outcomes"></slot>
@@ -69,6 +69,10 @@ Polymer({
 		_showError: {
 			type: Boolean,
 			value: false
+		},
+		headerTitle: {
+			type: String,
+			value: null
 		}
 	},
 
