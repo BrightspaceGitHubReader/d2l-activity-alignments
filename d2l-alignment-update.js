@@ -277,7 +277,11 @@ Polymer({
 								self.__promises = 0;
 								self.__promise = null;
 								self.candidateEntities = candidates.entities;
-								self.empty = candidates.entities.length > 0 ? false : true;
+								if (candidates.entities && candidates.entities.length > 0) {
+									self.empty = false;
+								} else {
+									self.empty = true;
+								}
 							}
 						});
 				}
