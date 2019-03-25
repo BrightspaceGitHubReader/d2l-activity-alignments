@@ -239,7 +239,7 @@ Polymer({
 
 	_onAlignmentRemove: function(e) {
 		const newMap = this._alignmentMap;
-		delete newMap[e.detail.entity.getLinkByRel("self").href];
+		delete newMap[e.detail.entity.getLinkByRel('self').href];
 		this.set('_alignmentMap', {});
 		this.set('_alignmentMap', newMap);
 
