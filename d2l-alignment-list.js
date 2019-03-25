@@ -238,8 +238,10 @@ Polymer({
 	},
 
 	_onAlignmentRemove: function(e) {
-		var index = +e.target.dataset.index;
-		this.splice('_directAlignmentHrefs', index, 1);
+		const newMap = this._alignmentMap;
+		delete newMap[e.detail.entity.getLinkByRel("self").href];
+		this.set('_alignmentMap', {});
+		this.set('_alignmentMap', newMap);
 
 		// Notify screen readers that an alignment has been removed
 		var screenReaderAlert = this.create('d2l-offscreen');
