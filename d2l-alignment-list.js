@@ -244,10 +244,10 @@ Polymer({
 		// Notify screen readers that an alignment has been removed
 		var screenReaderAlert = this.create('d2l-offscreen');
 		screenReaderAlert.textContent = this.localize('alignmentRemoved');
-		Polymer.dom(this.root).appendChild(screenReaderAlert);
+		this.shadowRoot.appendChild(screenReaderAlert);
 		screenReaderAlert.setAttribute('role', 'alert');
 		this.async(function() {
-			Polymer.dom(this.root).removeChild(screenReaderAlert);
+			this.shadowRoot.removeChild(screenReaderAlert);
 		}.bind(this), 3000);
 	},
 
