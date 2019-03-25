@@ -56,7 +56,7 @@ Polymer({
 			type: Boolean,
 			value: true
 		},
-		isAlignmentsEmpty: {
+		empty: {
 			type: Boolean,
 			notify: true,
 			readOnly: true,
