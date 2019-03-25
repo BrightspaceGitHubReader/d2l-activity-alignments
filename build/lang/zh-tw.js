@@ -4,6 +4,10 @@ window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
 window.D2L.PolymerBehaviors.SelectOutcomes = window.D2L.PolymerBehaviors.SelectOutcomes || {};
 window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior || {};
 
+/*
+* Zh Tw lang terms
+* @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangZhTwBehavior
+ */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangZhTwBehavior = {
 	zhTw: {
 		'add': 'Add',

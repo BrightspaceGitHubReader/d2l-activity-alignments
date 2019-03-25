@@ -4,6 +4,10 @@ window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
 window.D2L.PolymerBehaviors.SelectOutcomes = window.D2L.PolymerBehaviors.SelectOutcomes || {};
 window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior || {};
 
+/*
+* Fr lang terms
+* @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangFrBehavior
+ */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangFrBehavior = {
 	fr: {
 		'add': 'Inclure',

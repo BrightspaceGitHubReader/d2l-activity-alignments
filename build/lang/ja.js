@@ -4,6 +4,10 @@ window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
 window.D2L.PolymerBehaviors.SelectOutcomes = window.D2L.PolymerBehaviors.SelectOutcomes || {};
 window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior || {};
 
+/*
+* Ja lang terms
+* @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangJaBehavior
+ */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangJaBehavior = {
 	ja: {
 		'add': 'Add',
