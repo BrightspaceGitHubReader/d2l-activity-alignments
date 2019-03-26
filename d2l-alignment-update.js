@@ -170,7 +170,8 @@ Polymer({
 		empty: {
 			type: Boolean,
 			notify: true,
-			value: true,
+			value: false,
+			computed: '_isEmpty(candidates)'
 		},
 		_candidatesSelfHref: {
 			type: String,
@@ -277,11 +278,6 @@ Polymer({
 								self.__promises = 0;
 								self.__promise = null;
 								self.candidateEntities = candidates.entities;
-								if (candidates.entities && candidates.entities.length > 0) {
-									self.empty = false;
-								} else {
-									self.empty = true;
-								}
 							}
 						});
 				}
@@ -365,6 +361,13 @@ Polymer({
 			this.cancelDebouncer('loading');
 			this._loading = false;
 		}
-	}
+	},
 
+	_isEmpty: function(candidates) {
+		if (candidates.entities && candidates.entities.length > 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 });
