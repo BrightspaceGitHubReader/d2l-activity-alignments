@@ -54,13 +54,13 @@ Polymer({
 		},
 		_alignmentsIsEmpty: {
 			type: Boolean,
-			value: true
+			value: false
 		},
 		empty: {
 			type: Boolean,
 			notify: true,
 			readOnly: true,
-			computed: '_isAlignmentsEmpty(entity, _alignmentsIsEmpty)'
+			computed: '_isAlignmentsEmpty(_alignmentsIsEmpty)'
 		},
 
 	},
@@ -91,8 +91,8 @@ Polymer({
 		return entity && entity.hasLinkByRel(Rels.Alignments.alignments) && entity.getLinkByRel(Rels.Alignments.alignments).href;
 	},
 
-	_isAlignmentsEmpty: function(entity, _alignmentsIsEmpty) {
-		return !this._getAlignments(entity) || _alignmentsIsEmpty;
+	_isAlignmentsEmpty: function(_alignmentsIsEmpty) {
+		return _alignmentsIsEmpty;
 	}
 
 });
