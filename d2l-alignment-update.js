@@ -170,7 +170,7 @@ Polymer({
 		empty: {
 			type: Boolean,
 			notify: true,
-			value: false,
+			value: true,
 			computed: '_isEmpty(candidates)'
 		},
 		_candidatesSelfHref: {

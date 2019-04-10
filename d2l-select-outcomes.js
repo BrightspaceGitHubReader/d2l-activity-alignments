@@ -53,8 +53,7 @@ Polymer({
 			value: false
 		},
 		_alignmentsIsEmpty: {
-			type: Boolean,
-			value: false
+			type: Boolean
 		},
 		empty: {
 			type: Boolean,
