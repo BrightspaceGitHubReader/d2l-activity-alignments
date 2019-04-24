@@ -1,8 +1,8 @@
 {
-   "add" : "Add",
+   "add" : "إضافة",
    "addLabel" : "Add selection",
    "alignmentRemoved" : "Alignment removed",
-   "cancel" : "Cancel",
+   "cancel" : "إلغاء",
    "cancelLabel" : "Cancel selection",
    "directAlignments" : "{header-title} Aligned Directly to This Activity",
    "error" : "An error has occured",
