@@ -1,0 +1,11 @@
+{
+   "add" : "Ajouter",
+   "addLabel" : "Ajouter la sélection",
+   "alignmentRemoved" : "Alignement supprimé",
+   "cancel" : "Annuler",
+   "cancelLabel" : "Annuler la sélection",
+   "directAlignments" : "{header-title} aligné directement sur cette activité",
+   "error" : "Une erreur s’est produite",
+   "indirectAlignments" : "{header-title} aligné sur les critères de la grille d’évaluation",
+   "removeAlignment" : "Supprimer l’alignement"
+}
