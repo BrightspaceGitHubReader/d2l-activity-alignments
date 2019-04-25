@@ -1,11 +1,11 @@
 {
-   "add" : "Add",
-   "addLabel" : "Add selection",
-   "alignmentRemoved" : "Alignment removed",
-   "cancel" : "Cancel",
-   "cancelLabel" : "Cancel selection",
-   "directAlignments" : "{header-title} Aligned Directly to This Activity",
-   "error" : "An error has occured",
-   "indirectAlignments" : "{header-title} Aligned to Rubric Criteria",
-   "removeAlignment" : "Remove alignment"
+   "add" : "Toevoegen",
+   "addLabel" : "Selectie toevoegen",
+   "alignmentRemoved" : "Afstemming verwijderd",
+   "cancel" : "Annuleren",
+   "cancelLabel" : "Selectie annuleren",
+   "directAlignments" : "{header-title} rechtstreeks afgestemd op deze activiteit",
+   "error" : "Er is een fout opgetreden",
+   "indirectAlignments" : "{header-title} afgestemd op rubriccriteria",
+   "removeAlignment" : "Afstemming verwijderen"
 }

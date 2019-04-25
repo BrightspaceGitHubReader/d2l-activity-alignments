@@ -1,11 +1,11 @@
 {
-   "add" : "Add",
-   "addLabel" : "Add selection",
-   "alignmentRemoved" : "Alignment removed",
-   "cancel" : "Cancel",
-   "cancelLabel" : "Cancel selection",
-   "directAlignments" : "{header-title} Aligned Directly to This Activity",
-   "error" : "An error has occured",
-   "indirectAlignments" : "{header-title} Aligned to Rubric Criteria",
-   "removeAlignment" : "Remove alignment"
+   "add" : "Tilføj",
+   "addLabel" : "Tilføj valg",
+   "alignmentRemoved" : "Justering fjernet",
+   "cancel" : "Annuller",
+   "cancelLabel" : "Annuller valg",
+   "directAlignments" : "{header-title} justeret direkte til denne aktivitet",
+   "error" : "Der opstod en fejl",
+   "indirectAlignments" : "{header-title} justeret til rubrikkriterier",
+   "removeAlignment" : "Fjern justering"
 }

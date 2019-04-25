@@ -1,11 +1,11 @@
 {
-   "add" : "Add",
+   "add" : "添加",
    "addLabel" : "Add selection",
    "alignmentRemoved" : "Alignment removed",
-   "cancel" : "Cancel",
+   "cancel" : "取消",
    "cancelLabel" : "Cancel selection",
    "directAlignments" : "{header-title} Aligned Directly to This Activity",
-   "error" : "An error has occured",
+   "error" : "已经出现错误。",
    "indirectAlignments" : "{header-title} Aligned to Rubric Criteria",
    "removeAlignment" : "Remove alignment"
 }
