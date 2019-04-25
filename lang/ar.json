@@ -1,11 +1,11 @@
 {
    "add" : "إضافة",
-   "addLabel" : "Add selection",
-   "alignmentRemoved" : "Alignment removed",
+   "addLabel" : "إضافة تحديد",
+   "alignmentRemoved" : "تمت إزالة المحاذاة",
    "cancel" : "إلغاء",
-   "cancelLabel" : "Cancel selection",
-   "directAlignments" : "{header-title} Aligned Directly to This Activity",
-   "error" : "An error has occured",
-   "indirectAlignments" : "{header-title} Aligned to Rubric Criteria",
-   "removeAlignment" : "Remove alignment"
+   "cancelLabel" : "إلغاء التحديد",
+   "directAlignments" : "تمت محاذاة {header-title} مباشرة مع هذا النشاط",
+   "error" : "حدث خطأ",
+   "indirectAlignments" : "تمت محاذاة {header-title} مع معايير آلية التقييم",
+   "removeAlignment" : "إزالة المحاذاة"
 }

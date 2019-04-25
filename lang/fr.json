@@ -1,11 +1,11 @@
 {
-   "add" : "Inclure",
-   "addLabel" : "Inclure la sélection",
-   "alignmentRemoved" : "L'alignement a été supprimé",
+   "add" : "Ajouter",
+   "addLabel" : "Ajouter la sélection",
+   "alignmentRemoved" : "Alignement supprimé",
    "cancel" : "Annuler",
    "cancelLabel" : "Annuler la sélection",
-   "directAlignments" : "{header-title} Aligned Directly to This Activity",
+   "directAlignments" : "{header-title} aligné directement avec cette activité",
    "error" : "Une erreur est survenue",
-   "indirectAlignments" : "{header-title} Aligned to Rubric Criteria",
-   "removeAlignment" : "Supprimer l'alignement"
+   "indirectAlignments" : "{header-title} aligné avec les critères de la rubrique",
+   "removeAlignment" : "Supprimer l’alignement"
 }
