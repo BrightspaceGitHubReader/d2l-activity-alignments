@@ -5,7 +5,7 @@
   "version": "1.4.12",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test:lint && polymer test --skip-plugin sauce && npm run testcafe:local:chrome",
+    "test": "npm run test:lint && polymer test --skip-plugin sauce && npm run testcafe:chrome",
     "test:lint": "npm run test:lint:wc && npm run test:lint:js",
     "test:lint:js": "eslint . --ext .js,.html test/**/*.js test/**/*.html demo/**/*.js demo/**/*.html",
     "test:lint:wc": "polymer lint",
