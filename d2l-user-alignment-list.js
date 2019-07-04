@@ -131,6 +131,11 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-user-alignment-list
 				</template>
 			</div>
 			<d2l-loading-spinner slot="loading"></d2l-loading-spinner>
+			<template is="dom-if" if="[[_isEditable(entity, readOnly)]]">
+				<div>
+					<slot name="show-select-outcomes"></slot>
+				</div>
+			</template>
 		</siren-entity-loading>
 	</template>
 
