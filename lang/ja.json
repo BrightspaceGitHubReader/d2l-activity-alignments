@@ -4,8 +4,8 @@
    "alignmentRemoved" : "整合性が削除されました",
    "cancel" : "キャンセル",
    "cancelLabel" : "選択のキャンセル",
-   "directAlignments" : "{header-title} このアクティビティに直接整合されました",
+   "directAlignments" : "{headerTitle} このアクティビティに直接整合されました",
    "error" : "エラーが発生しました",
-   "indirectAlignments" : "{header-title} 注釈条件に整合されました",
+   "indirectAlignments" : "{headerTitle} 注釈条件に整合されました",
    "removeAlignment" : "整合性を削除"
 }

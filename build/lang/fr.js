@@ -17,7 +17,7 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangFrBehavior = {
 		'error': 'Une erreur est survenue',
 		'removeAlignment': 'Supprimer l\'alignement',
 		'alignmentRemoved': 'L\'alignement a été supprimé',
-		'directAlignments': '{header-title} Aligned Directly to This Activity',
-		'indirectAlignments': '{header-title} Aligned to Rubric Criteria'
+		'directAlignments': '{headerTitle} Aligned Directly to This Activity',
+		'indirectAlignments': '{headerTitle} Aligned to Rubric Criteria'
 	}
 };

@@ -32,6 +32,11 @@ class ActivityAlignmentTags extends mixinBehaviors([
 			_tagListIsEmpty: {
 				type: Boolean,
 				value: true
+			},
+			browseOutcomesText: {
+				type: String,
+				value: null,
+				reflectToAttribute: true
 			}
 		};
 	}
@@ -51,6 +56,7 @@ class ActivityAlignmentTags extends mixinBehaviors([
 					token="[[token]]"
 					read-only="[[readOnly]]"
 					empty="{{_tagListIsEmpty}}"
+					browse-outcomes-text="[[browseOutcomesText]]"
 				></d2l-activity-alignment-tag-list>
 			</template>
 			<template is="dom-if" if="[[_showError]]">

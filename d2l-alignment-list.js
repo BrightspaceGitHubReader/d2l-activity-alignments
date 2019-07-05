@@ -118,7 +118,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-list">
 					</div>
 				</template>
 				<template is="dom-if" if="[[_hasAlignments(_indirectAlignmentHrefs)]]">
-					<div class="alignment-list-header">[[localize('indirectAlignments', 'header-title', headerTitle)]]</div>
+					<div class="alignment-list-header">[[localize('indirectAlignments', 'headerTitle', headerTitle)]]</div>
 					<ul aria-busy="[[_loading]]" class$="[[_getClass(entity, true)]]">
 						<template is="dom-repeat" items="[[_indirectAlignmentHrefs]]">
 							<li>
@@ -133,7 +133,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-list">
 					</ul>
 				</template>
 				<template is="dom-if" if="[[_hasAlignments(_directAlignmentHrefs)]]">
-					<div class="alignment-list-header">[[localize('directAlignments', 'header-title', headerTitle)]]</div>
+					<div class="alignment-list-header">[[localize('directAlignments', 'headerTitle', headerTitle)]]</div>
 					<ul aria-busy="[[_loading]]" class$="[[_getClass(entity, readOnly)]]">
 						<template is="dom-repeat" items="[[_directAlignmentHrefs]]">
 							<li>

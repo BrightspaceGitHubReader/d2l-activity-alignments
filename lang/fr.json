@@ -4,8 +4,8 @@
    "alignmentRemoved" : "Alignement supprimé",
    "cancel" : "Annuler",
    "cancelLabel" : "Annuler la sélection",
-   "directAlignments" : "{header-title} aligné directement avec cette activité",
+   "directAlignments" : "{headerTitle} aligné directement avec cette activité",
    "error" : "Une erreur est survenue",
-   "indirectAlignments" : "{header-title} aligné avec les critères de la rubrique",
+   "indirectAlignments" : "{headerTitle} aligné avec les critères de la rubrique",
    "removeAlignment" : "Supprimer l’alignement"
 }

@@ -4,8 +4,8 @@
    "alignmentRemoved" : "Justering fjernet",
    "cancel" : "Annuller",
    "cancelLabel" : "Annuller valg",
-   "directAlignments" : "{header-title} justeret direkte til denne aktivitet",
+   "directAlignments" : "{headerTitle} justeret direkte til denne aktivitet",
    "error" : "Der opstod en fejl",
-   "indirectAlignments" : "{header-title} justeret til rubrikkriterier",
+   "indirectAlignments" : "{headerTitle} justeret til rubrikkriterier",
    "removeAlignment" : "Fjern justering"
 }

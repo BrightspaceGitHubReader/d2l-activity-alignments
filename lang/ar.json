@@ -4,8 +4,8 @@
    "alignmentRemoved" : "تمت إزالة المحاذاة",
    "cancel" : "إلغاء",
    "cancelLabel" : "إلغاء التحديد",
-   "directAlignments" : "تمت محاذاة {header-title} مباشرة مع هذا النشاط",
+   "directAlignments" : "تمت محاذاة {headerTitle} مباشرة مع هذا النشاط",
    "error" : "حدث خطأ",
-   "indirectAlignments" : "تمت محاذاة {header-title} مع معايير آلية التقييم",
+   "indirectAlignments" : "تمت محاذاة {headerTitle} مع معايير آلية التقييم",
    "removeAlignment" : "إزالة المحاذاة"
 }

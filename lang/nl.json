@@ -4,8 +4,8 @@
    "alignmentRemoved" : "Afstemming verwijderd",
    "cancel" : "Annuleren",
    "cancelLabel" : "Selectie annuleren",
-   "directAlignments" : "{header-title} rechtstreeks afgestemd op deze activiteit",
+   "directAlignments" : "{headerTitle} rechtstreeks afgestemd op deze activiteit",
    "error" : "Er is een fout opgetreden",
-   "indirectAlignments" : "{header-title} afgestemd op rubriccriteria",
+   "indirectAlignments" : "{headerTitle} afgestemd op rubriccriteria",
    "removeAlignment" : "Afstemming verwijderen"
 }

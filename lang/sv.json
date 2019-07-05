@@ -4,8 +4,8 @@
    "alignmentRemoved" : "Justeringen har tagits bort",
    "cancel" : "Avbryt",
    "cancelLabel" : "Avbryt val",
-   "directAlignments" : "{header-title} är direkt justerad efter den här aktiviteten",
+   "directAlignments" : "{headerTitle} är direkt justerad efter den här aktiviteten",
    "error" : "Ett fel har inträffat",
-   "indirectAlignments" : "{header-title} är justerad efter rubriceringskriterier",
+   "indirectAlignments" : "{headerTitle} är justerad efter rubriceringskriterier",
    "removeAlignment" : "Ta bort justering"
 }
