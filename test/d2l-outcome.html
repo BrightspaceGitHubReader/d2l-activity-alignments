@@ -54,6 +54,7 @@ D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest = function(request) {
 			return Promise.resolve(SirenParse(input_data));
 	}
 };
+window.D2L.Siren.WhitelistBehavior._testMode(true);
 
 /* global suite, test, assert, fixture */
 suite('d2l-outcome', function() {

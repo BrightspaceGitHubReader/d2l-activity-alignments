@@ -31,6 +31,7 @@ suite('d2l-alignment-intent', function() {
 	suite('smoke test', function() {
 		var element;
 		setup(function(done) {
+			window.D2L.Siren.WhitelistBehavior._testMode(true);
 			element = fixture('basic');
 			var href = 'static-data/intents/c297b02c-19b1-485a-92db-e598316271c8/5f4d6901-7c10-4edc-b2e1-821efc5c3708.json';
 			function waitForLoad(entity, error) {
@@ -55,6 +56,10 @@ suite('d2l-alignment-intent', function() {
 			);
 			element.href = 'static-data/intents/c297b02c-19b1-485a-92db-e598316271c8/5f4d6901-7c10-4edc-b2e1-821efc5c3708.json';
 			element.token = '';
+		});
+
+		teardown(function() {
+			window.D2L.Siren.WhitelistBehavior._testMode(false);
 		});
 
 		test('sets d2l-outcome href', function() {

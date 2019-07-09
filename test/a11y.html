@@ -26,6 +26,7 @@ import '../d2l-select-outcomes.js';
 suite('d2l-select-outcomes', function() {
 	suite('a11y', function() {
 		setup(function(done) {
+			window.D2L.Siren.WhitelistBehavior._testMode(true);
 			function stubFetch(href, entity) {
 				window.d2lfetch.fetch
 					.withArgs(href)
@@ -211,6 +212,10 @@ suite('d2l-select-outcomes', function() {
 			window.D2L.Siren.EntityStore.addListener('https://15215d45-f7e9-4967-bf9b-13a685538829.outcomes.api.dev.brightspace.com/outcomes/73292f97-ebe5-43d5-b1df-299d98f1e0c4/84f0b418-2f25-4184-87e5-9ab7f86fbc34', '', waitForFetch);
 			fixtureElement.href = 'https://15215d45-f7e9-4967-bf9b-13a685538829.activities.api.dev.brightspace.com/activities/6606_3000_1/usages/6609';
 			fixtureElement.token = '';
+		});
+
+		teardown(function() {
+			window.D2L.Siren.WhitelistBehavior._testMode(false);
 		});
 
 		test('A11y Audit - Fixture: d2l-select-outcomes', function() {
