@@ -36,7 +36,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-user-alignment-list
 				/* The standard button box-shadow width */
 				--d2l-alignment-list-overflow-margin: 4px;
 			}
-			
+
 			.d2l-alignment-list-content {
 				display: flex;
 				flex-direction: column;
@@ -129,13 +129,13 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-user-alignment-list
 				<template is="dom-if" if="[[_promiseError]]">
 					<d2l-alert type="error">[[localize('error')]]</d2l-alert>
 				</template>
+				<template is="dom-if" if="[[_isEditable(entity, readOnly)]]">
+					<div>
+						<slot name="show-select-outcomes"></slot>
+					</div>
+				</template>
 			</div>
 			<d2l-loading-spinner slot="loading"></d2l-loading-spinner>
-			<template is="dom-if" if="[[_isEditable(entity, readOnly)]]">
-				<div>
-					<slot name="show-select-outcomes"></slot>
-				</div>
-			</template>
 		</siren-entity-loading>
 	</template>
 
