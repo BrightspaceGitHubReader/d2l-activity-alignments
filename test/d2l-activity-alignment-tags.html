@@ -27,6 +27,7 @@ suite('d2l-alignment', function() {
 	suite('smoke test', function() {
 		var element;
 		setup(function(done) {
+			window.D2L.Siren.WhitelistBehavior._testMode(true);
 			element = fixture('basic');
 			var href = 'static-data/activity-usages/c297b02c-19b1-485a-92db-e598316271c8/f2b85092-5fbf-4e19-8345-8971f79debd8.json';
 			function waitForLoad(entity, error) {
@@ -51,6 +52,10 @@ suite('d2l-alignment', function() {
 			);
 			element.href = 'static-data/activity-usages/c297b02c-19b1-485a-92db-e598316271c8/f2b85092-5fbf-4e19-8345-8971f79debd8.json';
 			element.token = '';
+		});
+
+		teardown(function() {
+			window.D2L.Siren.WhitelistBehavior._testMode(false);
 		});
 
 		test('verify outcome tags', function(done) {
