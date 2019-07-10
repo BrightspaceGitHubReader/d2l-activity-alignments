@@ -22,6 +22,7 @@ import 'd2l-polymer-siren-behaviors/siren-entity-loading.js';
 import './d2l-alignment-intent.js';
 import './localize-behavior.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import {dom} from '@polymer/polymer/lib/legacy/polymer.dom.js';
 const $_documentContainer = document.createElement('template');
 
 $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-update">
@@ -129,10 +130,10 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-update">
 		</style>
 		<siren-entity-loading href="[[_candidatesSelfHref]]" token="[[token]]">
 			<div class="d2l-alignment-update-content">
-				<ul role="listbox" aria-multiselectable="true" aria-busy="[[_loading]]">
+				<ul role="listbox" aria-multiselectable="true" aria-busy="[[_loading]]" tabindex="0" on-focus="_handleListFocus">
 					<template is="dom-repeat" items="[[candidateEntities]]">
-						<li class$="[[_getClass(index, candidateEntities)]]" role="option" aria-checked$="[[_getChecked(item)]]">
-							<d2l-input-checkbox checked="[[_getChecked(item)]]" on-change="_onOutcomeSelectChange" on-keydown="_onKeyDown" data-index$="[[index]]" aria-labelledby="[[id]]alignment-intent-[[index]]">
+						<li class$="[[_getClass(index, candidateEntities)]]" tabindex="-1" role="option" aria-selected$="[[_getAriaChecked(item)]]" aria-checked$="[[_getAriaChecked(item)]]" aria-labelledby="[[id]]alignment-intent-[[index]]" on-keydown="_onKeyDown" on-focus="_handleOptionFocus" on-blur="_handleOptionBlur">
+							<d2l-input-checkbox tabindex="-1"  not-tabbable="true" checked="[[_getChecked(item)]]" on-change="_onOutcomeSelectChange"  data-index$="[[index]]" >
 								<d2l-alignment-intent id$="[[id]]alignment-intent-[[index]]" href="[[_getIntent(item)]]" token="[[token]]"></d2l-alignment-intent>
 							</d2l-input-checkbox>
 						</li>
@@ -198,7 +199,8 @@ Polymer({
 
 	_keyCodes: {
 		DOWN: 40,
-		UP: 38
+		UP: 38,
+		SPACE: 32
 	},
 
 	ready: function() {
@@ -208,17 +210,51 @@ Polymer({
 
 	_onKeyDown: function(e) {
 		var target = e.target;
-		if (e.keyCode === this._keyCodes.DOWN || e.keyCode === this._keyCodes.UP) {
+		if (e.keyCode === this._keyCodes.DOWN || e.keyCode === this._keyCodes.UP || e.keyCode === this._keyCodes.SPACE) {
 			// prevent scrolling when up/down arrows pressed
 			e.preventDefault();
 			e.stopPropagation();
 			if (e.keyCode === this._keyCodes.DOWN) {
-				this._focusNext(target);
+				var nextOption = target.nextSibling;
+				if (nextOption) {
+					nextOption.focus();
+				}
+				//this._focusNext(target);
 			} else if (e.keyCode === this._keyCodes.UP) {
-				this._focusPrevious(target);
+				var prevOption = target.previousSibling;
+				if (prevOption) {
+					prevOption.focus();
+				}
+				//this._focusPrevious(target);
+			} else if (e.keyCode === this._keyCodes.SPACE) {
+				var childCheckbox = target.firstChild;
+				var isChecked = childCheckbox.getAttribute('checked');
+				if (isChecked === '') {
+					childCheckbox.removeAttribute('checked', '');
+				} else {
+					childCheckbox.setAttribute('checked', '');
+				}
+				this.onOutcomeSelectChangeOnKeydown(childCheckbox);
 			}
 			return;
 		}
+	},
+
+	_handleListFocus: function() {
+		var elem = dom(this.root).querySelector('.d2l-select-outcomes-first');
+		if (elem) {
+			elem.focus();
+		}
+	},
+
+	_handleOptionFocus:function(e) {
+		var list = e.target.parentNode;
+		list.setAttribute('tabindex', '-1');
+	},
+
+	_handleOptionBlur:function(e) {
+		var list = e.target.parentNode;
+		list.setAttribute('tabindex', '0');
 	},
 
 	_focusNext: function(target) {
@@ -304,6 +340,13 @@ Polymer({
 		return candidate.hasClass(Classes.alignments.selected);
 	},
 
+	_getAriaChecked: function(candidate) {
+		if (this._getChecked(candidate)) {
+			return 'true';
+		}
+		return 'false';
+	},
+
 	_getIntent: function(entity) {
 		return entity && entity.hasLinkByRel(Rels.Outcomes.intent) && entity.getLinkByRel(Rels.Outcomes.intent).href;
 	},
@@ -311,6 +354,24 @@ Polymer({
 	_onOutcomeSelectChange: function(e) {
 		var self = this;
 		var target = e.target;
+		var index = +target.dataset.index;
+		this._performActionAndUpdate(/* @this */ function() {
+			var candidate = this.candidates.entities[index];
+			if (candidate) {
+				if (target.checked && candidate.getActionByName(Actions.alignments.select)) {
+					return candidate.getActionByName(Actions.alignments.select);
+				} else if (!target.checked && candidate.getActionByName(Actions.alignments.deselect)) {
+					return candidate.getActionByName(Actions.alignments.deselect);
+				}
+			}
+		})
+			.then(function() {
+				self._buttonsDisabled = false;
+			});
+	},
+
+	onOutcomeSelectChangeOnKeydown: function(target) {
+		var self = this;
 		var index = +target.dataset.index;
 		this._performActionAndUpdate(/* @this */ function() {
 			var candidate = this.candidates.entities[index];
