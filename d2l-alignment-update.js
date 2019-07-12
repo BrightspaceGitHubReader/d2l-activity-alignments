@@ -140,8 +140,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-update">
 					</template>
 				</ul>
 				<div class="d2l-alignment-update-buttons">
-					<d2l-button primary="" disabled="[[_buttonsDisabled]]" on-click="_add" aria-label="[[localize('addLabel')]]">[[localize('add')]]</d2l-button>
-					<d2l-button on-click="_cancel" aria-label="[[localize('cancelLabel')]]">[[localize('cancel')]]</d2l-button>
+					<d2l-button primary="" disabled="[[_buttonsDisabled]]" on-tap="_add" aria-label="[[localize('addLabel')]]">[[localize('add')]]</d2l-button>
+					<d2l-button on-tap="_cancel" aria-label="[[localize('cancelLabel')]]">[[localize('cancel')]]</d2l-button>
 					<d2l-loading-spinner hidden$="[[!_loading]]"></d2l-loading-spinner>
 				</div>
 				<template is="dom-if" if="[[_promiseError]]">
