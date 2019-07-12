@@ -61,6 +61,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-update">
 				padding: 0;
 				flex: 1;
 				overflow: auto;
+				word-break: break-word;
 				border: 1px solid transparent;
 				border-top-color: var(--d2l-color-gypsum);
 				border-bottom-color: var(--d2l-color-gypsum);
