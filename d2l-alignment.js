@@ -163,14 +163,7 @@ Polymer({
 					action: action
 				}
 			}));
-			this.performSirenAction(action)
-				.catch(function() {})
-				.then(function() {
-					var alignments = this.entity && this.entity.getLinkByRel('collection');
-					if (alignments) {
-						window.D2L.Siren.EntityStore.fetch(alignments.href, this.token, true);
-					}
-				}.bind(this));
+			this.performSirenAction(action);
 		}
 	},
 

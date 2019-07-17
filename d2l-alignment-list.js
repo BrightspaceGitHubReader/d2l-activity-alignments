@@ -237,10 +237,19 @@ Polymer({
 		);
 	},
 
+	_isEmpty: function(object) {
+		for (var x in object) {
+			return false;
+		}
+		return true;
+	},
+
 	_onAlignmentRemove: function(e) {
 		const newMap = this._alignmentMap;
 		delete newMap[e.detail.entity.getLinkByRel('self').href];
-		this.set('_alignmentMap', {});
+		if (this._isEmpty(newMap)) {
+			this.set('_alignmentMap', {});
+		}
 		this.set('_alignmentMap', newMap);
 
 		// Notify screen readers that an alignment has been removed
