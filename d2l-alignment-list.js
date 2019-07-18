@@ -50,6 +50,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-list">
 			}
 
 			siren-entity-loading {
+				display: flex;
+				flex-direction: column;
 				overflow: hidden;
 				width: 100%;
 				margin: var(--d2l-alignment-list-overflow-margin);
@@ -104,64 +106,71 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-list">
 				@apply --d2l-heading-3;
 				margin-bottom: 0;
 			}
+
+			.direction-correction { /* The slot of siren-entity-loading has felx-direction: row and needs to be corrected */
+				display: flex;
+				flex-direction: column;
+			}
 		</style>
 		<siren-entity-loading href="[[href]]" token="[[token]]">
-			<div class="d2l-alignment-list-content">
-				<template is="dom-if" if="[[_hasAlignmentsOrEditable(entity, _directAlignmentHrefs, _indirectAlignmentHrefs, readOnly)]]">
+			<div class="direction-correction">
+				<div class="d2l-alignment-list-content">
+					<template is="dom-if" if="[[_hasAlignmentsOrEditable(entity, _directAlignmentHrefs, _indirectAlignmentHrefs, readOnly)]]">
+						<div>
+							<slot name="outcomes-title"></slot>
+						</div>
+					</template>
+					<template is="dom-if" if="[[_hasAlignmentsAndNotEditable(entity, _directAlignmentHrefs, _indirectAlignmentHrefs, readOnly)]]">
+						<div>
+							<slot name="describe-aligned-outcomes"></slot>
+						</div>
+					</template>
+					<template is="dom-if" if="[[_hasAlignments(_indirectAlignmentHrefs)]]">
+						<div class="alignment-list-header">[[localize('indirectAlignments', 'headerTitle', headerTitle)]]</div>
+						<ul aria-busy="[[_loading]]" class$="[[_getClass(entity, true)]]">
+							<template is="dom-repeat" items="[[_indirectAlignmentHrefs]]">
+								<li>
+									<d2l-alignment
+										id$="[[id]]-indirect-alignment-intent-[[index]]"
+										href="[[item]]"
+										token="[[token]]"
+										read-only
+									></d2l-alignment>
+								</li>
+							</template>
+						</ul>
+					</template>
+					<template is="dom-if" if="[[_hasAlignments(_directAlignmentHrefs)]]">
+						<div class="alignment-list-header">[[localize('directAlignments', 'headerTitle', headerTitle)]]</div>
+						<ul aria-busy="[[_loading]]" class$="[[_getClass(entity, readOnly)]]">
+							<template is="dom-repeat" items="[[_directAlignmentHrefs]]">
+								<li>
+									<d2l-alignment
+										id$="[[id]]-direct-alignment-intent-[[index]]"
+										href="[[item]]"
+										token="[[token]]"
+										on-d2l-alignment-remove="_onAlignmentRemove"
+										data-index$="[[index]]"
+										read-only$="[[readOnly]]"
+									></d2l-alignment>
+								</li>
+							</template>
+						</ul>
+					</template>
+					<template is="dom-repeat" items="[[_alignmentHrefs]]">
+						<d2l-siren-map-helper href="[[item]]" token="[[token]]" map="{{_alignmentMap}}"></d2l-siren-map-helper>
+					</template>
+					<template is="dom-if" if="[[_promiseError]]">
+						<d2l-alert type="error">[[localize('error')]]</d2l-alert>
+					</template>
+				</div>
+				<template is="dom-if" if="[[_isEditable(entity, readOnly)]]">
 					<div>
-						<slot name="outcomes-title"></slot>
+						<slot name="show-select-outcomes"></slot>
 					</div>
-				</template>
-				<template is="dom-if" if="[[_hasAlignmentsAndNotEditable(entity, _directAlignmentHrefs, _indirectAlignmentHrefs, readOnly)]]">
-					<div>
-						<slot name="describe-aligned-outcomes"></slot>
-					</div>
-				</template>
-				<template is="dom-if" if="[[_hasAlignments(_indirectAlignmentHrefs)]]">
-					<div class="alignment-list-header">[[localize('indirectAlignments', 'headerTitle', headerTitle)]]</div>
-					<ul aria-busy="[[_loading]]" class$="[[_getClass(entity, true)]]">
-						<template is="dom-repeat" items="[[_indirectAlignmentHrefs]]">
-							<li>
-								<d2l-alignment
-									id$="[[id]]-indirect-alignment-intent-[[index]]"
-									href="[[item]]"
-									token="[[token]]"
-									read-only
-								></d2l-alignment>
-							</li>
-						</template>
-					</ul>
-				</template>
-				<template is="dom-if" if="[[_hasAlignments(_directAlignmentHrefs)]]">
-					<div class="alignment-list-header">[[localize('directAlignments', 'headerTitle', headerTitle)]]</div>
-					<ul aria-busy="[[_loading]]" class$="[[_getClass(entity, readOnly)]]">
-						<template is="dom-repeat" items="[[_directAlignmentHrefs]]">
-							<li>
-								<d2l-alignment
-									id$="[[id]]-direct-alignment-intent-[[index]]"
-									href="[[item]]"
-									token="[[token]]"
-									on-d2l-alignment-remove="_onAlignmentRemove"
-									data-index$="[[index]]"
-									read-only$="[[readOnly]]"
-								></d2l-alignment>
-							</li>
-						</template>
-					</ul>
-				</template>
-				<template is="dom-repeat" items="[[_alignmentHrefs]]">
-					<d2l-siren-map-helper href="[[item]]" token="[[token]]" map="{{_alignmentMap}}"></d2l-siren-map-helper>
-				</template>
-				<template is="dom-if" if="[[_promiseError]]">
-					<d2l-alert type="error">[[localize('error')]]</d2l-alert>
 				</template>
 			</div>
 			<d2l-loading-spinner slot="loading"></d2l-loading-spinner>
-			<template is="dom-if" if="[[_isEditable(entity, readOnly)]]">
-				<div>
-					<slot name="show-select-outcomes"></slot>
-				</div>
-			</template>
 		</siren-entity-loading>
 	</template>
 
