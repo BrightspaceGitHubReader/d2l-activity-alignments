@@ -227,6 +227,9 @@ D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest = function(request) {
 				'class': [
 					'alignment'
 				],
+				'properties': {
+					'relationshipType': 'owned'
+				},
 				'links': [
 					{
 						rel: [ 'collection' ],
@@ -248,6 +251,9 @@ D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest = function(request) {
 				'class': [
 					'alignment'
 				],
+				'properties': {
+					'relationshipType': 'owned'
+				},
 				'links': [
 					{
 						rel: [ 'collection' ],
