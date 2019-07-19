@@ -43,6 +43,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-alignment">
 
 			d2l-button-icon {
 				padding-left: 0.25rem;
+				height: 100%;
 			}
 
 			:host-context([dir="rtl"]) {
