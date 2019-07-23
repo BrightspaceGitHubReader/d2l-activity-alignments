@@ -4,7 +4,7 @@
    "alignmentRemoved" : "Hizalama kaldırıldı",
    "cancel" : "İptal",
    "cancelLabel" : "Seçimi iptal et",
-   "directAlignments" : "{headerTitle} Doğrudan Bu Etkinliğe Hizalandı",
+   "directAlignments" : "{header-title} Doğrudan Bu Etkinliğe Hizalandı",
    "error" : "Bir hata oluştu",
    "indirectAlignments" : "{headerTitle} Rubrik Kriterlerine Hizalandı",
    "removeAlignment" : "Hizalamayı kaldır"
