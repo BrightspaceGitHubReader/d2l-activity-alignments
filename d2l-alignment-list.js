@@ -83,8 +83,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-list">
 			}
 
 			.d2l-alignment-list-editable li {
-				padding: 0.6rem;
-				padding-right: 0;
+				padding: 0 0 0.6rem 0.6rem;
 				border-top: 1px solid var(--d2l-color-gypsum);
 				margin-bottom: 0;
 			}

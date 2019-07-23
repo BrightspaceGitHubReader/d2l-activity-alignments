@@ -61,6 +61,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 						max-chars="40"
 						deletable="[[_canDelete(item,readOnly)]]"
 						on-d2l-multi-select-list-item-deleted="_removeOutcome"
+						style="margin-top: 3px;"
 					></d2l-multi-select-list-item>
 				</template>
 				<template is="dom-if" if="[[_canUpdate(entity,readOnly)]]">
