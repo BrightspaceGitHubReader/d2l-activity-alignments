@@ -4,8 +4,8 @@
    "alignmentRemoved" : "Alignment removed",
    "cancel" : "取消",
    "cancelLabel" : "Cancel selection",
-   "directAlignments" : "{headerTitle} Aligned Directly to This Activity",
+   "directAlignments" : "{headerTitle} 直接与此活动对齐",
    "error" : "已经出现错误。",
-   "indirectAlignments" : "{headerTitle} Aligned to Rubric Criteria",
+   "indirectAlignments" : "{headerTitle} 与量规标准对齐",
    "removeAlignment" : "Remove alignment"
 }

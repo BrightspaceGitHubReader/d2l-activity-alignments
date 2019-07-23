@@ -6,6 +6,6 @@
    "cancelLabel" : "إلغاء التحديد",
    "directAlignments" : "تمت محاذاة {headerTitle} مباشرة مع هذا النشاط",
    "error" : "حدث خطأ",
-   "indirectAlignments" : "تمت محاذاة {headerTitle} مع معايير آلية التقييم",
+   "indirectAlignments" : "تمت محاذاة {headerTitle} مع معيار آلية التقييم",
    "removeAlignment" : "إزالة المحاذاة"
 }
