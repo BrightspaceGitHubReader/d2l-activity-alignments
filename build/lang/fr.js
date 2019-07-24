@@ -5,19 +5,19 @@ window.D2L.PolymerBehaviors.SelectOutcomes = window.D2L.PolymerBehaviors.SelectO
 window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior || {};
 
 /*
-* Fr lang terms
-* @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangFrBehavior
+ * Fr lang terms
+ * @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangFrBehavior
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangFrBehavior = {
 	fr: {
-		'add': 'Inclure',
-		'addLabel': 'Inclure la sélection',
+		'add': 'Ajouter',
+		'addLabel': 'Ajouter la sélection',
+		'alignmentRemoved': 'Alignement supprimé',
 		'cancel': 'Annuler',
 		'cancelLabel': 'Annuler la sélection',
+		'directAlignments': '{headerTitle} aligné directement avec cette activité',
 		'error': 'Une erreur est survenue',
-		'removeAlignment': 'Supprimer l\'alignement',
-		'alignmentRemoved': 'L\'alignement a été supprimé',
-		'directAlignments': '{headerTitle} Aligned Directly to This Activity',
-		'indirectAlignments': '{headerTitle} Aligned to Rubric Criteria'
+		'indirectAlignments': '{headerTitle} aligné avec les critères de la grille d’évaluation',
+		'removeAlignment': 'Supprimer l’alignement'
 	}
 };

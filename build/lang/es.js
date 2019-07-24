@@ -5,19 +5,19 @@ window.D2L.PolymerBehaviors.SelectOutcomes = window.D2L.PolymerBehaviors.SelectO
 window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior || {};
 
 /*
-* Es lang terms
-* @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangEsBehavior
+ * Es lang terms
+ * @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangEsBehavior
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangEsBehavior = {
 	es: {
-		'add': 'Add',
-		'addLabel': 'Add selection',
-		'cancel': 'Cancel',
-		'cancelLabel': 'Cancel selection',
-		'error': 'An error has occured',
-		'removeAlignment': 'Remove alignment',
-		'alignmentRemoved': 'Alignment removed',
-		'directAlignments': '{headerTitle} Aligned Directly to This Activity',
-		'indirectAlignments': '{headerTitle} Aligned to Rubric Criteria'
+		'add': 'Agregar',
+		'addLabel': 'Agregar selección',
+		'alignmentRemoved': 'Alineación eliminada',
+		'cancel': 'Cancelar',
+		'cancelLabel': 'Cancelar selección',
+		'directAlignments': '{headerTitle} alineado directamente con esta actividad',
+		'error': 'Se produjo un error',
+		'indirectAlignments': '{headerTitle} alineado con los criterios de la rúbrica',
+		'removeAlignment': 'Quitar la alineación'
 	}
 };

@@ -5,19 +5,19 @@ window.D2L.PolymerBehaviors.SelectOutcomes = window.D2L.PolymerBehaviors.SelectO
 window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior || {};
 
 /*
-* Zh lang terms
-* @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangZhBehavior
+ * Zh lang terms
+ * @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangZhBehavior
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangZhBehavior = {
 	zh: {
-		'add': 'Add',
+		'add': '添加',
 		'addLabel': 'Add selection',
-		'cancel': 'Cancel',
-		'cancelLabel': 'Cancel selection',
-		'error': 'An error has occured',
-		'removeAlignment': 'Remove alignment',
 		'alignmentRemoved': 'Alignment removed',
-		'directAlignments': '{headerTitle} Aligned Directly to This Activity',
-		'indirectAlignments': '{headerTitle} Aligned to Rubric Criteria'
+		'cancel': '取消',
+		'cancelLabel': 'Cancel selection',
+		'directAlignments': '{headerTitle} 直接与此活动对齐',
+		'error': '已经出现错误。',
+		'indirectAlignments': '{headerTitle} 与量规标准对齐',
+		'removeAlignment': 'Remove alignment'
 	}
 };

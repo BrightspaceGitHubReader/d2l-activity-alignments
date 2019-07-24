@@ -5,19 +5,19 @@ window.D2L.PolymerBehaviors.SelectOutcomes = window.D2L.PolymerBehaviors.SelectO
 window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior || {};
 
 /*
-* Zh Tw lang terms
-* @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangZhTwBehavior
+ * ZhTw lang terms
+ * @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangZhTwBehavior
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangZhTwBehavior = {
 	zhTw: {
-		'add': 'Add',
-		'addLabel': 'Add selection',
-		'cancel': 'Cancel',
-		'cancelLabel': 'Cancel selection',
-		'error': 'An error has occured',
-		'removeAlignment': 'Remove alignment',
-		'alignmentRemoved': 'Alignment removed',
-		'directAlignments': '{headerTitle} Aligned Directly to This Activity',
-		'indirectAlignments': '{headerTitle} Aligned to Rubric Criteria'
+		'add': '新增',
+		'addLabel': '新增選擇項目',
+		'alignmentRemoved': '校準已移除',
+		'cancel': '取消',
+		'cancelLabel': '取消選擇項目',
+		'directAlignments': '{headerTitle} 直接配合此活動校準',
+		'error': '發生錯誤',
+		'indirectAlignments': '{headerTitle} 配合量規標準校準',
+		'removeAlignment': '移除校準'
 	}
 };

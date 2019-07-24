@@ -5,19 +5,19 @@ window.D2L.PolymerBehaviors.SelectOutcomes = window.D2L.PolymerBehaviors.SelectO
 window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior || {};
 
 /*
-* Tr lang terms
-* @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangTrBehavior
+ * Tr lang terms
+ * @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangTrBehavior
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangTrBehavior = {
 	tr: {
-		'add': 'Add',
-		'addLabel': 'Add selection',
-		'cancel': 'Cancel',
-		'cancelLabel': 'Cancel selection',
-		'error': 'An error has occured',
-		'removeAlignment': 'Remove alignment',
-		'alignmentRemoved': 'Alignment removed',
-		'directAlignments': '{headerTitle} Aligned Directly to This Activity',
-		'indirectAlignments': '{headerTitle} Aligned to Rubric Criteria'
+		'add': 'Ekle',
+		'addLabel': 'Seçimi ekle',
+		'alignmentRemoved': 'Hizalama kaldırıldı',
+		'cancel': 'İptal',
+		'cancelLabel': 'Seçimi iptal et',
+		'directAlignments': '{headerTitle} Doğrudan Bu Etkinliğe Hizalandı',
+		'error': 'Bir hata oluştu',
+		'indirectAlignments': '{headerTitle} Rubrik Kriterlerine Hizalandı',
+		'removeAlignment': 'Hizalamayı kaldır'
 	}
 };

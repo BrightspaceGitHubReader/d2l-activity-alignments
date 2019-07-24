@@ -5,19 +5,19 @@ window.D2L.PolymerBehaviors.SelectOutcomes = window.D2L.PolymerBehaviors.SelectO
 window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior || {};
 
 /*
-* Ar lang terms
-* @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangArBehavior
+ * Ar lang terms
+ * @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangArBehavior
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangArBehavior = {
 	ar: {
-		'add': 'Add',
-		'addLabel': 'Add selection',
-		'cancel': 'Cancel',
-		'cancelLabel': 'Cancel selection',
-		'error': 'An error has occured',
-		'removeAlignment': 'Remove alignment',
-		'alignmentRemoved': 'Alignment removed',
-		'directAlignments': '{headerTitle} Aligned Directly to This Activity',
-		'indirectAlignments': '{headerTitle} Aligned to Rubric Criteria'
+		'add': 'إضافة',
+		'addLabel': 'إضافة تحديد',
+		'alignmentRemoved': 'تمت إزالة المحاذاة',
+		'cancel': 'إلغاء',
+		'cancelLabel': 'إلغاء التحديد',
+		'directAlignments': 'تمت محاذاة {headerTitle} مباشرة مع هذا النشاط',
+		'error': 'حدث خطأ',
+		'indirectAlignments': 'تمت محاذاة {headerTitle} مع معيار آلية التقييم',
+		'removeAlignment': 'إزالة المحاذاة'
 	}
 };

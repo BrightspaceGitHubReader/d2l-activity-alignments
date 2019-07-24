@@ -5,19 +5,19 @@ window.D2L.PolymerBehaviors.SelectOutcomes = window.D2L.PolymerBehaviors.SelectO
 window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior || {};
 
 /*
-* Sv lang terms
-* @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangSvBehavior
+ * Sv lang terms
+ * @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangSvBehavior
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangSvBehavior = {
 	sv: {
-		'add': 'Add',
-		'addLabel': 'Add selection',
-		'cancel': 'Cancel',
-		'cancelLabel': 'Cancel selection',
-		'error': 'An error has occured',
-		'removeAlignment': 'Remove alignment',
-		'alignmentRemoved': 'Alignment removed',
-		'directAlignments': '{headerTitle} Aligned Directly to This Activity',
-		'indirectAlignments': '{headerTitle} Aligned to Rubric Criteria'
+		'add': 'Lägg till',
+		'addLabel': 'Lägg till markering',
+		'alignmentRemoved': 'Justeringen har tagits bort',
+		'cancel': 'Avbryt',
+		'cancelLabel': 'Avbryt val',
+		'directAlignments': '{headerTitle} är direkt justerad efter den här aktiviteten',
+		'error': 'Ett fel har inträffat',
+		'indirectAlignments': '{headerTitle} är justerad efter rubriceringskriterier',
+		'removeAlignment': 'Ta bort justering'
 	}
 };
