@@ -209,17 +209,17 @@ Polymer({
 		this.__promises = 0;
 		this._handleSirenEntityLoadingFetched = this._handleSirenEntityLoadingFetched.bind(this);
 	},
-	
+
 	attached: function() {
 		this.shadowRoot.querySelector('siren-entity-loading').addEventListener('siren-entity-loading-fetched', this._handleSirenEntityLoadingFetched);
 	},
-	
+
 	detached: function() {
 		this.shadowRoot.querySelector('siren-entity-loading').removeEventListener('siren-entity-loading-fetched', this._handleSirenEntityLoadingFetched);
 	},
-	
+
 	_handleSirenEntityLoadingFetched: function(e) {
-		if( e.target === this.shadowRoot.querySelector('siren-entity-loading') ) {
+		if (e.target === this.shadowRoot.querySelector('siren-entity-loading')) {
 			this.dispatchEvent(new CustomEvent('d2l-alignment-list-loaded', {
 				bubbles: true,
 				composed: true
