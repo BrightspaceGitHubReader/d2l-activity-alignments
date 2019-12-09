@@ -107,6 +107,8 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 	}
 
 	_getAlignmentHrefs(entity) {
+		this.fire('d2l-activity-alignment-outcomes-updated', entity);
+
 		if (!entity) return [];
 		const alignmentEntities = entity.getSubEntitiesByClass('alignment');
 		return alignmentEntities.map(alignment => alignment.href);
