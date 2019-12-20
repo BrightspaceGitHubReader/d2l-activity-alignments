@@ -134,7 +134,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-alignment-update">
 				<ul role="listbox" aria-multiselectable="true" aria-busy="[[_loading]]" tabindex="0" on-focus="_handleListFocus">
 					<template is="dom-repeat" items="[[candidateEntities]]">
 						<li class$="[[_getClass(index, candidateEntities)]]" tabindex="-1" role="option" aria-selected$="[[_getAriaChecked(item)]]" aria-checked$="[[_getAriaChecked(item)]]" aria-labelledby="[[id]]alignment-intent-[[index]]" on-keydown="_onKeyDown" on-focus="_handleOptionFocus" on-blur="_handleOptionBlur">
-							<d2l-input-checkbox tabindex="-1"  not-tabbable="true" checked="[[_getChecked(item)]]" on-change="_onOutcomeSelectChange"  data-index$="[[index]]" >
+							<d2l-input-checkbox tabindex="-1"  not-tabbable="true" checked="[[_getChecked(item)]]" indeterminate="[[_getIndeterminate(item)]]" on-change="_onOutcomeSelectChange"  data-index$="[[index]]" >
 								<d2l-alignment-intent id$="[[id]]alignment-intent-[[index]]" href="[[_getIntent(item)]]" token="[[token]]"></d2l-alignment-intent>
 							</d2l-input-checkbox>
 						</li>
@@ -357,6 +357,10 @@ Polymer({
 
 	_getChecked: function(candidate) {
 		return candidate.hasClass(Classes.alignments.selected);
+	},
+
+	_getIndeterminate: function(candidate) {
+		return candidate.hasClass(Classes.alignments.indeterminate);
 	},
 
 	_getAriaChecked: function(candidate) {
