@@ -313,7 +313,8 @@ D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest = function(request) {
 					'entities': [
 						{
 							'class': [
-								'alignment-candidate'
+								'alignment-candidate',
+								'selected'
 							],
 							'rel': [
 								'item'
@@ -329,7 +330,8 @@ D2L.PolymerBehaviors.FetchSirenEntityBehavior._makeRequest = function(request) {
 							]
 						}, {
 							'class': [
-								'alignment-candidate'
+								'alignment-candidate',
+								'indeterminate'
 							],
 							'rel': [
 								'item'
