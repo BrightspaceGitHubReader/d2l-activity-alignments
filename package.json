@@ -5,7 +5,9 @@
   "version": "1.4.25",
   "main": "index.js",
   "scripts": {
-    "lang:build": "node langtools/build.js -c langtools/config.json",
+    "lang:build": "lang-build -ec langtools/config.json",
+    "lang:copy": "lang-copy -svc langtools/config.json",
+    "lang:lint": "eslint build/lang",
     "test": "npm run test:lint && polymer test --skip-plugin sauce && npm run testcafe:chrome",
     "test:lint": "npm run test:lint:wc && npm run test:lint:js",
     "test:lint:js": "eslint . --ext .js,.html test/**/*.js test/**/*.html demo/**/*.js demo/**/*.html",
@@ -22,6 +24,7 @@
     "@polymer/iron-demo-helpers": "^3.0.0",
     "@webcomponents/webcomponentsjs": "^2.2.3",
     "babel-eslint": "^10.0.1",
+    "d2l-polymer-langtools": "^1.1.1",
     "eslint": "^5.14.1",
     "eslint-config-brightspace": "^0.4.1",
     "eslint-plugin-html": "^5.0.3",
