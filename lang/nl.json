@@ -1,11 +1,11 @@
 {
-   "add" : "Toevoegen",
-   "addLabel" : "Selectie toevoegen",
-   "alignmentRemoved" : "Afstemming verwijderd",
-   "cancel" : "Annuleren",
-   "cancelLabel" : "Selectie annuleren",
-   "directAlignments" : "{headerTitle} rechtstreeks afgestemd op deze activiteit",
-   "error" : "Er is een fout opgetreden",
-   "indirectAlignments" : "{headerTitle} afgestemd op rubriccriteria",
-   "removeAlignment" : "Afstemming verwijderen"
+    "add": "Toevoegen",
+    "addLabel": "Selectie toevoegen",
+    "alignmentRemoved": "Afstemming verwijderd",
+    "cancel": "Annuleren",
+    "cancelLabel": "Selectie annuleren",
+    "directAlignments": "{headerTitle} rechtstreeks afgestemd op deze activiteit",
+    "error": "Er is een fout opgetreden",
+    "indirectAlignments": "{headerTitle} afgestemd op rubriccriteria",
+    "removeAlignment": "Afstemming verwijderen"
 }

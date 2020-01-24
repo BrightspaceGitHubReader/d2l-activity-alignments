@@ -5,19 +5,19 @@ window.D2L.PolymerBehaviors.SelectOutcomes = window.D2L.PolymerBehaviors.SelectO
 window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior || {};
 
 /*
-* Da lang terms
-* @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangDaBehavior
+ * Da lang terms
+ * @polymerBehavior D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangDaBehavior
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangDaBehavior = {
-	daDk: {
-		'add': 'Add',
-		'addLabel': 'Add selection',
-		'cancel': 'Cancel',
-		'cancelLabel': 'Cancel selection',
-		'error': 'An error has occured',
-		'removeAlignment': 'Remove alignment',
-		'alignmentRemoved': 'Alignment removed',
-		'directAlignments': '{headerTitle} Aligned Directly to This Activity',
-		'indirectAlignments': '{headerTitle} Aligned to Rubric Criteria'
+	da: {
+		'add': 'Tilføj',
+		'addLabel': 'Tilføj valg',
+		'alignmentRemoved': 'Justering fjernet',
+		'cancel': 'Annuller',
+		'cancelLabel': 'Annuller valg',
+		'directAlignments': '{headerTitle} justeret direkte til denne aktivitet',
+		'error': 'Der opstod en fejl',
+		'indirectAlignments': '{headerTitle} justeret til rubrikkriterier',
+		'removeAlignment': 'Fjern justering'
 	}
 };
