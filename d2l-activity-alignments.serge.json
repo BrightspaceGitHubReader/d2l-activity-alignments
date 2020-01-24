@@ -1,6 +1,6 @@
 {
   "name": "d2l-activity-alignments",
-  "source_dir": "lang",
+  "source_dir": "lang/",
   "output_file_path": "lang/%LANG%.json",
   "output_lang_rewrite": [
     "ar-sa ar",
