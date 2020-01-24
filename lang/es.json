@@ -1,11 +1,11 @@
 {
-   "add" : "Agregar",
-   "addLabel" : "Agregar selección",
-   "alignmentRemoved" : "Alineación eliminada",
-   "cancel" : "Cancelar",
-   "cancelLabel" : "Cancelar selección",
-   "directAlignments" : "{headerTitle} alineado directamente con esta actividad",
-   "error" : "Se produjo un error",
-   "indirectAlignments" : "{headerTitle} alineado con los criterios de la rúbrica",
-   "removeAlignment" : "Quitar la alineación"
+    "add": "Agregar",
+    "addLabel": "Agregar selección",
+    "alignmentRemoved": "Alineación eliminada",
+    "cancel": "Cancelar",
+    "cancelLabel": "Cancelar selección",
+    "directAlignments": "{headerTitle} alineado directamente con esta actividad",
+    "error": "Se produjo un error",
+    "indirectAlignments": "{headerTitle} alineado con los criterios de la rúbrica",
+    "removeAlignment": "Quitar la alineación"
 }

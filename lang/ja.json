@@ -1,11 +1,11 @@
 {
-   "add" : "追加",
-   "addLabel" : "選択の追加",
-   "alignmentRemoved" : "整合性が削除されました",
-   "cancel" : "キャンセル",
-   "cancelLabel" : "選択のキャンセル",
-   "directAlignments" : "{headerTitle} このアクティビティに直接整合されました",
-   "error" : "エラーが発生しました",
-   "indirectAlignments" : "{headerTitle} 注釈条件に整合されました",
-   "removeAlignment" : "整合性を削除"
+    "add": "追加",
+    "addLabel": "選択の追加",
+    "alignmentRemoved": "整合性が削除されました",
+    "cancel": "キャンセル",
+    "cancelLabel": "選択のキャンセル",
+    "directAlignments": "{headerTitle} このアクティビティに直接整合されました",
+    "error": "エラーが発生しました",
+    "indirectAlignments": "{headerTitle} 注釈条件に整合されました",
+    "removeAlignment": "整合性を削除"
 }
