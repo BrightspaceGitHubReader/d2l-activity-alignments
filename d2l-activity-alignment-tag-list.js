@@ -3,9 +3,8 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import 'd2l-polymer-siren-behaviors/store/siren-action-behavior.js';
 import OutcomeParserBehavior from './d2l-outcome-parser-behavior.js';
-import 'd2l-multi-select/localize-behavior.js';
-import 'd2l-multi-select/d2l-multi-select-list-item.js';
-import 'd2l-multi-select/d2l-multi-select-list.js';
+import '@brightspace-ui-labs/multi-select/multi-select-list-item.js';
+import '@brightspace-ui-labs/multi-select/multi-select-list.js';
 import 'd2l-hypermedia-constants/d2l-hypermedia-constants.js';
 import 'd2l-button/d2l-button-icon.js';
 import 'd2l-tooltip/d2l-tooltip.js';
@@ -53,16 +52,16 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 
 	static get template() {
 		return html`
-			<d2l-multi-select-list>
+			<d2l-labs-multi-select-list>
 				<template is="dom-repeat" items="[[_getAlignmentToOutcomeMap(_alignmentHrefs,_alignmentMap,_intentMap,_outcomeMap)]]">
-					<d2l-multi-select-list-item
+					<d2l-labs-multi-select-list-item
 						text="[[_getOutcomeTextDescription(item)]]"
 						short-text="[[_getOutcomeShortDescription(item)]]"
 						max-chars="40"
 						deletable="[[_canDelete(item,readOnly)]]"
-						on-d2l-multi-select-list-item-deleted="_removeOutcome"
+						on-d2l-labs-multi-select-list-item-deleted="_removeOutcome"
 						style="margin-top: 3px;"
-					></d2l-multi-select-list-item>
+					></d2l-labs-multi-select-list-item>
 				</template>
 				<template is="dom-if" if="[[_canUpdate(entity,readOnly)]]">
 					<d2l-button-icon
@@ -74,7 +73,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 					></d2l-button-icon>
 					<d2l-tooltip for="browse-outcome-button" position="top">[[browseOutcomesText]]</d2l-tooltip>
 				</template>
-			</d2l-multi-select-list>
+			</d2l-labs-multi-select-list>
 			<div style="display: none;">
 				<template is="dom-repeat" items="[[_alignmentHrefs]]">
 					<d2l-siren-map-helper href="[[item]]" token="[[token]]" map="{{_alignmentMap}}"></d2l-siren-map-helper>
