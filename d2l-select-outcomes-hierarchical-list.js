@@ -45,6 +45,35 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 			d2l-alert {
 				margin-top: 0.5rem;
 			}
+
+			ul {
+				padding: 0;
+				flex: 1;
+				overflow: auto;
+				word-break: break-word;
+				border: 1px solid transparent;
+				border-top-color: var(--d2l-color-gypsum);
+			}
+
+			li {
+				position: relative;
+				list-style-type: none;
+				margin-top: -1px;
+				border: 1px solid transparent;
+				border-top-color: var(--d2l-color-gypsum);
+				color: var(--d2l-color-ferrite);
+				padding: 0.75rem 1.25rem;
+			}
+
+			d2l-input-checkbox {
+				margin: 0;
+			}
+
+			d2l-input-checkbox:hover {
+				z-index: 1;
+				background-color: var(--d2l-color-celestine-plus-2);
+				color: var(--d2l-color-celestine);
+			}
 		</style>
 		<siren-entity-loading href="[[href]]" token="[[token]]">
 			<div class="d2l-alignment-update-content">
