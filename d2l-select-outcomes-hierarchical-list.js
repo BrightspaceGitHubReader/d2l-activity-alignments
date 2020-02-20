@@ -53,6 +53,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 				word-break: break-word;
 				border: 1px solid transparent;
 				border-top-color: var(--d2l-color-gypsum);
+				margin-bottom: 0px;
 			}
 
 			li {

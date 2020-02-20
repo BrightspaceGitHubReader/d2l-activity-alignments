@@ -71,6 +71,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-outcome-hierarchy-item">
 				word-break: break-word;
 				border: 1px solid transparent;
 				border-top-color: var(--d2l-color-gypsum);
+				margin-bottom: 0px;
 			}
 
 			li {
