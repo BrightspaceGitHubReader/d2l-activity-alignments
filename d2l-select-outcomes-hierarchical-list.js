@@ -54,6 +54,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 				border: 1px solid transparent;
 				border-top-color: var(--d2l-color-gypsum);
 				margin-bottom: 0px;
+				margin-block-start: 0em;
 			}
 
 			li {
@@ -63,7 +64,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 				border: 1px solid transparent;
 				border-top-color: var(--d2l-color-gypsum);
 				color: var(--d2l-color-ferrite);
-				padding: 0.75rem 1.25rem;
+				padding: 1.5rem 1.25rem 0rem;
 			}
 
 			d2l-input-checkbox {

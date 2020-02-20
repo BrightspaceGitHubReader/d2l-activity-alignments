@@ -40,6 +40,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-outcome-hierarchy-item">
 
 			.d2l-collapsible-node {
 				display: flex;
+				padding-bottom: 1rem;
 			}
 
 			.d2l-outcome-identifier {
@@ -72,6 +73,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-outcome-hierarchy-item">
 				border: 1px solid transparent;
 				border-top-color: var(--d2l-color-gypsum);
 				margin-bottom: 0px;
+				margin-block-start: 0em;
 			}
 
 			li {
