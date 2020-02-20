@@ -230,5 +230,9 @@ Polymer({
 		} else {
 			this.alignments.delete(this.item.properties.objectiveId);
 		}
+		this.dispatchEvent(new CustomEvent('d2l-alignment-list-changed', {
+			bubbles: true,
+			composed: true
+		}));
 	}
 });

@@ -56,12 +56,17 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 				flex: 0 0 auto;
 				padding: 4px;
 				align-items: center;
-				margin: auto 1rem 1rem 1rem;
+				margin: 1rem;
 			}
 			.d2l-hierchical-list {
 				overflow: auto;
 				overflow-x: hidden;
-				height: 90%
+				height: 85%
+			}
+			.d2l-selected-outcomes {
+				@apply --d2l-body-small-text;
+				text-align: right;
+				width: 100%
 			}
 		</style>
 		<siren-entity-loading href="[[href]]" token="[[token]]">
@@ -71,6 +76,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 					<d2l-button primary="" disabled="[[_buttonsDisabled]]" on-tap="_add" aria-label="[[localize('addLabel')]]">[[localize('add')]]</d2l-button>
 					<d2l-button on-tap="_cancel" aria-label="[[localize('cancelLabel')]]">[[localize('cancel')]]</d2l-button>
 					<d2l-loading-spinner hidden$="[[!_loading]]"></d2l-loading-spinner>
+					<div class="d2l-selected-outcomes">[[_alignmentsSize]] selected outcomes</div>
 				</div>
 				<template is="dom-if" if="[[_showError]]">
 					<d2l-alert type="error">[[localize('error')]]</d2l-alert>
@@ -99,6 +105,10 @@ Polymer({
 		_loading: {
 			type: Boolean,
 			value: false
+		},
+		_alignmentsSize: {
+			type: Number,
+			value: 0
 		}
 	},
 
@@ -111,16 +121,19 @@ Polymer({
 	ready: function() {
 		this._handleSirenEntityLoadingFetched = this._handleSirenEntityLoadingFetched.bind(this);
 		this._boundHandleError = this._handleError.bind(this);
+		this._alignmentsListChanged = this._alignmentsListChanged.bind(this);
 	},
 
 	attached: function() {
 		this._showError = false;
 		this.shadowRoot.querySelector('siren-entity-loading').addEventListener('siren-entity-loading-fetched', this._handleSirenEntityLoadingFetched);
 		this.addEventListener('d2l-siren-entity-error', this._boundHandleError);
+		this.addEventListener('d2l-alignment-list-changed', this._alignmentsListChanged);
 	},
 
 	detached: function() {
 		this.shadowRoot.querySelector('siren-entity-loading').removeEventListener('siren-entity-loading-fetched', this._handleSirenEntityLoadingFetched);
+		this.removeEventListener('d2l-alignment-list-changed', this._alignmentsListChanged);
 		this.removeEventListener('d2l-siren-entity-error', this._boundHandleError);
 	},
 
@@ -143,10 +156,16 @@ Polymer({
 
 	_getAlignments: function(entity) {
 		if (entity && entity.properties.directAlignments) {
+			this._alignmentsSize = entity.properties.directAlignments.length;
 			return new Set(entity.properties.directAlignments);
 		} else {
+			this._alignmentsSize = 0;
 			return new Set();
 		}
+	},
+
+	_getAlignmentsSize: function(alignments) {
+		this._alignmentsSize = alignments.size;
 	},
 
 	_cancel: function() {
@@ -171,5 +190,9 @@ Polymer({
 					composed: true
 				}));
 			}.bind(this));
+	},
+
+	_alignmentsListChanged: function() {
+		this._alignmentsSize = this._alignments.size;
 	}
 });
