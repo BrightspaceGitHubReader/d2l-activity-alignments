@@ -219,13 +219,13 @@ Polymer({
 
 	_redrawIcon: function(_collapsed) {
 		if (_collapsed) {
-			return 'd2l-tier1:arrow-expand';
+			return "d2l-tier1:arrow-expand";
 		} else {
-			return 'd2l-tier1:arrow-collapse';
+			return "d2l-tier1:arrow-collapse";
 		}
-	},
-
-	_onOutcomeSelectChange: function(e) {
+	 },
+	 
+	 _onOutcomeSelectChange: function(e) {
 		var target = e.target;
 		if (target.checked) {
 			this.alignments.add(this.item.properties.objectiveId);
