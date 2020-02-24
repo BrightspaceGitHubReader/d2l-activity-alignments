@@ -28,19 +28,26 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-outcome-hierarchy-item">
 				width: 100%;
 			}
 
-			d2l-button-icon {
-				padding-right: 0.25rem;
-				height: 100%;
-			}
-
 			.d2l-outcome-wrap {
 				display: flex;
 				flex-direction: column-reverse;
 			}
 
+			.d2l-outcome-heading {
+				background-color: #F9FBFF;
+			}
+
+			.d2l-outcome-heading > * {
+				margin: 0px;
+				font-family: Lato; 
+				font-size: 16px; 
+				font-weight: bold;
+				line-height: 100%;
+			}
+
 			.d2l-collapsible-node {
+				height: 100%;
 				display: flex;
-				padding-bottom: 1rem;
 			}
 
 			.d2l-outcome-identifier {
@@ -65,42 +72,43 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-outcome-hierarchy-item">
 				width: 100%;
 			}
 
+			d2l-icon {
+				padding: 0px 6px;
+			}
+
 			ul {
-				padding: 0;
+				padding: 6px 0px;
 				flex: 1;
 				overflow: auto;
 				word-break: break-word;
-				border: 1px solid transparent;
-				border-top-color: var(--d2l-color-gypsum);
 				margin-bottom: 0px;
 				margin-block-start: 0em;
 			}
 
 			li {
-				position: relative;
 				list-style-type: none;
-				margin-top: -1px;
 				border: 1px solid transparent;
-				border-bottom: none;
 				border-top-color: var(--d2l-color-gypsum);
 				color: var(--d2l-color-ferrite);
-				padding: 0.75rem 1.25rem;
+				padding: 6px 0px 6px 1.25rem;
 			}
 
 			d2l-input-checkbox {
+				padding-left: 12px;
 				margin: 0;
 			}
 
-			d2l-input-checkbox:hover {
+			.d2l-select-outcomes-leaf:hover {
 				z-index: 1;
 				background-color: var(--d2l-color-celestine-plus-2);
+				border-top: 1px solid var(--d2l-color-celestine-plus-1);
+				border-bottom: 1px solid var(--d2l-color-celestine-plus-1);
 				color: var(--d2l-color-celestine);
 			}
 		</style>
 
-		<div class="d2l-outcome-wrap">
 		<template is="dom-if" if="[[_isLeafNode(item)]]">
-			<d2l-input-checkbox tabindex="-1"  not-tabbable="true" checked="[[_getChecked(item)]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
+			<d2l-input-checkbox tabindex="-1" not-tabbable="true" checked="[[_getChecked(item)]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
 				<div class="d2l-outcome-wrap">
 					<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
 						<div class="d2l-outcome-identifier">[[getOutcomeIdentifier(item)]]</div>
@@ -112,30 +120,23 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-outcome-hierarchy-item">
 				</div>
 			</d2l-input-checkbox>
 		</template>
-		<template is="dom-if" if="[[!_isLeafNode(item)]]">
+		<template is="dom-if" if="[[_isNonLeafNode(item)]]">
 			<div>
 				<div class="d2l-collapsible-node">
-					<d2l-button-icon
-						icon="[[_collapseIcon]]"
-						aria-label$="[[browseOutcomesText]]"
-						style$="[[_iconStyle]]"
-						on-click="_expandCollapse"
-						id="browse-outcome-button"
-					></d2l-button-icon>
-					<div class="d2l-outcome-wrap">
+					<d2l-icon icon="[[_collapseIcon]]"></d2l-icon>
+					<div class="d2l-outcome-heading">
 						<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
-							<div class="d2l-outcome-identifier">[[getOutcomeIdentifier(item)]]</div>
+							<h4>[[getOutcomeIdentifier(item)]]</h4>
 						</template>
-						<div class="d2l-outcome-text">
-							<s-html hidden="[[!_fromTrustedSource(item)]]" html="[[getOutcomeDescriptionHtml(item)]]"></s-html>
-							<span hidden="[[_fromTrustedSource(item)]]">[[getOutcomeDescriptionPlainText(item)]]</span>
-						</div>
+						<template is="dom-if" if="[[!_hasOutcomeIdentifier(item)]]">
+							<h4>[[getOutcomeDescriptionPlainText(item)]]</h4>
+						</template>
 					</div>
 				</div>
 				<template is="dom-if" if="[[!_collapsed]]">
 					<ul tabindex="0" on-focus="_handleListFocus" style="list-style-type:none">
 						<template is="dom-repeat" items="[[_subHierarchyItems]]">
-							<li tabindex="-1">
+							<li class$="[[_getClass(item)]]" tabindex="-1">
 								<d2l-outcome-hierarchy-item id$="[[id]]" item="[[item]]" alignments="[[alignments]]"></d2l-outcome-hierarchy-item>
 							</li>
 						</template>
@@ -143,7 +144,15 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-outcome-hierarchy-item">
 				</template>
 			</div>
 		</template>
-        </div>
+		<template is="dom-if" if="[[_isRootNode(item)]]">
+			<ul tabindex="0" on-focus="_handleListFocus" style="list-style-type:none">
+				<template is="dom-repeat" items="[[_subHierarchyItems]]">
+					<li class$="[[_getClass(item)]]" tabindex="-1">
+						<d2l-outcome-hierarchy-item id$="[[id]]" item="[[item]]" alignments="[[alignments]]"></d2l-outcome-hierarchy-item>
+					</li>
+				</template>
+			</ul>
+		</template>
 	</template>
 
 </dom-module>`;
@@ -170,7 +179,7 @@ Polymer({
 		},
 		_collapsed: {
 			type: Boolean,
-			value: false
+			value: true
 		},
 		_iconStyle: {
 			type: String,
@@ -194,6 +203,18 @@ Polymer({
 		}
 	},
 
+	ready: function() {
+		this._expandCollapse = this._expandCollapse.bind(this);
+	},
+
+	attached: function() {
+		this.addEventListener('click', this._expandCollapse);
+	},
+
+	detached: function() {
+		this.removeEventListener('click', this._expandCollapse);
+	},
+
 	_getHierarchy: function(item) {
 		if (!item || !item.entities) {
 			return [];
@@ -205,6 +226,14 @@ Polymer({
 		return item.class.includes('leaf-outcome');
 	},
 
+	_isNonLeafNode: function(item) {
+		return item.class.includes('collection');
+	},
+
+	_isRootNode: function(item) {
+		return item.class.includes('outcomes-root');
+	},
+
 	_getChecked: function(item) {
 		return this.alignments && item && item.properties && item.properties.objectiveId && this.alignments.has(item.properties.objectiveId);
 	},
@@ -213,8 +242,9 @@ Polymer({
 		return !!this.getOutcomeIdentifier(entity);
 	},
 
-	_expandCollapse: function() {
+	_expandCollapse: function(event) {
 		this._collapsed = !this._collapsed;
+		event.stopPropagation();
 	},
 
 	_redrawIcon: function(_collapsed) {
@@ -236,5 +266,15 @@ Polymer({
 			bubbles: true,
 			composed: true
 		}));
+	},
+
+	_getClass: function(item) {
+		var className = '';
+		if (this._isLeafNode(item)) {
+			className += 'd2l-select-outcomes-leaf';
+		} else {
+			className += ' d2l-select-outcomes-collection';
+		}
+		return className;
 	}
 });

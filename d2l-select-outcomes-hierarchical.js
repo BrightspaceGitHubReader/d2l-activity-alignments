@@ -27,6 +27,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 				overflow: auto;
 			}
 			.d2l-select-outcomes-hierarchical-main {
+				width: 100%;
 				display: block;
 				position: relative;
 			}
@@ -61,7 +62,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 			.d2l-hierchical-list {
 				overflow: auto;
 				overflow-x: hidden;
-				height: 85%
+				height: 85%;
 			}
 			.d2l-selected-outcomes {
 				@apply --d2l-body-small-text;
@@ -69,11 +70,11 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 				width: 100%
 			}
 		</style>
-		<siren-entity-loading href="[[href]]" token="[[token]]">
+		<siren-entity-loading href="[[href]]" token="[[token]]" style="width:100%;">
 			<div class="d2l-select-outcomes-hierarchical-main">
 				<d2l-select-outcomes-hierarchical-list class="d2l-hierchical-list" href="[[_getHierarchy(entity)]]" token="[[token]]" alignments="[[_alignments]]"></d2l-select-outcomes-hierarchical-list>
 				<div class="d2l-alignment-update-buttons">
-					<d2l-button primary="" disabled="[[_buttonsDisabled]]" on-tap="_add" aria-label="[[localize('addLabel')]]">[[localize('add')]]</d2l-button>
+					<d2l-button primary="" disabled="[[_buttonsDisabled]]" on-tap="_add" aria-label="[[alignButtonText]]">[[alignButtonText]]</d2l-button>
 					<d2l-button on-tap="_cancel" aria-label="[[localize('cancelLabel')]]">[[localize('cancel')]]</d2l-button>
 					<d2l-loading-spinner hidden$="[[!_loading]]"></d2l-loading-spinner>
 					<div class="d2l-selected-outcomes">[[_alignmentsSize]] selected outcomes</div>
@@ -94,6 +95,10 @@ Polymer({
 	is: 'd2l-select-outcomes-hierarchical',
 
 	properties: {
+		alignButtonText: {
+			type: String,
+			value: null
+		},
 		_showError: {
 			type: Boolean,
 			value: false

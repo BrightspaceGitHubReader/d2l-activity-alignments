@@ -27,65 +27,30 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 			:host {
 				display: block;
 				overflow: hidden;
-				width: 100%;
 				height: 100%;
 			}
 
 			.d2l-alignment-update-content {
+				width: 100%;
 				display: flex;
 				flex-direction: column;
 				flex: 1;
 			}
 
-			.d2l-hierarchy-tree{
+			.d2l-hierarchy-tree {
+				width: 100%;
 				list-style-type: none;
 				padding-inline-start: 0px;
+				z-index:2;
 			}
 
 			d2l-alert {
 				margin-top: 0.5rem;
 			}
-
-			ul {
-				padding: 0;
-				flex: 1;
-				overflow: auto;
-				word-break: break-word;
-				border: 1px solid transparent;
-				border-top-color: var(--d2l-color-gypsum);
-				margin-bottom: 0px;
-				margin-block-start: 0em;
-			}
-
-			li {
-				position: relative;
-				list-style-type: none;
-				margin-top: -1px;
-				border: 1px solid transparent;
-				border-top-color: var(--d2l-color-gypsum);
-				color: var(--d2l-color-ferrite);
-				padding: 1.5rem 1.25rem 0rem;
-			}
-
-			d2l-input-checkbox {
-				margin: 0;
-			}
-
-			d2l-input-checkbox:hover {
-				z-index: 1;
-				background-color: var(--d2l-color-celestine-plus-2);
-				color: var(--d2l-color-celestine);
-			}
 		</style>
 		<siren-entity-loading href="[[href]]" token="[[token]]">
 			<div class="d2l-alignment-update-content">
-				<ul class="d2l-hierarchy-tree" tabindex="0">
-					<template is="dom-repeat" items="[[_subHierarchyItems]]">
-						<li tabindex="-1" role="option" aria-selected$="[[_getAriaChecked(item)]]" aria-checked$="[[_getAriaChecked(item)]]">
-							<d2l-outcome-hierarchy-item id$="[[id]]" item="[[item]]" alignments="[[alignments]]"></d2l-outcome-hierarchy-item>
-						</li>
-					</template>
-				</ul>
+				<d2l-outcome-hierarchy-item item="[[_getHierarchyStart(entity)]]" alignments="[[alignments]]"></d2l-outcome-hierarchy-item>
 			</div>
 		</siren-entity-loading>
 	</template>
@@ -107,26 +72,19 @@ Polymer({
 	properties: {
 		alignments: {
 			type: Set
-		},
-		_subHierarchyItems: {
-			type: Array,
-			computed: '_getHierarchy(entity)'
 		}
 	},
 
-	_getAriaChecked: function(candidate) {
-		if (this._getChecked(candidate)) {
-			return 'true';
+	_getHierarchyStart: function(entity) {
+		if (!entity || !entity.hasSubEntityByClass('hierarchical-outcome')) {
+			return undefined;
 		}
-		return 'false';
-	},
-	
-	_getChecked: function(candidate) {
-		return true;
-	},
 
-	_getHierarchy: function(entity) {
-		if (!entity || !entity.hasSubEntityByClass('hierarchical-outcome')) return [];
-		return entity.getSubEntitiesByClass('hierarchical-outcome');
+		var hierarchyRoot = {
+			entities: entity.getSubEntitiesByClass('hierarchical-outcome'),
+			class: ['hierarchical-outcome', 'outcomes-root']
+		};
+
+		return hierarchyRoot;
 	}
 });
