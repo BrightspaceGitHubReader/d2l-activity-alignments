@@ -62,6 +62,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 				overflow: auto;
 				overflow-x: hidden;
 				height: 85%;
+				border: 1px solid var(--d2l-color-gypsum);
 			}
 			.d2l-selected-outcomes {
 				@apply --d2l-body-small-text;

@@ -34,6 +34,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 				width: 100%;
 				display: flex;
 				flex-direction: column;
+				margin-top: -2px;
 			}
 
 			.d2l-hierarchy-tree {

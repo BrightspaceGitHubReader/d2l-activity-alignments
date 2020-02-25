@@ -151,7 +151,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			</template>
 		</template>
 		<template is="dom-if" if="[[_isRootNode(item)]]">
-			<ul tabindex="0" on-focus="_handleListFocus" style="list-style-type:none; border: 1px solid var(--d2l-color-gypsum); border-top: none;" >
+			<ul tabindex="0" on-focus="_handleListFocus" style="list-style-type:none; border: 1px solid transparent; border-bottom-color: var(--d2l-color-gypsum);" >
 				<template is="dom-repeat" items="[[_subHierarchyItems]]">
 					<li class$="[[_getCellClass(item)]]" tabindex="-1">
 						<d2l-outcome-hierarchy-item id$="[[id]]" item="[[item]]" alignments="[[alignments]]" current-level="[[_nextLevel]]"></d2l-outcome-hierarchy-item>
