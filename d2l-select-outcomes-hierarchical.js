@@ -24,7 +24,6 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 		<style>
 			:host {
 				display: flex;
-				overflow: auto;
 			}
 			.d2l-select-outcomes-hierarchical-main {
 				width: 100%;

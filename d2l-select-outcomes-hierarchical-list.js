@@ -34,7 +34,6 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 				width: 100%;
 				display: flex;
 				flex-direction: column;
-				flex: 1;
 			}
 
 			.d2l-hierarchy-tree {
@@ -50,7 +49,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 		</style>
 		<siren-entity-loading href="[[href]]" token="[[token]]">
 			<div class="d2l-alignment-update-content">
-				<d2l-outcome-hierarchy-item item="[[_getHierarchyStart(entity)]]" alignments="[[alignments]]"></d2l-outcome-hierarchy-item>
+				<d2l-outcome-hierarchy-item item="[[_getHierarchyStart(entity)]]" alignments="[[alignments]]" current-level="[[level]]"></d2l-outcome-hierarchy-item>
 			</div>
 		</siren-entity-loading>
 	</template>
@@ -72,6 +71,10 @@ Polymer({
 	properties: {
 		alignments: {
 			type: Set
+		},
+		level: {
+			type: Number,
+			value: 0,
 		}
 	},
 
