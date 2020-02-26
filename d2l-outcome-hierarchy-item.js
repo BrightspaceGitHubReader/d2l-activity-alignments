@@ -93,6 +93,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			}
 
 			d2l-input-checkbox {
+				background-color: var(--leaf-background-colour);
 				padding-left: var(--sublevel-cell-margin);
 				padding-right: var(--sublevel-cell-margin);
 				padding-top: 12px;
@@ -223,11 +224,19 @@ Polymer({
 
 	ready: function() {
 		this._expandCollapse = this._expandCollapse.bind(this);
-
 		const marginLeft = 12 * this.currentLevel;
-		this.updateStyles({
-			'--sublevel-cell-margin': `${marginLeft}px`,
-		});
+
+		if (this._isSelected) {
+			this.updateStyles({
+				'--sublevel-cell-margin': `${marginLeft}px`,
+				'--leaf-background-colour': `var(--d2l-color-celestine-plus-2)`
+			});
+		} else {
+			this.updateStyles({
+				'--sublevel-cell-margin': `${marginLeft}px`,
+				'--leaf-background-colour': `transparent`,
+			});
+		}
 	},
 
 	attached: function() {
@@ -281,8 +290,14 @@ Polymer({
 	_onOutcomeSelectChange: function(e) {
 		var target = e.target;
 		if (target.checked) {
+			this.updateStyles({
+				'--leaf-background-colour': `var(--d2l-color-celestine-plus-2)`,
+			});
 			this.alignments.add(this.item.properties.objectiveId);
 		} else {
+			this.updateStyles({
+				'--leaf-background-colour': `transparent`,
+			});
 			this.alignments.delete(this.item.properties.objectiveId);
 		}
 
