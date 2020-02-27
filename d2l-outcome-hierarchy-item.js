@@ -19,6 +19,7 @@ import 's-html/s-html.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 import OutcomeParserBehavior from './d2l-outcome-parser-behavior.js';
 const $_documentContainer = document.createElement('template');
+import { afterNextRender } from '@polymer/polymer/lib/utils/render-status';
 
 $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-item">
 	<template strip-whitespace="">
@@ -142,20 +143,46 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 				</div>
 			</div>
 			<template is="dom-if" if="[[!_collapsed]]">
-				<ul tabindex="0" on-focus="_handleListFocus" style="list-style-type:none">
-					<template is="dom-repeat" items="[[_subHierarchyItems]]">
+				<ul tabindex="0" style="list-style-type:none">
+					<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
 						<li class$="[[_getCellClass(item)]]" tabindex="-1">
-							<d2l-outcome-hierarchy-item id$="[[id]]" item="[[item]]" alignments="[[alignments]]" current-level="[[_nextLevel]]"></d2l-outcome-hierarchy-item>
+							<d2l-outcome-hierarchy-item
+								id="[[outcomesIndex]]"
+								item="[[item]]" 
+								index="[[outcomesIndex]]"
+								tabindex="-1"
+								alignments="[[alignments]]" 
+								current-level="[[_nextLevel]]"
+								parentNode="[[root]]"
+								is-last="[[_getOutcomeIsLast(outcomesIndex)]]"
+								on-focus-next="_focusNextSibling"
+								on-focus-previous="_focusPreviousSibling"
+								on-focus-parent="_focusSelf"
+								on-focus-child="_onFocusChild"
+							</d2l-outcome-hierarchy-item>
 						</li>
 					</template>
 				</ul>
 			</template>
 		</template>
 		<template is="dom-if" if="[[_isRootNode(item)]]">
-			<ul tabindex="0" on-focus="_handleListFocus" style="list-style-type:none; border: 1px solid transparent; border-bottom-color: var(--d2l-color-gypsum);" >
-				<template is="dom-repeat" items="[[_subHierarchyItems]]">
+			<ul tabindex="0" style="list-style-type:none; border: 1px solid transparent; border-bottom-color: var(--d2l-color-gypsum);" >
+				<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
 					<li class$="[[_getCellClass(item)]]" tabindex="-1">
-						<d2l-outcome-hierarchy-item id$="[[id]]" item="[[item]]" alignments="[[alignments]]" current-level="[[_nextLevel]]"></d2l-outcome-hierarchy-item>
+						<d2l-outcome-hierarchy-item
+							id$="[[outcomesIndex]]"
+							item="[[item]]" 
+							index="[[outcomesIndex]]" 
+							tabindex="-1" 
+							alignments="[[alignments]]" 
+							current-level="[[_nextLevel]]"
+							parentNode="[[root]]"
+							is-last="[[_getOutcomeIsLast(outcomesIndex)]]"
+							on-focus-next="_focusNextSibling"
+							on-focus-previous="_focusPreviousSibling"
+							on-focus-parent="_focusSelf"
+							on-focus-child="_onFocusChild"
+						</d2l-outcome-hierarchy-item>
 					</li>
 				</template>
 			</ul>
@@ -180,7 +207,7 @@ Polymer({
 		alignments: {
 			type: Set
 		},
-		_subHierarchyItems: {
+		_children: {
 			type: Array,
 			computed: '_getHierarchy(item)'
 		},
@@ -207,6 +234,17 @@ Polymer({
 		_leafClass: {
 			type: String,
 			computed: '_getLeafClass(_isSelected)'
+		},
+		parentNode: {
+			type: Object
+		},
+		index: {
+			type: Number,
+			value: -1
+		},
+		isLast: {
+			type: Number,
+			value: false
 		}
 	},
 
@@ -223,7 +261,12 @@ Polymer({
 	},
 
 	ready: function() {
-		this._expandCollapse = this._expandCollapse.bind(this);
+		afterNextRender(this, function() {
+			this.addEventListener('focus', this.onFocus);
+			this.addEventListener('blur', this.onBlur);
+			this.addEventListener('click', this._expandCollapse);
+		}.bind(this));
+
 		const marginLeft = 12 * this.currentLevel;
 
 		if (this._isSelected) {
@@ -239,12 +282,24 @@ Polymer({
 		}
 	},
 
-	attached: function() {
-		this.addEventListener('click', this._expandCollapse);
+	onFocus: function(e) {
+		e.stopPropagation();
+		const event = new CustomEvent('focus-child');
+		event.node = this;
+		this.dispatchEvent(event);
+
+		this._focus = true;
+		this.keydownEventListener = this._handleKeyDown.bind(this);
+		window.addEventListener('keydown', this.keydownEventListener);
 	},
 
-	detached: function() {
-		this.removeEventListener('click', this._expandCollapse);
+	onBlur: function() {
+		this._focus = false;
+		window.removeEventListener('keydown', this.keydownEventListener);
+	},
+
+	_getThis: function() {
+		return this;
 	},
 
 	_getHierarchy: function(item) {
@@ -252,6 +307,10 @@ Polymer({
 			return [];
 		}
 		return item.entities.filter(function(e) {return e.class.includes('hierarchical-outcome'); });
+	},
+
+	_isEmpty(array) {
+		return !array || !array.length;
 	},
 
 	_isLeafNode: function(item) {
@@ -280,6 +339,7 @@ Polymer({
 
 	_expandCollapse: function(event) {
 		this._collapsed = !this._collapsed;
+		if (!this._focus) this._focusSelf();
 		event.stopPropagation();
 	},
 
@@ -314,4 +374,132 @@ Polymer({
 	_getNextLevel: function(currentLevel) {
 		return currentLevel ? currentLevel + 1 : 1;
 	},
+
+	_getOutcomeIsLast: function(outcomeIndex) {
+		return outcomeIndex === this._children.length - 1;
+	},
+
+	_handleKeyDown: function(e) {
+		console.log('handling');
+		if (this._hasOutcomeIdentifier(this.item)) {
+			console.log(this.getOutcomeIdentifier(this.item));
+		} else {
+			console.log(this.getOutcomeDescriptionPlainText(this.item));
+		}
+		if (e.key === 'ArrowDown') {
+			e.preventDefault();
+			e.stopPropagation();
+			this._focusNext();
+		} else if (e.key === 'ArrowUp') {
+			e.preventDefault();
+			e.stopPropagation();
+			this._focusPrevious();
+		} else if (e.key === 'ArrowLeft') {
+			e.preventDefault();
+			e.stopPropagation();
+			if (!this._isEmpty(this._children) && !this._collapsed) {
+				this._toggleCollapse();
+			} else {
+				this._focusParent();
+			}
+		} else if (e.key === 'ArrowRight') {
+			e.preventDefault();
+			e.stopPropagation();
+			if (!this._isEmpty(this._children) && this._collapsed) {
+				this._toggleCollapse();
+			} else {
+				this._focusChild();
+			}
+		} else if (e.key === 'Enter') {
+			e.preventDefault();
+			e.stopPropagation();
+			this._selectHandler();
+		} else if (e.key === 'Home') {
+			e.preventDefault();
+			e.stopPropagation();
+			this._focusFirst();
+		} else if (e.key === 'End') {
+			e.preventDefault();
+			e.stopPropagation();
+			this._focusLast();
+		}
+	},
+
+	_focusChild: function() {
+		if (!this._isEmpty(this._children) && !this._collapsed) {
+			const elem = this.root.querySelector('d2l-outcomes-hierarchy-item');
+			if (elem) {
+				elem.focus();
+			}
+		}
+	},
+
+	_focusNext: function() {
+		console.log('focusing next: ' + this.index);
+		if (!this._isEmpty(this._children) && !this._collapsed) {
+			this._focusChild();
+		} else if (!this.isLast) {
+			this.onBlur();
+			const event = new CustomEvent('focus-next');
+			event.index = this.index;
+			this.dispatchEvent(event);
+		}
+	},
+
+	_focusPrevious: function() {
+		console.log('focusing previous: ' + this.index);
+		if (this.index > 0) {
+			this.onBlur();
+			const event = new CustomEvent('focus-previous');
+			event.index = this.index;
+			this.dispatchEvent(event);
+		} else {
+			this._focusParent();
+		}
+	},
+
+	_focusNextSibling: function(e) {
+		if (e.index < this._children.length - 1) {
+			const element = this.shadowRoot.getElementById((e.index + 1).toString());
+			if (element) {
+				element.focus();
+			}
+		} else {
+			const event = new CustomEvent('focus-next');
+			event.index = this.index;
+			this.dispatchEvent(event);
+		}
+	},
+
+	_focusPreviousSibling: function(e) {
+		if (e.index > 0) {
+			const element = this.shadowRoot.getElementById((e.index - 1).toString());
+			if (element) {
+				element.focus();
+			}
+		} else {
+			const event = new CustomEvent('focus-previous');
+			event.index = this.index;
+			this.dispatchEvent(event);
+		}
+	},
+
+	_focusParent: function() {
+		if (!this.parentNode) return;
+		this.onBlur();
+		const event = new CustomEvent('focus-parent');
+		this.dispatchEvent(event);
+	},
+
+	_focusSelf: function() {
+		this.blur();
+		this.focus();
+	},
+
+	_onFocusChild: function(e) {
+		if (this._focus) this.onBlur();
+		const event = new CustomEvent('focus-child');
+		event.node = e.node;
+		this.dispatchEvent(event);
+	}
 });
