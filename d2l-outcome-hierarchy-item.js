@@ -340,7 +340,9 @@ Polymer({
 	_expandCollapse: function(event) {
 		this._collapsed = !this._collapsed;
 		if (!this._focus) this._focusSelf();
-		event.stopPropagation();
+		if (event) {
+			event.stopPropagation();
+		}
 	},
 
 	_redrawIcon: function(_collapsed) {
@@ -380,12 +382,6 @@ Polymer({
 	},
 
 	_handleKeyDown: function(e) {
-		console.log('handling');
-		if (this._hasOutcomeIdentifier(this.item)) {
-			console.log(this.getOutcomeIdentifier(this.item));
-		} else {
-			console.log(this.getOutcomeDescriptionPlainText(this.item));
-		}
 		if (e.key === 'ArrowDown') {
 			e.preventDefault();
 			e.stopPropagation();
@@ -398,7 +394,7 @@ Polymer({
 			e.preventDefault();
 			e.stopPropagation();
 			if (!this._isEmpty(this._children) && !this._collapsed) {
-				this._toggleCollapse();
+				this._expandCollapse();
 			} else {
 				this._focusParent();
 			}
@@ -406,7 +402,7 @@ Polymer({
 			e.preventDefault();
 			e.stopPropagation();
 			if (!this._isEmpty(this._children) && this._collapsed) {
-				this._toggleCollapse();
+				this._expandCollapse();
 			} else {
 				this._focusChild();
 			}
@@ -427,7 +423,7 @@ Polymer({
 
 	_focusChild: function() {
 		if (!this._isEmpty(this._children) && !this._collapsed) {
-			const elem = this.root.querySelector('d2l-outcomes-hierarchy-item');
+			const elem = this.shadowRoot.getElementById('0');
 			if (elem) {
 				elem.focus();
 			}
@@ -435,10 +431,9 @@ Polymer({
 	},
 
 	_focusNext: function() {
-		console.log('focusing next: ' + this.index);
 		if (!this._isEmpty(this._children) && !this._collapsed) {
 			this._focusChild();
-		} else if (!this.isLast) {
+		} else {
 			this.onBlur();
 			const event = new CustomEvent('focus-next');
 			event.index = this.index;
@@ -447,7 +442,6 @@ Polymer({
 	},
 
 	_focusPrevious: function() {
-		console.log('focusing previous: ' + this.index);
 		if (this.index > 0) {
 			this.onBlur();
 			const event = new CustomEvent('focus-previous');
@@ -461,6 +455,11 @@ Polymer({
 	_focusNextSibling: function(e) {
 		if (e.index < this._children.length - 1) {
 			const element = this.shadowRoot.getElementById((e.index + 1).toString());
+			if (element) {
+				element.focus();
+			}
+		} else if (this.currentLevel == 0) {
+			const element = this.shadowRoot.getElementById((this._children.length - 1).toString());
 			if (element) {
 				element.focus();
 			}
@@ -485,7 +484,7 @@ Polymer({
 	},
 
 	_focusParent: function() {
-		if (!this.parentNode) return;
+		if (!this.parentNode || this.currentLevel == 1) return;
 		this.onBlur();
 		const event = new CustomEvent('focus-parent');
 		this.dispatchEvent(event);

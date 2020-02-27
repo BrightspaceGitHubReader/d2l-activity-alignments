@@ -53,7 +53,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 				<d2l-outcome-hierarchy-item 
 					item="[[_getHierarchyStart(entity)]]" 
 					alignments="[[alignments]]" 
-					current-level="[[level]]">
+					current-level="[[level]]"
 				</d2l-outcome-hierarchy-item>
 			</div>
 		</siren-entity-loading>
