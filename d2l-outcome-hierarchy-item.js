@@ -245,6 +245,9 @@ Polymer({
 		isLast: {
 			type: Number,
 			value: false
+		},
+		currentLevel: {
+			type: Number
 		}
 	},
 
@@ -296,10 +299,6 @@ Polymer({
 	onBlur: function() {
 		this._focus = false;
 		window.removeEventListener('keydown', this.keydownEventListener);
-	},
-
-	_getThis: function() {
-		return this;
 	},
 
 	_getHierarchy: function(item) {
@@ -409,7 +408,6 @@ Polymer({
 		} else if (e.key === 'Enter') {
 			e.preventDefault();
 			e.stopPropagation();
-			this._selectHandler();
 		} else if (e.key === 'Home') {
 			e.preventDefault();
 			e.stopPropagation();
@@ -458,8 +456,8 @@ Polymer({
 			if (element) {
 				element.focus();
 			}
-		} else if (this.currentLevel == 0) {
-			const element = this.shadowRoot.getElementById((this._children.length - 1).toString());
+		} else if (this.currentLevel === 0) {
+			const element = this.shadowRoot.getElementById('0');
 			if (element) {
 				element.focus();
 			}
@@ -484,15 +482,22 @@ Polymer({
 	},
 
 	_focusParent: function() {
-		if (!this.parentNode || this.currentLevel == 1) return;
+		if (!this.parentNode) return;
 		this.onBlur();
 		const event = new CustomEvent('focus-parent');
 		this.dispatchEvent(event);
 	},
 
 	_focusSelf: function() {
-		this.blur();
-		this.focus();
+		if (this.currentLevel === 0) {
+			const element = this.shadowRoot.getElementById((this._children.length - 1).toString());
+			if (element) {
+				element.focus();
+			}
+		} else {
+			this.blur();
+			this.focus();
+		}
 	},
 
 	_onFocusChild: function(e) {
