@@ -116,7 +116,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 		</style>
 
 		<template is="dom-if" if="[[_isLeafNode(item)]]">
-			<d2l-input-checkbox class="[[_leafClass]]" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
+			<d2l-input-checkbox id="checkbox" class="[[_leafClass]]" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
 				<div class="d2l-outcome-wrap">
 					<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
 						<div class="d2l-outcome-identifier">[[getOutcomeIdentifier(item)]]</div>
@@ -143,7 +143,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 				</div>
 			</div>
 			<template is="dom-if" if="[[!_collapsed]]">
-				<ul tabindex="0" style="list-style-type:none">
+				<ul style="list-style-type:none">
 					<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
 						<li class$="[[_getCellClass(item)]]" tabindex="-1">
 							<d2l-outcome-hierarchy-item
@@ -166,7 +166,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			</template>
 		</template>
 		<template is="dom-if" if="[[_isRootNode(item)]]">
-			<ul tabindex="0" style="list-style-type:none; border: 1px solid transparent; border-bottom-color: var(--d2l-color-gypsum);" >
+			<ul style="list-style-type:none; border: 1px solid transparent; border-bottom-color: var(--d2l-color-gypsum);" >
 				<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
 					<li class$="[[_getCellClass(item)]]" tabindex="-1">
 						<d2l-outcome-hierarchy-item
@@ -287,6 +287,10 @@ Polymer({
 
 	onFocus: function(e) {
 		e.stopPropagation();
+
+		if (this.currentLevel === 0) {
+			return this._selectFirstNode();
+		}
 		const event = new CustomEvent('focus-child');
 		event.node = this;
 		this.dispatchEvent(event);
@@ -405,9 +409,13 @@ Polymer({
 			} else {
 				this._focusChild();
 			}
-		} else if (e.key === 'Enter') {
+		} else if (e.key === 'Enter' || e.keyCode === 32) {
 			e.preventDefault();
 			e.stopPropagation();
+			const elem = this.shadowRoot.getElementById('checkbox');
+			if (elem) {
+				elem.simulateClick();
+			}
 		} else if (e.key === 'Home') {
 			e.preventDefault();
 			e.stopPropagation();
@@ -457,10 +465,7 @@ Polymer({
 				element.focus();
 			}
 		} else if (this.currentLevel === 0) {
-			const element = this.shadowRoot.getElementById('0');
-			if (element) {
-				element.focus();
-			}
+			this._selectFirstNode();
 		} else {
 			const event = new CustomEvent('focus-next');
 			event.index = this.index;
@@ -490,10 +495,7 @@ Polymer({
 
 	_focusSelf: function() {
 		if (this.currentLevel === 0) {
-			const element = this.shadowRoot.getElementById((this._children.length - 1).toString());
-			if (element) {
-				element.focus();
-			}
+			this._selectLastNode();
 		} else {
 			this.blur();
 			this.focus();
@@ -505,5 +507,19 @@ Polymer({
 		const event = new CustomEvent('focus-child');
 		event.node = e.node;
 		this.dispatchEvent(event);
+	},
+
+	_selectFirstNode: function() {
+		const element = this.shadowRoot.getElementById('0');
+		if (element) {
+			element.focus();
+		}
+	},
+
+	_selectLastNode: function() {
+		const element = this.shadowRoot.getElementById((this._children.length - 1).toString());
+		if (element) {
+			element.focus();
+		}
 	}
 });
