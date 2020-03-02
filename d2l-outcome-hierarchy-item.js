@@ -264,11 +264,9 @@ Polymer({
 	},
 
 	ready: function() {
-		afterNextRender(this, function() {
-			this.addEventListener('focus', this.onFocus);
-			this.addEventListener('blur', this.onBlur);
-			this.addEventListener('click', this._expandCollapse);
-		}.bind(this));
+		this.onFocus = this.onFocus.bind(this);
+		this.onBlur = this.onBlur.bind(this);
+		this._expandCollapse = this._expandCollapse.bind(this);
 
 		const marginLeft = 12 * this.currentLevel;
 
@@ -283,6 +281,18 @@ Polymer({
 				'--leaf-background-colour': `transparent`,
 			});
 		}
+	},
+
+	attached: function() {
+		this.addEventListener('focus', this.onFocus);
+		this.addEventListener('blur', this.onBlur);
+		this.addEventListener('click', this._expandCollapse);
+	},
+
+	detached: function() {
+		this.removeEventListener('focus', this.onFocus);
+		this.removeEventListener('blur', this.onBlur);
+		this.removeEventListener('click', this._expandCollapse);
 	},
 
 	onFocus: function(e) {
@@ -396,7 +406,7 @@ Polymer({
 		} else if (e.key === 'ArrowLeft') {
 			e.preventDefault();
 			e.stopPropagation();
-			if (!this._isEmpty(this._children) && !this._collapsed) {
+			if (!this._isEmpty(this._children) && (!this._collapsed || this.currentLevel === 1)) {
 				this._expandCollapse();
 			} else {
 				this._focusParent();
@@ -488,7 +498,7 @@ Polymer({
 
 	_focusParent: function() {
 		if (!this.parentNode) return;
-		this.onBlur();
+		this.blur();
 		const event = new CustomEvent('focus-parent');
 		this.dispatchEvent(event);
 	},
