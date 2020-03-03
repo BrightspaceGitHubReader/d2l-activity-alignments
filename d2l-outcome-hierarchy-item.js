@@ -79,9 +79,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 
 			ul {
 				list-style-type:none;
-				padding: 0px 0px;
+				padding: 0px;
 				flex: 1;
-				overflow: auto;
 				word-break: break-word;
 				margin-bottom: 0px;
 				margin-block-start: 0em;
@@ -89,13 +88,12 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 
 			li {
 				list-style-type: none;
-				border: 1px solid transparent;
+				border: 2px solid transparent;
 				border-top-color: var(--d2l-color-gypsum);
 				color: var(--d2l-color-ferrite);
 			}
 
 			d2l-input-checkbox {
-				background-color: var(--leaf-background-colour);
 				padding-left: var(--sublevel-cell-margin);
 				padding-right: var(--sublevel-cell-margin);
 				padding-top: 12px;
@@ -115,6 +113,12 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
                 border: 1px solid transparent;
                 border-bottom-color: var(--d2l-color-gypsum);
 			}
+
+			d2l-outcome-hierarchy-item {
+				background-color: var(--leaf-background-colour);
+				border: var(--leaf-border);
+			}
+
 		</style>
 		<template is="dom-if" if="[[_isLeafNode(item)]]">
 			<d2l-input-checkbox id="checkbox" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
@@ -268,7 +272,9 @@ Polymer({
 		this._expandCollapse = this._expandCollapse.bind(this);
 
 		const marginLeft = 12 * this.currentLevel;
-
+		this.updateStyles({
+			'--leaf-border': `2px solid transparent`
+		});
 		if (this._isSelected) {
 			this.updateStyles({
 				'--sublevel-cell-margin': `${marginLeft}px`,
@@ -304,12 +310,19 @@ Polymer({
 		event.node = this;
 		this.dispatchEvent(event);
 
+		this.updateStyles({
+			'--leaf-border': `2px solid var(--d2l-color-celestine-plus-1)`
+		});
+
 		this._focus = true;
 		this.keydownEventListener = this._handleKeyDown.bind(this);
 		window.addEventListener('keydown', this.keydownEventListener);
 	},
 
 	onBlur: function() {
+		this.updateStyles({
+			'--leaf-border': `2px solid transparent`
+		});
 		this._focus = false;
 		window.removeEventListener('keydown', this.keydownEventListener);
 	},

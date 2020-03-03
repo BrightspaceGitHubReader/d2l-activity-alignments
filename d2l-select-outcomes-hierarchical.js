@@ -58,7 +58,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 				align-items: center;
 				margin: 1rem;
 			}
-			.d2l-hierchical-list {
+			.d2l-hierarchical-list {
 				overflow: auto;
 				overflow-x: hidden;
 				height: 85%;
@@ -74,7 +74,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 			<div class="d2l-select-outcomes-hierarchical-main">
 				<d2l-select-outcomes-hierarchical-list
 					aria-busy="[[_loading]]"
-					class="d2l-hierchical-list"
+					class="d2l-hierarchical-list"
 					href="[[_getHierarchy(entity)]]"
 					token="[[token]]"
 					alignments="[[_alignments]]">
