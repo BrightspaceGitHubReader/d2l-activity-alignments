@@ -72,7 +72,13 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 		</style>
 		<siren-entity-loading href="[[href]]" token="[[token]]" style="width:100%;">
 			<div class="d2l-select-outcomes-hierarchical-main">
-				<d2l-select-outcomes-hierarchical-list class="d2l-hierchical-list" href="[[_getHierarchy(entity)]]" token="[[token]]" alignments="[[_alignments]]"></d2l-select-outcomes-hierarchical-list>
+				<d2l-select-outcomes-hierarchical-list
+					aria-busy="[[_loading]]"
+					class="d2l-hierchical-list" 
+					href="[[_getHierarchy(entity)]]" 
+					token="[[token]]" 
+					alignments="[[_alignments]]">
+				</d2l-select-outcomes-hierarchical-list>
 				<div class="d2l-alignment-update-buttons">
 					<d2l-button primary="" disabled="[[_buttonsDisabled]]" on-tap="_add" aria-label="[[alignButtonText]]">[[alignButtonText]]</d2l-button>
 					<d2l-button on-tap="_cancel" aria-label="[[localize('cancelLabel')]]">[[localize('cancel')]]</d2l-button>

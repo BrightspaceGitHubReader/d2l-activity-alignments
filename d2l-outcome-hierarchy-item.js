@@ -78,6 +78,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			}
 
 			ul {
+				list-style-type:none;
 				padding: 0px 0px;
 				flex: 1;
 				overflow: auto;
@@ -110,13 +111,15 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 				color: var(--d2l-color-celestine);
 			}
 
-			.leaf-node-selected {
-				background-color: var(--d2l-color-celestine-plus-2);
+			.d2l-hierarchy-tree {
+                border: 1px solid transparent; 
+                border-bottom-color: var(--d2l-color-gypsum);
 			}
+			
 		</style>
 
 		<template is="dom-if" if="[[_isLeafNode(item)]]">
-			<d2l-input-checkbox id="checkbox" class="[[_leafClass]]" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
+			<d2l-input-checkbox id="checkbox" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
 				<div class="d2l-outcome-wrap">
 					<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
 						<div class="d2l-outcome-identifier">[[getOutcomeIdentifier(item)]]</div>
@@ -143,7 +146,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 				</div>
 			</div>
 			<template is="dom-if" if="[[!_collapsed]]">
-				<ul style="list-style-type:none">
+				<ul>
 					<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
 						<li class$="[[_getCellClass(item)]]" tabindex="-1">
 							<d2l-outcome-hierarchy-item
@@ -158,7 +161,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 								on-focus-next="_focusNextSibling"
 								on-focus-previous="_focusPreviousSibling"
 								on-focus-parent="_focusSelf"
-								on-focus-child="_onFocusChild"
+								on-focus-child="_onFocusChild">
 							</d2l-outcome-hierarchy-item>
 						</li>
 					</template>
@@ -166,7 +169,9 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			</template>
 		</template>
 		<template is="dom-if" if="[[_isRootNode(item)]]">
-			<ul style="list-style-type:none; border: 1px solid transparent; border-bottom-color: var(--d2l-color-gypsum);" >
+			<ul 
+				class="d2l-hierarchy-tree" 
+				role="application tree">
 				<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
 					<li class$="[[_getCellClass(item)]]" tabindex="-1">
 						<d2l-outcome-hierarchy-item
@@ -181,7 +186,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 							on-focus-next="_focusNextSibling"
 							on-focus-previous="_focusPreviousSibling"
 							on-focus-parent="_focusSelf"
-							on-focus-child="_onFocusChild"
+							on-focus-child="_onFocusChild">
 						</d2l-outcome-hierarchy-item>
 					</li>
 				</template>
@@ -230,10 +235,6 @@ Polymer({
 		_isSelected: {
 			type: Boolean,
 			computed: '_getIsSelected(alignments, item)'
-		},
-		_leafClass: {
-			type: String,
-			computed: '_getLeafClass(_isSelected)'
 		},
 		parentNode: {
 			type: Object
@@ -340,10 +341,6 @@ Polymer({
 
 	_getIsSelected: function(alignments, item) {
 		return alignments && item && item.properties && item.properties.objectiveId && alignments.has(item.properties.objectiveId);
-	},
-
-	_getLeafClass: function(isSelected) {
-		return isSelected ? 'leaf-node-selected' : '';
 	},
 
 	_hasOutcomeIdentifier: function(entity) {
