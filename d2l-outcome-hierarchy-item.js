@@ -112,12 +112,10 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			}
 
 			.d2l-hierarchy-tree {
-                border: 1px solid transparent; 
+                border: 1px solid transparent;
                 border-bottom-color: var(--d2l-color-gypsum);
 			}
-			
 		</style>
-
 		<template is="dom-if" if="[[_isLeafNode(item)]]">
 			<d2l-input-checkbox id="checkbox" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
 				<div class="d2l-outcome-wrap">
@@ -151,10 +149,10 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 						<li class$="[[_getCellClass(item)]]" tabindex="-1">
 							<d2l-outcome-hierarchy-item
 								id="[[outcomesIndex]]"
-								item="[[item]]" 
+								item="[[item]]"
 								index="[[outcomesIndex]]"
 								tabindex="-1"
-								alignments="[[alignments]]" 
+								alignments="[[alignments]]"
 								current-level="[[_nextLevel]]"
 								parentNode="[[root]]"
 								is-last="[[_getOutcomeIsLast(outcomesIndex)]]"
@@ -169,17 +167,17 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			</template>
 		</template>
 		<template is="dom-if" if="[[_isRootNode(item)]]">
-			<ul 
-				class="d2l-hierarchy-tree" 
+			<ul
+				class="d2l-hierarchy-tree"
 				role="application tree">
 				<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
 					<li class$="[[_getCellClass(item)]]" tabindex="-1">
 						<d2l-outcome-hierarchy-item
 							id$="[[outcomesIndex]]"
-							item="[[item]]" 
-							index="[[outcomesIndex]]" 
-							tabindex="-1" 
-							alignments="[[alignments]]" 
+							item="[[item]]"
+							index="[[outcomesIndex]]"
+							tabindex="-1"
+							alignments="[[alignments]]"
 							current-level="[[_nextLevel]]"
 							parentNode="[[root]]"
 							is-last="[[_getOutcomeIsLast(outcomesIndex)]]"

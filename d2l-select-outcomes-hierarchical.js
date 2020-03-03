@@ -74,9 +74,9 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 			<div class="d2l-select-outcomes-hierarchical-main">
 				<d2l-select-outcomes-hierarchical-list
 					aria-busy="[[_loading]]"
-					class="d2l-hierchical-list" 
-					href="[[_getHierarchy(entity)]]" 
-					token="[[token]]" 
+					class="d2l-hierchical-list"
+					href="[[_getHierarchy(entity)]]"
+					token="[[token]]"
 					alignments="[[_alignments]]">
 				</d2l-select-outcomes-hierarchical-list>
 				<div class="d2l-alignment-update-buttons">

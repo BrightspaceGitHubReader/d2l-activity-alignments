@@ -52,8 +52,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 			<div class="d2l-alignment-update-content">
 				<d2l-outcome-hierarchy-item
 					tabindex="0"
-					item="[[_getHierarchyStart(entity)]]" 
-					alignments="[[alignments]]" 
+					item="[[_getHierarchyStart(entity)]]"
+					alignments="[[alignments]]"
 					current-level="[[level]]"
 				</d2l-outcome-hierarchy-item>
 			</div>
