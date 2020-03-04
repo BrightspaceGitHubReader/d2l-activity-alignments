@@ -1,5 +1,5 @@
 /**
-`d2l-select-outcomes-hierchical-list`
+`d2l-select-outcomes-hierarchical-list`
 */
 
 import '@polymer/polymer/polymer-legacy.js';

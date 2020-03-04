@@ -34,6 +34,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 				display: flex;
 				flex-direction: column-reverse;
 				margin-left: 10px;
+				width: 100%;
 			}
 
 			.d2l-outcome-heading > * {
@@ -104,8 +105,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			.d2l-select-outcomes-leaf:hover {
 				z-index: 1;
 				background-color: var(--d2l-color-celestine-plus-2);
-				border-top: 1px solid var(--d2l-color-celestine-plus-1);
-				border-bottom: 1px solid var(--d2l-color-celestine-plus-1);
+				border-top: 2px solid var(--d2l-color-celestine-plus-1);
+				border-bottom: 2px solid var(--d2l-color-celestine-plus-1);
 				color: var(--d2l-color-celestine);
 			}
 
@@ -117,83 +118,105 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			d2l-outcome-hierarchy-item {
 				background-color: var(--leaf-background-colour);
 				border: var(--leaf-border);
+				margin:-2px;
 			}
 
 		</style>
-		<template is="dom-if" if="[[_isLeafNode(item)]]">
-			<d2l-input-checkbox id="checkbox" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
-				<div class="d2l-outcome-wrap">
-					<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
-						<div class="d2l-outcome-identifier">[[getOutcomeIdentifier(item)]]</div>
-					</template>
-					<div class="d2l-outcome-text">
-						<s-html hidden="[[!_fromTrustedSource(item)]]" html="[[getOutcomeDescriptionHtml(item)]]"></s-html>
-						<span hidden="[[_fromTrustedSource(item)]]">[[getOutcomeDescriptionPlainText(item)]]</span>
-					</div>
+		<div 
+			id="container"
+			tabindex="-1"
+			role="treeitem"
+			aria-selected="[[_ariaSelected]]"
+			aria-expanded="[[_ariaExpanded]]">
+			<template is="dom-if" if="[[_isLeafNode(item)]]">
+				<div>	
+					<d2l-input-checkbox id="checkbox" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
+						<div class="d2l-outcome-wrap">
+							<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
+								<div class="d2l-outcome-identifier">[[getOutcomeIdentifier(item)]]</div>
+							</template>
+							<div class="d2l-outcome-text">
+								<s-html hidden="[[!_fromTrustedSource(item)]]" html="[[getOutcomeDescriptionHtml(item)]]"></s-html>
+								<span hidden="[[_fromTrustedSource(item)]]">[[getOutcomeDescriptionPlainText(item)]]</span>
+							</div>
+						</div>
+					</d2l-input-checkbox>
 				</div>
-			</d2l-input-checkbox>
-		</template>
-		<template is="dom-if" if="[[_isNonLeafNode(item)]]">
-			<div class="d2l-collapsible-node">
-				<div class="node-header-content">
-					<d2l-icon icon="[[_collapseIcon]]"></d2l-icon>
-					<div class="d2l-outcome-heading">
-						<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
-							<h4>[[getOutcomeIdentifier(item)]]</h4>
-						</template>
-						<template is="dom-if" if="[[!_hasOutcomeIdentifier(item)]]">
-							<h4>[[getOutcomeDescriptionPlainText(item)]]</h4>
-						</template>
-					</div>
-				</div>
-			</div>
-			<template is="dom-if" if="[[!_collapsed]]">
-				<ul>
-					<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
-						<li class$="[[_getCellClass(item)]]" tabindex="-1">
-							<d2l-outcome-hierarchy-item
-								id="[[outcomesIndex]]"
-								item="[[item]]"
-								index="[[outcomesIndex]]"
-								tabindex="-1"
-								alignments="[[alignments]]"
-								current-level="[[_nextLevel]]"
-								parentNode="[[root]]"
-								is-last="[[_getOutcomeIsLast(outcomesIndex)]]"
-								on-focus-next="_focusNextSibling"
-								on-focus-previous="_focusPreviousSibling"
-								on-focus-parent="_focusSelf"
-								on-focus-child="_onFocusChild">
-							</d2l-outcome-hierarchy-item>
-						</li>
-					</template>
-				</ul>
 			</template>
-		</template>
-		<template is="dom-if" if="[[_isRootNode(item)]]">
-			<ul
-				class="d2l-hierarchy-tree"
-				role="application tree">
-				<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
-					<li class$="[[_getCellClass(item)]]" tabindex="-1">
-						<d2l-outcome-hierarchy-item
-							id$="[[outcomesIndex]]"
-							item="[[item]]"
-							index="[[outcomesIndex]]"
-							tabindex="-1"
-							alignments="[[alignments]]"
-							current-level="[[_nextLevel]]"
-							parentNode="[[root]]"
-							is-last="[[_getOutcomeIsLast(outcomesIndex)]]"
-							on-focus-next="_focusNextSibling"
-							on-focus-previous="_focusPreviousSibling"
-							on-focus-parent="_focusSelf"
-							on-focus-child="_onFocusChild">
-						</d2l-outcome-hierarchy-item>
-					</li>
-				</template>
-			</ul>
-		</template>
+			<template is="dom-if" if="[[_isNonLeafNode(item)]]">
+				<div>
+					<div class="d2l-collapsible-node">
+						<div class="node-header-content">
+							<d2l-icon icon="[[_collapseIcon]]"></d2l-icon>
+							<div id="aria-id" class="d2l-outcome-heading">
+								<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
+									<h4>[[getOutcomeIdentifier(item)]]</h4>
+								</template>
+								<template is="dom-if" if="[[!_hasOutcomeIdentifier(item)]]">
+									<h4>[[getOutcomeDescriptionPlainText(item)]]</h4>
+								</template>
+							</div>
+						</div>
+					</div>
+					<template is="dom-if" if="[[!_collapsed]]">
+						<ul
+							role="group">
+							<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
+								<li class$="[[_getCellClass(item)]]" tabindex="-1">
+									<d2l-outcome-hierarchy-item
+										id$="[[outcomesIndex]]"
+										item="[[item]]"
+										index="[[outcomesIndex]]"
+										tabindex="-1"
+										alignments="[[alignments]]"
+										current-level="[[_nextLevel]]"
+										parentNode="[[root]]"
+										is-last="[[_getOutcomeIsLast(outcomesIndex)]]"
+										on-focus-next="_focusNextSibling"
+										on-focus-previous="_focusPreviousSibling"
+										on-focus-parent="_focusSelf"
+										on-focus-child="_onFocusChild"
+										on-focus-last-child="_onFocusLastChild"
+										on-focus-tree-start="_onFocusTreeStart"
+										on-focus-tree-end="_onFocusTreeEnd">
+									</d2l-outcome-hierarchy-item>
+								</li>
+							</template>
+						</ul>
+					</template>
+				</div>
+			</template>
+			<template is="dom-if" if="[[_isRootNode(item)]]">
+				<div
+					class="d2l-hierarchy-tree"
+					role="application tree"
+					aria-multiselectable="true"
+					aria-label="Outcomes Hierarchical Tree">
+					<ul>
+						<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
+							<li class$="[[_getCellClass(item)]]" tabindex="-1">
+								<d2l-outcome-hierarchy-item
+									id$="[[outcomesIndex]]"
+									item="[[item]]"
+									index="[[outcomesIndex]]"
+									tabindex="-1"
+									alignments="[[alignments]]"
+									current-level="[[_nextLevel]]"
+									parentNode="[[root]]"
+									is-last="[[_getOutcomeIsLast(outcomesIndex)]]"
+									on-focus-next="_focusNextSibling"
+									on-focus-previous="_focusPreviousSibling"
+									on-focus-parent="_focusSelf"
+									on-focus-last-child="_onFocusLastChild"
+									on-focus-tree-start="_onFocusTreeStart"
+									on-focus-tree-end="_onFocusTreeEnd">
+								</d2l-outcome-hierarchy-item>
+							</li>
+						</template>
+					</ul>
+				</div>
+			</template>
+		</div>
 	</template>
 
 </dom-module>`;
@@ -251,6 +274,14 @@ Polymer({
 		},
 		currentLevel: {
 			type: Number
+		},
+		_ariaSelected: {
+			type: String,
+			computed: '_getAriaSelected(item, _isSelected)'
+		},
+		_ariaExpanded: {
+			type: String,
+			computed: '_getAriaExpanded(item, _collapsed)'
 		}
 	},
 
@@ -303,8 +334,13 @@ Polymer({
 	onFocus: function(e) {
 		e.stopPropagation();
 
-		if (this.currentLevel === 0) {
+		if (this._isRootNode(this.item)) {
 			return this._selectFirstNode();
+		} else {
+			const elem = this.shadowRoot.getElementById('container');
+			if (elem) {
+				elem.focus();
+			}
 		}
 		const event = new CustomEvent('focus-child');
 		event.node = this;
@@ -323,8 +359,29 @@ Polymer({
 		this.updateStyles({
 			'--leaf-border': `2px solid transparent`
 		});
+		this._blurContainer();
 		this._focus = false;
 		window.removeEventListener('keydown', this.keydownEventListener);
+	},
+
+	_getAriaExpanded: function(item, _collapsed) {
+		if (!item || !item.entities || !this._isNonLeafNode(item)) {
+			return undefined;
+		} else if (_collapsed) {
+			return 'false';
+		} else {
+			return 'true';
+		}
+	},
+	
+	_getAriaSelected: function(item, _isSelected) {
+		if (!item || !item.entities || !this._isLeafNode(item)) {
+			return undefined;
+		} else if (_isSelected) {
+			return 'true';
+		} else {
+			return false;
+		}		
 	},
 
 	_getHierarchy: function(item) {
@@ -334,8 +391,8 @@ Polymer({
 		return item.entities.filter(function(e) {return e.class.includes('hierarchical-outcome'); });
 	},
 
-	_isEmpty(array) {
-		return !array || !array.length;
+	_hasChildren() {
+		return this._children && this._children.length;
 	},
 
 	_isLeafNode: function(item) {
@@ -360,9 +417,19 @@ Polymer({
 
 	_expandCollapse: function(event) {
 		this._collapsed = !this._collapsed;
-		if (!this._focus) this._focusSelf();
+		this.blur();
+		this._focusSelf();
 		if (event) {
 			event.stopPropagation();
+		}
+	},
+
+	_expandCollapseIfLeaf: function() {
+		if (this._isLeafNode(this.item)) {
+			const elem = this.shadowRoot.getElementById('checkbox');
+			if (elem) {
+				elem.simulateClick();
+			}
 		}
 	},
 
@@ -373,11 +440,13 @@ Polymer({
 	_onOutcomeSelectChange: function(e) {
 		var target = e.target;
 		if (target.checked) {
+			this._isSelected = true;
 			this.updateStyles({
 				'--leaf-background-colour': `var(--d2l-color-celestine-plus-2)`,
 			});
 			this.alignments.add(this.item.properties.objectiveId);
 		} else {
+			this._isSelected = false;
 			this.updateStyles({
 				'--leaf-background-colour': `transparent`,
 			});
@@ -410,43 +479,57 @@ Polymer({
 		} else if (e.key === 'ArrowUp') {
 			e.preventDefault();
 			e.stopPropagation();
-			this._focusPrevious();
+			this._moveUpTree();
 		} else if (e.key === 'ArrowLeft') {
 			e.preventDefault();
 			e.stopPropagation();
-			if (!this._isEmpty(this._children) && (!this._collapsed || this.currentLevel === 1)) {
+			if (this._hasChildren() && !this._collapsed) {
 				this._expandCollapse();
-			} else {
+			} else if (this.currentLevel > 1) {
 				this._focusParent();
 			}
 		} else if (e.key === 'ArrowRight') {
 			e.preventDefault();
 			e.stopPropagation();
-			if (!this._isEmpty(this._children) && this._collapsed) {
+			if (this._hasChildren() && this._collapsed) {
 				this._expandCollapse();
 			} else {
 				this._focusChild();
 			}
-		} else if (e.key === 'Enter' || e.keyCode === 32) {
+		} else if (e.key === 'Enter') {
 			e.preventDefault();
 			e.stopPropagation();
-			const elem = this.shadowRoot.getElementById('checkbox');
-			if (elem) {
-				elem.simulateClick();
+			if (this._isLeafNode(this.item)) {
+				const elem = this.shadowRoot.getElementById('checkbox');
+				if (elem) {
+					elem.simulateClick();
+				}
+			} else if (this._isNonLeafNode(this.item)) {
+				this._expandCollapse();
+			}
+		} else if (e.keyCode === 32) {
+			e.preventDefault();
+			e.stopPropagation();
+			if (this._isLeafNode(this.item)) {
+				const elem = this.shadowRoot.getElementById('checkbox');
+				if (elem) {
+					elem.simulateClick();
+				}
 			}
 		} else if (e.key === 'Home') {
 			e.preventDefault();
 			e.stopPropagation();
-			this._focusFirst();
+			this._onFocusTreeStart();
 		} else if (e.key === 'End') {
 			e.preventDefault();
 			e.stopPropagation();
-			this._focusLast();
+			this._onFocusTreeEnd();
 		}
 	},
 
 	_focusChild: function() {
-		if (!this._isEmpty(this._children) && !this._collapsed) {
+		if (this._hasChildren() && !this._collapsed) {
+			this._blurContainer();
 			const elem = this.shadowRoot.getElementById('0');
 			if (elem) {
 				elem.focus();
@@ -455,24 +538,24 @@ Polymer({
 	},
 
 	_focusNext: function() {
-		if (!this._isEmpty(this._children) && !this._collapsed) {
+		if (this._hasChildren() && !this._collapsed) {
 			this._focusChild();
 		} else {
-			this.onBlur();
+			this._blurContainer();
 			const event = new CustomEvent('focus-next');
 			event.index = this.index;
 			this.dispatchEvent(event);
 		}
 	},
 
-	_focusPrevious: function() {
-		if (this.index > 0) {
-			this.onBlur();
+	_moveUpTree: function() {
+		if (this.index === 0) {
+			this._focusParent();
+		} else {
+			this._blurContainer();
 			const event = new CustomEvent('focus-previous');
 			event.index = this.index;
 			this.dispatchEvent(event);
-		} else {
-			this._focusParent();
 		}
 	},
 
@@ -482,8 +565,8 @@ Polymer({
 			if (element) {
 				element.focus();
 			}
-		} else if (this.currentLevel === 0) {
-			this._selectFirstNode();
+		} else if (this._isRootNode(this.item)) {
+			this.focusLastVisibleNode();
 		} else {
 			const event = new CustomEvent('focus-next');
 			event.index = this.index;
@@ -493,29 +576,24 @@ Polymer({
 
 	_focusPreviousSibling: function(e) {
 		if (e.index > 0) {
-			const element = this.shadowRoot.getElementById((e.index - 1).toString());
-			if (element) {
-				element.focus();
+			const elem = this.shadowRoot.getElementById((e.index - 1).toString());
+			if (elem) {
+				elem.focusLastVisibleNode();
 			}
-		} else {
-			const event = new CustomEvent('focus-previous');
-			event.index = this.index;
-			this.dispatchEvent(event);
 		}
 	},
 
 	_focusParent: function() {
 		if (!this.parentNode) return;
-		this.blur();
+		this._blurContainer();
 		const event = new CustomEvent('focus-parent');
 		this.dispatchEvent(event);
 	},
 
 	_focusSelf: function() {
-		if (this.currentLevel === 0) {
-			this._selectLastNode();
+		if (this._isRootNode(this.item)) {
+			this._selectFirstNode();
 		} else {
-			this.blur();
 			this.focus();
 		}
 	},
@@ -534,10 +612,46 @@ Polymer({
 		}
 	},
 
+	_onFocusTreeStart: function() {
+		if (this._isRootNode(this.item)) {
+			this.blur();
+			this._selectFirstNode();
+		} else {
+			const event = new CustomEvent('focus-tree-start');
+			this.dispatchEvent(event);
+		}
+	},
+
+	_onFocusTreeEnd: function() {
+		if (this._isRootNode(this.item)) {
+			this.blur();
+			this.focusLastVisibleNode();
+		} else {
+			const event = new CustomEvent('focus-tree-end');
+			this.dispatchEvent(event);
+		}
+	},
+
 	_selectLastNode: function() {
 		const element = this.shadowRoot.getElementById((this._children.length - 1).toString());
 		if (element) {
 			element.focus();
+		}
+	},
+
+	_blurContainer: function() {
+		const elem = this.shadowRoot.getElementById('container');
+		if (elem) {
+			elem.blur();
+		}
+	},
+
+	focusLastVisibleNode: function() {
+		if (this._isRootNode(this.item) || (this._hasChildren() && !this._collapsed)) {
+			const elem = this.shadowRoot.getElementById((this._children.length - 1).toString());
+			elem.focusLastVisibleNode();
+		} else {
+			this.focus();
 		}
 	}
 });
