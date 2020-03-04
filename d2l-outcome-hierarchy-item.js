@@ -259,7 +259,7 @@ Polymer({
 		},
 		_isSelected: {
 			type: Boolean,
-			computed: '_getIsSelected(alignments, item)'
+			value: false
 		},
 		parentNode: {
 			type: Object
@@ -277,13 +277,17 @@ Polymer({
 		},
 		_ariaSelected: {
 			type: String,
-			computed: '_getAriaSelected(item, _isSelected)'
 		},
 		_ariaExpanded: {
 			type: String,
 			computed: '_getAriaExpanded(item, _collapsed)'
 		}
 	},
+
+	observers: [
+		'_setIsSelectedState(item, alignments)',
+		'_setAriaSelected(item, _isSelected)'
+	],
 
 	created: function() {
 		const userAgent = window.navigator.userAgent;
@@ -333,7 +337,6 @@ Polymer({
 
 	onFocus: function(e) {
 		e.stopPropagation();
-
 		if (this._isRootNode(this.item)) {
 			return this._selectFirstNode();
 		} else {
@@ -374,17 +377,17 @@ Polymer({
 		}
 	},
 	
-	_getAriaSelected: function(item, _isSelected) {
-		if (!item || !item.entities || !this._isLeafNode(item)) {
-			return undefined;
+	_setAriaSelected: function(item, _isSelected) {
+		if (!item || !item.class || !this._isLeafNode(item)) {
+			this._ariaSelected = undefined;
 		} else if (_isSelected) {
-			return 'true';
+			this._ariaSelected = 'true';
 		} else {
-			return false;
+			this._ariaSelected = 'false';
 		}		
 	},
 
-	_getHierarchy: function(item) {
+	_getHierarchy: function(item, alignments) {
 		if (!item || !item.entities) {
 			return [];
 		}
@@ -407,8 +410,12 @@ Polymer({
 		return item.class.includes('outcomes-root');
 	},
 
-	_getIsSelected: function(alignments, item) {
-		return alignments && item && item.properties && item.properties.objectiveId && alignments.has(item.properties.objectiveId);
+	_setIsSelectedState: function(item, alignments) {
+		if (alignments && item && item.properties && item.properties.objectiveId) {
+			this._isSelected = alignments.has(item.properties.objectiveId);
+		} else {
+			this._isSelected = false;
+		}	
 	},
 
 	_hasOutcomeIdentifier: function(entity) {
