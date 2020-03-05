@@ -598,6 +598,7 @@ Polymer({
 	},
 
 	_focusSelf: function() {
+		this._blurContainer();
 		if (this._isRootNode(this.item)) {
 			this._selectFirstNode();
 		} else {
@@ -621,9 +622,9 @@ Polymer({
 
 	_onFocusTreeStart: function() {
 		if (this._isRootNode(this.item)) {
-			this.blur();
 			this._selectFirstNode();
 		} else {
+			this._blurContainer();
 			const event = new CustomEvent('focus-tree-start');
 			this.dispatchEvent(event);
 		}
@@ -631,9 +632,9 @@ Polymer({
 
 	_onFocusTreeEnd: function() {
 		if (this._isRootNode(this.item)) {
-			this.blur();
 			this.focusLastVisibleNode();
 		} else {
+			this._blurContainer();
 			const event = new CustomEvent('focus-tree-end');
 			this.dispatchEvent(event);
 		}
