@@ -18,6 +18,7 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangNlBehavior = {
 		'directAlignments': '{headerTitle} rechtstreeks afgestemd op deze activiteit',
 		'error': 'Er is een fout opgetreden',
 		'indirectAlignments': '{headerTitle} afgestemd op rubriccriteria',
-		'removeAlignment': 'Afstemming verwijderen'
+		'removeAlignment': 'Afstemming verwijderen',
+		'selected': 'selected '
 	}
 };

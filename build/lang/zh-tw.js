@@ -18,6 +18,7 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangZhTwBehavior = {
 		'directAlignments': '{headerTitle} 直接配合此活動校準',
 		'error': '發生錯誤',
 		'indirectAlignments': '{headerTitle} 配合量規標準校準',
-		'removeAlignment': '移除校準'
+		'removeAlignment': '移除校準',
+		'selected': 'selected '
 	}
 };

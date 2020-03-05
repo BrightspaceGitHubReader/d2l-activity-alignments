@@ -83,7 +83,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 					<d2l-button primary="" disabled="[[_buttonsDisabled]]" on-tap="_add" aria-label="[[alignButtonText]]">[[alignButtonText]]</d2l-button>
 					<d2l-button on-tap="_cancel" aria-label="[[localize('cancelLabel')]]">[[localize('cancel')]]</d2l-button>
 					<d2l-loading-spinner hidden$="[[!_loading]]"></d2l-loading-spinner>
-					<div class="d2l-selected-outcomes">[[_alignmentsSize]] selected outcomes</div>
+					<div class="d2l-selected-outcomes">[[_alignmentsSize]] [[localize('selected')]]</div>
 				</div>
 				<template is="dom-if" if="[[_showError]]">
 					<d2l-alert type="error">[[localize('error')]]</d2l-alert>

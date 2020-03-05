@@ -18,6 +18,7 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangFrBehavior = {
 		'directAlignments': '{headerTitle} aligné directement avec cette activité',
 		'error': 'Une erreur est survenue',
 		'indirectAlignments': '{headerTitle} aligné avec les critères de la grille d’évaluation',
-		'removeAlignment': 'Supprimer l’alignement'
+		'removeAlignment': 'Supprimer l’alignement',
+		'selected': 'selected '
 	}
 };
