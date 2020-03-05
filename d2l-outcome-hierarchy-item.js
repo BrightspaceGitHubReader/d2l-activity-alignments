@@ -19,7 +19,6 @@ import 's-html/s-html.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 import OutcomeParserBehavior from './d2l-outcome-parser-behavior.js';
 const $_documentContainer = document.createElement('template');
-import { afterNextRender } from '@polymer/polymer/lib/utils/render-status';
 
 $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-item">
 	<template strip-whitespace="">
@@ -308,17 +307,17 @@ Polymer({
 
 		const marginLeft = 12 * this.currentLevel;
 		this.updateStyles({
-			'--leaf-border': `2px solid transparent`
+			'--leaf-border': '2px solid transparent'
 		});
 		if (this._isSelected) {
 			this.updateStyles({
 				'--sublevel-cell-margin': `${marginLeft}px`,
-				'--leaf-background-colour': `var(--d2l-color-celestine-plus-2)`
+				'--leaf-background-colour': 'var(--d2l-color-celestine-plus-2)'
 			});
 		} else {
 			this.updateStyles({
 				'--sublevel-cell-margin': `${marginLeft}px`,
-				'--leaf-background-colour': `transparent`,
+				'--leaf-background-colour': 'transparent',
 			});
 		}
 	},
@@ -350,7 +349,7 @@ Polymer({
 		this.dispatchEvent(event);
 
 		this.updateStyles({
-			'--leaf-border': `2px solid var(--d2l-color-celestine-plus-1)`
+			'--leaf-border': '2px solid var(--d2l-color-celestine-plus-1)'
 		});
 
 		this._focus = true;
@@ -360,7 +359,7 @@ Polymer({
 
 	onBlur: function() {
 		this.updateStyles({
-			'--leaf-border': `2px solid transparent`
+			'--leaf-border': '2px solid transparent'
 		});
 		this._blurContainer();
 		this._focus = false;
@@ -376,7 +375,7 @@ Polymer({
 			return 'true';
 		}
 	},
-	
+
 	_setAriaSelected: function(item, _isSelected) {
 		if (!item || !item.class || !this._isLeafNode(item)) {
 			this._ariaSelected = undefined;
@@ -384,10 +383,10 @@ Polymer({
 			this._ariaSelected = 'true';
 		} else {
 			this._ariaSelected = 'false';
-		}		
+		}
 	},
 
-	_getHierarchy: function(item, alignments) {
+	_getHierarchy: function(item) {
 		if (!item || !item.entities) {
 			return [];
 		}
@@ -415,7 +414,7 @@ Polymer({
 			this._isSelected = alignments.has(item.properties.objectiveId);
 		} else {
 			this._isSelected = false;
-		}	
+		}
 	},
 
 	_hasOutcomeIdentifier: function(entity) {
@@ -449,13 +448,13 @@ Polymer({
 		if (target.checked) {
 			this._isSelected = true;
 			this.updateStyles({
-				'--leaf-background-colour': `var(--d2l-color-celestine-plus-2)`,
+				'--leaf-background-colour': 'var(--d2l-color-celestine-plus-2)',
 			});
 			this.alignments.add(this.item.properties.objectiveId);
 		} else {
 			this._isSelected = false;
 			this.updateStyles({
-				'--leaf-background-colour': `transparent`,
+				'--leaf-background-colour': 'transparent',
 			});
 			this.alignments.delete(this.item.properties.objectiveId);
 		}

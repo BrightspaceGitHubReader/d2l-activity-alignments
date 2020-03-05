@@ -12,7 +12,6 @@ import '@polymer/polymer/polymer-legacy.js';
 
 import 'd2l-polymer-siren-behaviors/store/entity-behavior.js';
 import 'd2l-polymer-siren-behaviors/store/siren-action-behavior.js';
-import { Rels } from 'd2l-hypermedia-constants';
 import './d2l-select-outcomes-hierarchical-list.js';
 import 'd2l-alert/d2l-alert.js';
 import './localize-behavior.js';
@@ -157,7 +156,7 @@ Polymer({
 		}
 	},
 
-	_handleError: function(e) {
+	_handleError: function() {
 		this._showError = true;
 	},
 

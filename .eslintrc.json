@@ -2,6 +2,8 @@
   "extends": "brightspace/polymer-3-config",
   "globals": {
     "Promise": false,
-    "amd": true
+    "amd": true,
+    "Set": true,
+    "Map": true
   }
 }
