@@ -158,8 +158,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 						</div>
 					</div>
 					<template is="dom-if" if="[[!_collapsed]]">
-						<ul
-							role="group">
+						<ul role="group">
 							<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
 								<li class$="[[_getCellClass(item)]]" tabindex="-1">
 									<d2l-outcome-hierarchy-item
@@ -410,11 +409,8 @@ Polymer({
 	},
 
 	_setIsSelectedState: function(item, alignments) {
-		if (alignments && item && item.properties && item.properties.objectiveId) {
-			this._isSelected = alignments.has(item.properties.objectiveId);
-		} else {
-			this._isSelected = false;
-		}
+		const canSelect = alignments && item && item.properties && item.properties.objectiveId;
+		this._isSelected = canSelect ? alignments.has(item.properties.objectiveId) : false;
 	},
 
 	_hasOutcomeIdentifier: function(entity) {
