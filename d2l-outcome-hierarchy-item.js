@@ -242,7 +242,7 @@ Polymer({
 		},
 		_collapsed: {
 			type: Boolean,
-			value: true
+			value: false
 		},
 		_iconStyle: {
 			type: String,
