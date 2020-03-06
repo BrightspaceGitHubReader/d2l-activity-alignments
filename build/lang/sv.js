@@ -18,6 +18,8 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangSvBehavior = {
 		'directAlignments': '{headerTitle} är direkt justerad efter den här aktiviteten',
 		'error': 'Ett fel har inträffat',
 		'indirectAlignments': '{headerTitle} är justerad efter rubriceringskriterier',
-		'removeAlignment': 'Ta bort justering'
+		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
+		'removeAlignment': 'Ta bort justering',
+		'selected': 'selected '
 	}
 };

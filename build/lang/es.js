@@ -18,6 +18,8 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangEsBehavior = {
 		'directAlignments': '{headerTitle} alineado directamente con esta actividad',
 		'error': 'Se produjo un error',
 		'indirectAlignments': '{headerTitle} alineado con los criterios de la rúbrica',
-		'removeAlignment': 'Quitar la alineación'
+		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
+		'removeAlignment': 'Quitar la alineación',
+		'selected': 'selected '
 	}
 };

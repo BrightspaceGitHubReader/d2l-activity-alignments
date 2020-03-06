@@ -18,6 +18,8 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangDaBehavior = {
 		'directAlignments': '{headerTitle} justeret direkte til denne aktivitet',
 		'error': 'Der opstod en fejl',
 		'indirectAlignments': '{headerTitle} justeret til rubrikkriterier',
-		'removeAlignment': 'Fjern justering'
+		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
+		'removeAlignment': 'Fjern justering',
+		'selected': 'selected '
 	}
 };

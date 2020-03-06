@@ -18,6 +18,8 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangJaBehavior = {
 		'directAlignments': '{headerTitle} このアクティビティに直接整合されました',
 		'error': 'エラーが発生しました',
 		'indirectAlignments': '{headerTitle} 注釈条件に整合されました',
-		'removeAlignment': '整合性を削除'
+		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
+		'removeAlignment': '整合性を削除',
+		'selected': 'selected '
 	}
 };

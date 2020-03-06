@@ -18,6 +18,8 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangFiBehavior = {
 		'directAlignments': '{headerTitle} Aligned Directly to This Activity',
 		'error': 'An error has occured',
 		'indirectAlignments': '{headerTitle} Aligned to Rubric Criteria',
-		'removeAlignment': 'Remove alignment'
+		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
+		'removeAlignment': 'Remove alignment',
+		'selected': 'selected '
 	}
 };
