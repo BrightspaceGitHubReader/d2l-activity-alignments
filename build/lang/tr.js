@@ -18,6 +18,7 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangTrBehavior = {
 		'directAlignments': '{headerTitle} Doğrudan Bu Etkinliğe Hizalandı',
 		'error': 'Bir hata oluştu',
 		'indirectAlignments': '{headerTitle} Rubrik Kriterlerine Hizalandı',
+		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
 		'removeAlignment': 'Hizalamayı kaldır',
 		'selected': 'selected '
 	}

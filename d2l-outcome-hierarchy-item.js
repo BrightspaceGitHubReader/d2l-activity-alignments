@@ -190,7 +190,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 					class="d2l-hierarchy-tree"
 					role="application tree"
 					aria-multiselectable="true"
-					aria-label="Outcomes Hierarchical Tree">
+					aria-label="[[localize('outcomesHierarchicalTree')]]">
 					<ul>
 						<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
 							<li class$="[[_getCellClass(item)]]" tabindex="-1">

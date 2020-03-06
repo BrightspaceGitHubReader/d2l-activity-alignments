@@ -7,6 +7,7 @@
     "directAlignments": "{headerTitle} rechtstreeks afgestemd op deze activiteit",
     "error": "Er is een fout opgetreden",
     "indirectAlignments": "{headerTitle} afgestemd op rubriccriteria",
+    "outcomesHierarchicalTree": "Outcomes Hierarchical Tree",
     "removeAlignment": "Afstemming verwijderen",
     "selected": "selected "
 }

@@ -18,6 +18,7 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangZhBehavior = {
 		'directAlignments': '{headerTitle} 直接与此活动对齐',
 		'error': '已经出现错误。',
 		'indirectAlignments': '{headerTitle} 与量规标准对齐',
+		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
 		'removeAlignment': 'Remove alignment',
 		'selected': 'selected '
 	}
