@@ -89,7 +89,7 @@ Polymer({
 
 		var hierarchyRoot = {
 			entities: entity.getSubEntitiesByClass('hierarchical-outcome'),
-			class: ['hierarchical-outcome', 'outcomes-root']
+			class: ['hierarchical-outcome', 'hierarchy-start']
 		};
 
 		return hierarchyRoot;

@@ -147,7 +147,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 					<div class="d2l-collapsible-node">
 						<div class="node-header-content">
 							<d2l-icon icon="[[_collapseIcon]]"></d2l-icon>
-							<div id="aria-id" class="d2l-outcome-heading">
+							<div class="d2l-outcome-heading">
 								<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
 									<h4>[[getOutcomeIdentifier(item)]]</h4>
 								</template>
@@ -185,7 +185,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 					</template>
 				</div>
 			</template>
-			<template is="dom-if" if="[[_isRootNode(item)]]">
+			<template is="dom-if" if="[[_isHierarchyStart(item)]]">
 				<div
 					class="d2l-hierarchy-tree"
 					role="application tree"
@@ -336,7 +336,7 @@ Polymer({
 
 	onFocus: function(e) {
 		e.stopPropagation();
-		if (this._isRootNode(this.item)) {
+		if (this._isHierarchyStart(this.item)) {
 			return this._selectFirstNode();
 		} else {
 			const elem = this.shadowRoot.getElementById('container');
@@ -405,8 +405,8 @@ Polymer({
 		return item.class.includes('collection');
 	},
 
-	_isRootNode: function(item) {
-		return item.class.includes('outcomes-root');
+	_isHierarchyStart: function(item) {
+		return item.class.includes('hierarchy-start');
 	},
 
 	_setIsSelectedState: function(item, alignments) {
@@ -571,7 +571,7 @@ Polymer({
 			if (element) {
 				element.focus();
 			}
-		} else if (this._isRootNode(this.item)) {
+		} else if (this._isHierarchyStart(this.item)) {
 			this.focusLastVisibleNode();
 		} else {
 			const event = new CustomEvent('focus-next');
@@ -598,7 +598,7 @@ Polymer({
 
 	_focusSelf: function() {
 		this._blurContainer();
-		if (this._isRootNode(this.item)) {
+		if (this._isHierarchyStart(this.item)) {
 			this._selectFirstNode();
 		} else {
 			this.focus();
@@ -620,7 +620,7 @@ Polymer({
 	},
 
 	_onFocusTreeStart: function() {
-		if (this._isRootNode(this.item)) {
+		if (this._isHierarchyStart(this.item)) {
 			this._selectFirstNode();
 		} else {
 			this._blurContainer();
@@ -630,7 +630,7 @@ Polymer({
 	},
 
 	_onFocusTreeEnd: function() {
-		if (this._isRootNode(this.item)) {
+		if (this._isHierarchyStart(this.item)) {
 			this.focusLastVisibleNode();
 		} else {
 			this._blurContainer();
@@ -654,7 +654,7 @@ Polymer({
 	},
 
 	focusLastVisibleNode: function() {
-		if (this._isRootNode(this.item) || (this._hasChildren() && !this._collapsed)) {
+		if (this._isHierarchyStart(this.item) || (this._hasChildren() && !this._collapsed)) {
 			const elem = this.shadowRoot.getElementById((this._children.length - 1).toString());
 			elem.focusLastVisibleNode();
 		} else {
