@@ -7,7 +7,13 @@
     "directAlignments": "{headerTitle} alineado directamente con esta actividad",
     "error": "Se produjo un error",
     "indirectAlignments": "{headerTitle} alineado con los criterios de la rúbrica",
+    "noSearchResultFor": "No results found for \"{searchText}\"",
     "outcomesHierarchicalTree": "Outcomes Hierarchical Tree",
     "removeAlignment": "Quitar la alineación",
+    "searchCleared": "Search cleared",
+    "searchOutcomes": "Search Outcomes",
+    "searchPlaceholder": "Search...",
+    "searchResultFor": "{numOfResults} search results for \"{searchText}\"",
+    "searchResultsNumber": "{numOfResults} search results",
     "selected": "selected "
 }

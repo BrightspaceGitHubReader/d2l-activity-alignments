@@ -7,7 +7,13 @@
     "directAlignments": "{headerTitle} 直接配合此活動校準",
     "error": "發生錯誤",
     "indirectAlignments": "{headerTitle} 配合量規標準校準",
+    "noSearchResultFor": "No results found for \"{searchText}\"",
     "outcomesHierarchicalTree": "Outcomes Hierarchical Tree",
     "removeAlignment": "移除校準",
+    "searchCleared": "Search cleared",
+    "searchOutcomes": "Search Outcomes",
+    "searchPlaceholder": "Search...",
+    "searchResultFor": "{numOfResults} search results for \"{searchText}\"",
+    "searchResultsNumber": "{numOfResults} search results",
     "selected": "selected "
 }

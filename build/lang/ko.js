@@ -18,8 +18,14 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangKoBehavior = {
 		'directAlignments': '{headerTitle} 이 활동에 직접 정렬됨',
 		'error': '오류 발생',
 		'indirectAlignments': '{headerTitle} 루브릭 기준에 따라 정렬됨',
+		'noSearchResultFor': 'No results found for "{searchText}"',
 		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
 		'removeAlignment': '정렬 제거',
+		'searchCleared': 'Search cleared',
+		'searchOutcomes': 'Search Outcomes',
+		'searchPlaceholder': 'Search...',
+		'searchResultFor': '{numOfResults} search results for "{searchText}"',
+		'searchResultsNumber': '{numOfResults} search results',
 		'selected': 'selected '
 	}
 };

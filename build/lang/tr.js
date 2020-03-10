@@ -18,8 +18,14 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangTrBehavior = {
 		'directAlignments': '{headerTitle} Doğrudan Bu Etkinliğe Hizalandı',
 		'error': 'Bir hata oluştu',
 		'indirectAlignments': '{headerTitle} Rubrik Kriterlerine Hizalandı',
+		'noSearchResultFor': 'No results found for "{searchText}"',
 		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
 		'removeAlignment': 'Hizalamayı kaldır',
+		'searchCleared': 'Search cleared',
+		'searchOutcomes': 'Search Outcomes',
+		'searchPlaceholder': 'Search...',
+		'searchResultFor': '{numOfResults} search results for "{searchText}"',
+		'searchResultsNumber': '{numOfResults} search results',
 		'selected': 'selected '
 	}
 };

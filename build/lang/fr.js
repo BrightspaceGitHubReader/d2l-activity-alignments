@@ -18,8 +18,14 @@ D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangFrBehavior = {
 		'directAlignments': '{headerTitle} aligné directement avec cette activité',
 		'error': 'Une erreur est survenue',
 		'indirectAlignments': '{headerTitle} aligné avec les critères de la grille d’évaluation',
+		'noSearchResultFor': 'Aucun résultat trouvé pour "{searchText}"',
 		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
 		'removeAlignment': 'Supprimer l’alignement',
+		'searchCleared': 'Recherche effacée',
+		'searchOutcomes': 'Résultats de recherche',
+		'searchPlaceholder': 'Chercher...',
+		'searchResultFor': '{numOfResults} Résultats de recherche pour "{searchText}"',
+		'searchResultsNumber': '{numOfResults} résultats de recherche',
 		'selected': 'selected '
 	}
 };

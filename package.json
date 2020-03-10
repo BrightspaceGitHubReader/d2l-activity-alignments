@@ -24,7 +24,7 @@
     "@polymer/iron-demo-helpers": "^3.0.0",
     "@webcomponents/webcomponentsjs": "^2.2.3",
     "babel-eslint": "^10.0.1",
-    "d2l-polymer-langtools": "^1.1.1",
+    "d2l-polymer-langtools": "^1.2.1",
     "eslint": "^5.14.1",
     "eslint-config-brightspace": "^0.4.1",
     "eslint-plugin-html": "^5.0.3",
@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@brightspace-ui-labs/multi-select": "^3",
+    "@polymer/iron-a11y-announcer": "^3.0.2",
     "@polymer/polymer": "^3.0.0",
     "d2l-alert": "BrightspaceUI/alert#semver:^4",
     "d2l-button": "BrightspaceUI/button#semver:^5",

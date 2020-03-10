@@ -16,6 +16,7 @@ import 'd2l-polymer-siren-behaviors/siren-entity-loading.js';
 import 'd2l-typography/d2l-typography-shared-styles.js';
 import 'd2l-button/d2l-button.js';
 import 's-html/s-html.js';
+import './d2l-bold-text-wrapper.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 import OutcomeParserBehavior from './d2l-outcome-parser-behavior.js';
 const $_documentContainer = document.createElement('template');
@@ -37,11 +38,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			}
 
 			.d2l-outcome-heading > * {
-				margin: 0px;
-				font-family: Lato; 
-				font-size: 16px; 
-				font-weight: bold;
-				line-height: 100%;
+				margin: -3px 0px 0px 5px !important;
+				@apply --d2l-heading-3;
 			}
 
 			.d2l-collapsible-node {
@@ -128,15 +126,19 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			aria-selected="[[_ariaSelected]]"
 			aria-expanded="[[_ariaExpanded]]">
 			<template is="dom-if" if="[[_isLeafNode(item)]]">
-				<div>	
+				<div>
 					<d2l-input-checkbox id="checkbox" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
 						<div class="d2l-outcome-wrap">
 							<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
-								<div class="d2l-outcome-identifier">[[getOutcomeIdentifier(item)]]</div>
+								<div class="d2l-outcome-identifier">
+									<d2l-bold-text-wrapper content="[[getOutcomeIdentifier(item)]]"></d2l-bold-text-wrapper>
+								</div>
 							</template>
 							<div class="d2l-outcome-text">
 								<s-html hidden="[[!_fromTrustedSource(item)]]" html="[[getOutcomeDescriptionHtml(item)]]"></s-html>
-								<span hidden="[[_fromTrustedSource(item)]]">[[getOutcomeDescriptionPlainText(item)]]</span>
+								<div hidden="[[_fromTrustedSource(item)]]">
+									<d2l-bold-text-wrapper content="[[getOutcomeDescriptionPlainText(item)]]"></d2l-bold-text-wrapper>
+								</div>
 							</div>
 						</div>
 					</d2l-input-checkbox>
@@ -170,6 +172,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 										current-level="[[_nextLevel]]"
 										parentNode="[[root]]"
 										is-last="[[_getOutcomeIsLast(outcomesIndex)]]"
+										search-text="[[searchText]]"
 										on-focus-next="_focusNextSibling"
 										on-focus-previous="_focusPreviousSibling"
 										on-focus-parent="_focusSelf"
@@ -202,6 +205,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 									current-level="[[_nextLevel]]"
 									parentNode="[[root]]"
 									is-last="[[_getOutcomeIsLast(outcomesIndex)]]"
+									search-text="[[searchText]]"
 									on-focus-next="_focusNextSibling"
 									on-focus-previous="_focusPreviousSibling"
 									on-focus-parent="_focusSelf"
@@ -411,6 +415,10 @@ Polymer({
 	_setIsSelectedState: function(item, alignments) {
 		const canSelect = alignments && item && item.properties && item.properties.objectiveId;
 		this._isSelected = canSelect ? alignments.has(item.properties.objectiveId) : false;
+
+		this.updateStyles({
+			'--leaf-background-colour': this._isSelected ? 'var(--d2l-color-celestine-plus-2)' : 'transparent',
+		});
 	},
 
 	_hasOutcomeIdentifier: function(entity) {
