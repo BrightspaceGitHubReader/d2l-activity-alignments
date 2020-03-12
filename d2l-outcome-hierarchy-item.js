@@ -17,6 +17,7 @@ import 'd2l-typography/d2l-typography-shared-styles.js';
 import 'd2l-button/d2l-button.js';
 import 's-html/s-html.js';
 import './d2l-bold-text-wrapper.js';
+import './localize-behavior.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 import OutcomeParserBehavior from './d2l-outcome-parser-behavior.js';
 const $_documentContainer = document.createElement('template');
@@ -123,15 +124,15 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			id="container"
 			tabindex="-1"
 			role="treeitem"
-			aria-selected="[[_ariaSelected]]"
-			aria-expanded="[[_ariaExpanded]]">
+			aria-selected$="[[_ariaSelected]]"
+			aria-expanded$="[[_ariaExpanded]]">
 			<template is="dom-if" if="[[_isLeafNode(item)]]">
 				<div>
 					<d2l-input-checkbox id="checkbox" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
-						<div class="d2l-outcome-wrap">
+						<div class="d2l-outcome-wrap" aria-label$="[[_leafAriaLabel]]">
 							<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
 								<div class="d2l-outcome-identifier">
-									<d2l-bold-text-wrapper content="[[getOutcomeIdentifier(item)]]"></d2l-bold-text-wrapper>
+									<d2l-bold-text-wrapper content="[[_getOutcomeIdentifier(item, searchText)]]"></d2l-bold-text-wrapper>
 								</div>
 							</template>
 							<div class="d2l-outcome-text">
@@ -146,7 +147,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			</template>
 			<template is="dom-if" if="[[_isNonLeafNode(item)]]">
 				<div>
-					<div class="d2l-collapsible-node">
+					<div class="d2l-collapsible-node" aria-label$="[[_headerAriaLabel]]">
 						<div class="node-header-content">
 							<d2l-icon icon="[[_collapseIcon]]"></d2l-icon>
 							<div class="d2l-outcome-heading">
@@ -229,7 +230,8 @@ Polymer({
 	is: 'd2l-outcome-hierarchy-item',
 
 	behaviors: [
-		OutcomeParserBehavior
+		window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior,
+		OutcomeParserBehavior,
 	],
 
 	properties: {
@@ -260,8 +262,7 @@ Polymer({
 			computed: '_getNextLevel(currentLevel)'
 		},
 		_isSelected: {
-			type: Boolean,
-			value: false
+			type: Boolean
 		},
 		parentNode: {
 			type: Object
@@ -283,6 +284,14 @@ Polymer({
 		_ariaExpanded: {
 			type: String,
 			computed: '_getAriaExpanded(item, _collapsed)'
+		},
+		_headerAriaLabel: {
+			type: String,
+			computed: '_computeHeaderAriaLabel(item, _collapsed, currentLevel)',
+		},
+		_leafAriaLabel: {
+			type: String,
+			computed: '_computeLeafAriaLabel(item, _isSelected)',
 		}
 	},
 
@@ -380,9 +389,9 @@ Polymer({
 	},
 
 	_setAriaSelected: function(item, _isSelected) {
-		if (!item || !item.class || !this._isLeafNode(item)) {
+		if (!item || !item.class) {
 			this._ariaSelected = undefined;
-		} else if (_isSelected) {
+		} else if (_isSelected || !this._isLeafNode(item)) {
 			this._ariaSelected = 'true';
 		} else {
 			this._ariaSelected = 'false';
@@ -664,5 +673,58 @@ Polymer({
 		} else {
 			this.focus();
 		}
+	},
+
+	_computeHeaderAriaLabel: function(item, collapsed, level) {
+		if (!item || !item.properties || collapsed === undefined) return undefined;
+
+		const name = this.getOutcomeIdentifier(item);
+		const status = collapsed ? 'collapsed' : 'expanded';
+
+		return this.localize('a11yHeaderAriaLabel',
+			'level', level,
+			'status', this.localize(status),
+			'name', name
+		);
+	},
+
+	_computeLeafAriaLabel: function(item, selected) {
+		if (!item || !item.properties || selected === undefined) return undefined;
+
+		const shortCode = this.getOutcomeIdentifier(item) || '';
+		const description = this.getOutcomeDescriptionPlainText(item) || '';
+		const status = selected ? 'selected' : 'notSelected';
+
+		return this.localize('a11yLeafAriaLabel',
+			'shortCode', shortCode,
+			'status', this.localize(status),
+			'description', description
+		);
+	},
+
+	_getOutcomeIdentifier(entity, searchText) {
+		let content = this.getOutcomeIdentifier(entity);
+		if (!content || !searchText) return content;
+
+		const escapeRegExp = (s) => s.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&');
+		const searchWords = [...new Set(searchText.split(' ').filter(i => i))];
+		if (searchWords.indexOf('b') > 0) { // 'b' has to be the first item, otherwise all <b> tag will be messed up
+			searchWords.splice(searchWords.indexOf('b'), 1);
+			searchWords.unshift('b');
+		}
+		const dedupWords = searchWords.filter(item => {
+			for (const i of searchWords) {
+				if (i !== item && i.indexOf(item) > -1) {
+					return false;
+				}
+			}
+			return true;
+		});
+
+		for (const i of dedupWords) {
+			const searchRegex = new RegExp(escapeRegExp(i), 'ig');
+			content = content.replace(searchRegex, '<b>$&</b>');
+		}
+		return content;
 	}
 });

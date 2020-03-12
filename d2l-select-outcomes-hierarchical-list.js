@@ -166,10 +166,10 @@ Polymer({
 		const description = this.getOutcomeDescriptionPlainText(entity).toLowerCase().normalize();
 		const notation = this.getOutcomeIdentifier(entity).toLowerCase().normalize();
 		const searchTextLower = searchText.trim().toLowerCase().normalize();
-		const splitText = searchTextLower.split(' ').filter(i => i);
+		const searchWords = [...new Set(searchTextLower.split(' ').filter(i => i))];
 
 		const containsText = (i) => description.indexOf(i) > -1 || notation.indexOf(i) > -1;
-		return splitText.every(containsText);
+		return searchWords.every(containsText);
 	},
 
 	_filterHierachy: function(entity, searchText) {
@@ -192,10 +192,23 @@ Polymer({
 		if (!entity || !searchText) return entity;
 
 		const escapeRegExp = (s) => s.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&');
-		for (const i of searchText.split(' ').filter(i => i)) {
+		const searchWords = [...new Set(searchText.split(' ').filter(i => i))];
+		if (searchWords.indexOf('b') > 0) { // 'b' has to be the first item, otherwise all <b> tag will be messed up
+			searchWords.splice(searchWords.indexOf('b'), 1);
+			searchWords.unshift('b');
+		}
+		const dedupWords = searchWords.filter(item => {
+			for (const i of searchWords) {
+				if (i !== item && i.indexOf(item) > -1) {
+					return false;
+				}
+			}
+			return true;
+		});
+
+		for (const i of dedupWords) {
 			const searchRegex = new RegExp(escapeRegExp(i), 'ig');
 			entity.properties.description = entity.properties.description.replace(searchRegex, '<b>$&</b>');
-			entity.properties.notation = entity.properties.notation.replace(searchRegex, '<b>$&</b>');
 		}
 		return entity;
 	},

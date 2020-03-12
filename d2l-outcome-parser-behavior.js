@@ -30,7 +30,7 @@ const OutcomeParserBehavior = {
 	},
 
 	getOutcomeIdentifier: function(outcomeEntity) {
-		if (!outcomeEntity) {
+		if (!outcomeEntity || !outcomeEntity.properties) {
 			return;
 		}
 
