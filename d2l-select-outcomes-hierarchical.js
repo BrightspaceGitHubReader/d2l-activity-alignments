@@ -61,7 +61,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 			.d2l-hierarchical-list {
 				overflow: auto;
 				overflow-x: hidden;
-				height: 85%;
+				height: 520px;
 				border: 1px solid var(--d2l-color-gypsum);
 			}
 			.d2l-selected-outcomes {

@@ -39,7 +39,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			}
 
 			.d2l-outcome-heading > * {
-				margin: -3px 0px 0px 5px !important;
+				margin: -6px 0px 0px 5px !important;
 				@apply --d2l-heading-3;
 			}
 
