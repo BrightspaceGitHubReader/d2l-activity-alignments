@@ -75,7 +75,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 			}
 
 			.search-result-number {
-				margin-bottom: 24px;
+				margin-bottom: 12px;
+				margin-top: -12px;
 				@apply --d2l-body-standard;
 			}
 			
