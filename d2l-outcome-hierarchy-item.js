@@ -38,20 +38,22 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 				width: 100%;
 			}
 
+			.d2l-outcome-heading {
+				margin-top: 10px;
+			}
+
 			.d2l-outcome-heading > * {
 				margin: -6px 0px 0px 5px !important;
 				@apply --d2l-heading-3;
 			}
 
 			.d2l-collapsible-node {
-				height: 36px;
 				display: flex;
 				background-color: #F9FBFF;
 			}
 
 			.node-header-content {
-				display: flex;
-				margin-top: 10px;
+				display: -webkit-inline-box;
 				margin-left: var(--sublevel-cell-margin);
 			}
 
@@ -73,6 +75,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			}
 
 			d2l-icon {
+				margin-top: 6px;
 				margin-right: 8px;
 			}
 
@@ -151,10 +154,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 						<div class="node-header-content">
 							<d2l-icon icon="[[_collapseIcon]]"></d2l-icon>
 							<div class="d2l-outcome-heading">
-								<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
-									<h4>[[getOutcomeIdentifier(item)]]</h4>
-								</template>
-								<template is="dom-if" if="[[!_hasOutcomeIdentifier(item)]]">
+								<template is="dom-if" if="[[_hasOutcomeDescription(item)]]">
 									<h4>[[getOutcomeDescriptionPlainText(item)]]</h4>
 								</template>
 							</div>
@@ -432,6 +432,10 @@ Polymer({
 
 	_hasOutcomeIdentifier: function(entity) {
 		return !!this.getOutcomeIdentifier(entity);
+	},
+
+	_hasOutcomeDescription: function(entity) {
+		return !!this.getOutcomeDescriptionPlainText(entity);
 	},
 
 	_expandCollapse: function(event) {
