@@ -25,6 +25,11 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 			:host {
 				display: flex;
 			}
+
+			* {
+				outline: none;
+			}
+
 			.d2l-select-outcomes-hierarchical-main {
 				width: 100%;
 				display: block;

@@ -15,6 +15,7 @@ import 'd2l-loading-spinner/d2l-loading-spinner.js';
 import 'd2l-polymer-siren-behaviors/siren-entity-loading.js';
 import 'd2l-typography/d2l-typography-shared-styles.js';
 import 'd2l-button/d2l-button.js';
+import '@polymer/iron-collapse/iron-collapse.js';
 import 's-html/s-html.js';
 import './d2l-bold-text-wrapper.js';
 import './localize-behavior.js';
@@ -31,6 +32,10 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 				--sublevel-cell-margin: 6px;
 			}
 
+			* {
+				outline: none;
+			}
+
 			.d2l-outcome-wrap {
 				display: flex;
 				flex-direction: column-reverse;
@@ -40,21 +45,26 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 
 			.d2l-outcome-heading {
 				margin-top: 10px;
+				margin-right: 24px;
+				line-height: 32px;
 			}
 
 			.d2l-outcome-heading > * {
 				margin: -6px 0px 0px 5px !important;
-				@apply --d2l-heading-3;
+				font-size: var(--d2l-heading-4_-_font-size);
+				font-weight: var(--d2l-heading-4_-_font-weight);
 			}
 
 			.d2l-collapsible-node {
 				display: flex;
-				background-color: #F9FBFF;
+				background-color: var(--non-leaf-background);
+				border: var(--leaf-border);
 			}
 
 			.node-header-content {
 				display: -webkit-inline-box;
 				margin-left: var(--sublevel-cell-margin);
+				line-height: 28px;
 			}
 
 			.d2l-outcome-identifier {
@@ -86,6 +96,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 				word-break: break-word;
 				margin-bottom: 0px;
 				margin-block-start: 0em;
+				transition:visibility 0.3s linear,opacity 0.3s linear;
 			}
 
 			li {
@@ -116,10 +127,14 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
                 border-bottom-color: var(--d2l-color-gypsum);
 			}
 
-			d2l-outcome-hierarchy-item {
+			.leaf-node-container {
 				background-color: var(--leaf-background-colour);
 				border: var(--leaf-border);
-				margin:-2px;
+				margin: -2px;
+			}
+
+			#children-collapse {
+				--iron-collapse-transition-duration: 200ms;
 			}
 
 		</style>
@@ -130,7 +145,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			aria-selected$="[[_ariaSelected]]"
 			aria-expanded$="[[_ariaExpanded]]">
 			<template is="dom-if" if="[[_isLeafNode(item)]]">
-				<div>
+				<div class="leaf-node-container">
 					<d2l-input-checkbox id="checkbox" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
 						<div class="d2l-outcome-wrap" aria-label$="[[_leafAriaLabel]]">
 							<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
@@ -160,8 +175,8 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 							</div>
 						</div>
 					</div>
-					<template is="dom-if" if="[[!_collapsed]]">
-						<ul role="group">
+					<iron-collapse opened$=[[!_collapsed]] id="children-collapse">
+						<ul>
 							<template is="dom-repeat" items="[[_children]]" index-as="outcomesIndex">
 								<li class$="[[_getCellClass(item)]]" tabindex="-1">
 									<d2l-outcome-hierarchy-item
@@ -185,7 +200,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 								</li>
 							</template>
 						</ul>
-					</template>
+					</iron-collapse>
 				</div>
 			</template>
 			<template is="dom-if" if="[[_isHierarchyStart(item)]]">
@@ -319,7 +334,8 @@ Polymer({
 
 		const marginLeft = 12 * this.currentLevel;
 		this.updateStyles({
-			'--leaf-border': '2px solid transparent'
+			'--leaf-border': '2px solid transparent',
+			'--non-leaf-background': '#F9FBFF',
 		});
 		if (this._isSelected) {
 			this.updateStyles({
@@ -353,7 +369,9 @@ Polymer({
 		} else {
 			const elem = this.shadowRoot.getElementById('container');
 			if (elem) {
-				elem.focus();
+				elem.focus({
+					preventScroll: true
+				});
 			}
 		}
 		const event = new CustomEvent('focus-child');
@@ -361,7 +379,8 @@ Polymer({
 		this.dispatchEvent(event);
 
 		this.updateStyles({
-			'--leaf-border': '2px solid var(--d2l-color-celestine-plus-1)'
+			'--leaf-border': '2px solid var(--d2l-color-celestine-plus-1)',
+			'--non-leaf-background': 'var(--d2l-color-celestine-plus-2)',
 		});
 
 		this._focus = true;
@@ -371,7 +390,8 @@ Polymer({
 
 	onBlur: function() {
 		this.updateStyles({
-			'--leaf-border': '2px solid transparent'
+			'--leaf-border': '2px solid transparent',
+			'--non-leaf-background': '#F9FBFF',
 		});
 		this._blurContainer();
 		this._focus = false;
@@ -613,13 +633,14 @@ Polymer({
 		this.dispatchEvent(event);
 	},
 
-	_focusSelf: function() {
+	_focusSelf: function(e) {
 		this._blurContainer();
 		if (this._isHierarchyStart(this.item)) {
-			this._selectFirstNode();
-		} else {
-			this.focus();
+			return this._selectFirstNode();
 		}
+		e ? this.focus() : this.focus({
+			preventScroll: true
+		});
 	},
 
 	_onFocusChild: function(e) {
@@ -681,8 +702,7 @@ Polymer({
 
 	_computeHeaderAriaLabel: function(item, collapsed, level) {
 		if (!item || !item.properties || collapsed === undefined) return undefined;
-
-		const name = this.getOutcomeIdentifier(item);
+		const name = this.getOutcomeDescriptionPlainText(item);
 		const status = collapsed ? 'collapsed' : 'expanded';
 
 		return this.localize('a11yHeaderAriaLabel',
