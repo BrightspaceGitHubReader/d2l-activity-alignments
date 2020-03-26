@@ -1,6 +1,6 @@
 {
    "a11yHeaderAriaLabel" : "Nível de árvore {level} – {status} – {name}",
-   "a11yLeafAriaLabel" : "Folha de árvore {shortcode} – {status} – {description}",
+   "a11yLeafAriaLabel" : "Folha de árvore {shortCode} – {status} – {description}",
    "add" : "Adicionar",
    "addLabel" : "Adicionar seleção",
    "alignmentRemoved" : "Alinhamento removido",

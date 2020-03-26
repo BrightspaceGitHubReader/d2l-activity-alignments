@@ -10,27 +10,27 @@ window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.Polymer
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangEsBehavior = {
 	es: {
-		'a11yHeaderAriaLabel': 'Tree level {level} - {status} - {name}',
-		'a11yLeafAriaLabel': 'Tree leaf {shortCode} - {status} - {description}',
+		'a11yHeaderAriaLabel': 'Nivel de árbol {level}: {status}: {name}',
+		'a11yLeafAriaLabel': 'Hoja de árbol {shortCode}: {status}: {description}',
 		'add': 'Agregar',
 		'addLabel': 'Agregar selección',
 		'alignmentRemoved': 'Alineación eliminada',
 		'cancel': 'Cancelar',
 		'cancelLabel': 'Cancelar selección',
-		'collapsed': 'collapsed',
+		'collapsed': 'contraído',
 		'directAlignments': '{headerTitle} alineado directamente con esta actividad',
 		'error': 'Se produjo un error',
-		'expanded': 'expanded',
+		'expanded': 'expandido',
 		'indirectAlignments': '{headerTitle} alineado con los criterios de la rúbrica',
-		'noSearchResultFor': 'No results found for "{searchText}"',
-		'notSelected': 'not selected',
-		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
+		'noSearchResultFor': 'No se encontraron resultados para “{searchText}”',
+		'notSelected': 'no seleccionado',
+		'outcomesHierarchicalTree': 'Árbol jerárquico de resultados',
 		'removeAlignment': 'Quitar la alineación',
-		'searchCleared': 'Search cleared',
-		'searchOutcomes': 'Search Outcomes',
-		'searchPlaceholder': 'Search...',
-		'searchResultFor': '{numOfResults} search results for "{searchText}"',
-		'searchResultsNumber': '{numOfResults} search results',
-		'selected': 'selected '
+		'searchCleared': 'Se borró la búsqueda',
+		'searchOutcomes': 'Buscar resultados',
+		'searchPlaceholder': 'Buscar…',
+		'searchResultFor': '{numOfResults} resultados de búsqueda para “{searchText}”',
+		'searchResultsNumber': '{numOfResults} resultados de búsqueda',
+		'selected': 'seleccionado'
 	}
 };

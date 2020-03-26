@@ -10,27 +10,27 @@ window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.Polymer
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangNlBehavior = {
 	nl: {
-		'a11yHeaderAriaLabel': 'Tree level {level} - {status} - {name}',
-		'a11yLeafAriaLabel': 'Tree leaf {shortCode} - {status} - {description}',
+		'a11yHeaderAriaLabel': 'Structuurniveau {level} - {status} - {name}',
+		'a11yLeafAriaLabel': 'Structuurblad {shortCode} - {status} - {description}',
 		'add': 'Toevoegen',
 		'addLabel': 'Selectie toevoegen',
 		'alignmentRemoved': 'Afstemming verwijderd',
 		'cancel': 'Annuleren',
 		'cancelLabel': 'Selectie annuleren',
-		'collapsed': 'collapsed',
+		'collapsed': 'samengevouwen',
 		'directAlignments': '{headerTitle} rechtstreeks afgestemd op deze activiteit',
 		'error': 'Er is een fout opgetreden',
-		'expanded': 'expanded',
+		'expanded': 'uitgevouwen',
 		'indirectAlignments': '{headerTitle} afgestemd op rubriccriteria',
-		'noSearchResultFor': 'No results found for "{searchText}"',
-		'notSelected': 'not selected',
-		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
+		'noSearchResultFor': 'Geen resultaten gevonden voor "{searchText}"',
+		'notSelected': 'niet geselecteerd',
+		'outcomesHierarchicalTree': 'Hiërarchische structuur voor uitkomsten',
 		'removeAlignment': 'Afstemming verwijderen',
-		'searchCleared': 'Search cleared',
-		'searchOutcomes': 'Search Outcomes',
-		'searchPlaceholder': 'Search...',
-		'searchResultFor': '{numOfResults} search results for "{searchText}"',
-		'searchResultsNumber': '{numOfResults} search results',
-		'selected': 'selected '
+		'searchCleared': 'Zoekopdracht gewist',
+		'searchOutcomes': 'Resultaten zoekopdracht',
+		'searchPlaceholder': 'Zoeken...',
+		'searchResultFor': '{numOfResults} zoekresultaten voor "{searchText}"',
+		'searchResultsNumber': '{numOfResults} zoekresultaten',
+		'selected': 'geselecteerd'
 	}
 };

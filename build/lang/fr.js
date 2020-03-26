@@ -10,27 +10,27 @@ window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.Polymer
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangFrBehavior = {
 	fr: {
-		'a11yHeaderAriaLabel': 'Tree level {level} - {status} - {name}',
-		'a11yLeafAriaLabel': 'Tree leaf {shortCode} - {status} - {description}',
+		'a11yHeaderAriaLabel': 'Niveau de l\'arborescence {level} – {status} – {name}',
+		'a11yLeafAriaLabel': 'Élément de l\'arbre {shortCode} – {status} – {description}',
 		'add': 'Ajouter',
 		'addLabel': 'Ajouter la sélection',
 		'alignmentRemoved': 'Alignement supprimé',
 		'cancel': 'Annuler',
 		'cancelLabel': 'Annuler la sélection',
-		'collapsed': 'collapsed',
+		'collapsed': 'réduit(e)',
 		'directAlignments': '{headerTitle} aligné directement avec cette activité',
 		'error': 'Une erreur est survenue',
-		'expanded': 'expanded',
+		'expanded': 'développé(e)',
 		'indirectAlignments': '{headerTitle} aligné avec les critères de la grille d’évaluation',
-		'noSearchResultFor': 'Aucun résultat trouvé pour "{searchText}"',
-		'notSelected': 'not selected',
-		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
+		'noSearchResultFor': 'Aucun résultat trouvé pour "{searchText}".',
+		'notSelected': 'non sélectionné(e)',
+		'outcomesHierarchicalTree': 'Résultats de l\'arborescence hiérarchique',
 		'removeAlignment': 'Supprimer l’alignement',
 		'searchCleared': 'Recherche effacée',
-		'searchOutcomes': 'Résultats de recherche',
-		'searchPlaceholder': 'Chercher...',
-		'searchResultFor': '{numOfResults} Résultats de recherche pour "{searchText}"',
-		'searchResultsNumber': '{numOfResults} résultats de recherche',
-		'selected': 'selected '
+		'searchOutcomes': 'Résultats de la recherche',
+		'searchPlaceholder': 'Rechercher…',
+		'searchResultFor': '{numOfResults} résultat(s) de la recherche pour "{searchText}"',
+		'searchResultsNumber': '{numOfResults} résultat(s) de la recherche',
+		'selected': 'sélectionné(s)'
 	}
 };

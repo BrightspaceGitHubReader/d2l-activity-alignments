@@ -10,27 +10,27 @@ window.D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior = window.D2L.Polymer
  */
 D2L.PolymerBehaviors.SelectOutcomes.LocalizeBehavior.LangTrBehavior = {
 	tr: {
-		'a11yHeaderAriaLabel': 'Tree level {level} - {status} - {name}',
-		'a11yLeafAriaLabel': 'Tree leaf {shortCode} - {status} - {description}',
+		'a11yHeaderAriaLabel': 'Ağaç seviyesi {level} - {status} - {name}',
+		'a11yLeafAriaLabel': 'Ağaç yaprağı {shortCode} - {status} - {description}',
 		'add': 'Ekle',
 		'addLabel': 'Seçimi ekle',
 		'alignmentRemoved': 'Hizalama kaldırıldı',
 		'cancel': 'İptal',
 		'cancelLabel': 'Seçimi iptal et',
-		'collapsed': 'collapsed',
+		'collapsed': 'daraltılmış',
 		'directAlignments': '{headerTitle} Doğrudan Bu Etkinliğe Hizalandı',
 		'error': 'Bir hata oluştu',
-		'expanded': 'expanded',
+		'expanded': 'genişletilmiş',
 		'indirectAlignments': '{headerTitle} Rubrik Kriterlerine Hizalandı',
-		'noSearchResultFor': 'No results found for "{searchText}"',
-		'notSelected': 'not selected',
-		'outcomesHierarchicalTree': 'Outcomes Hierarchical Tree',
+		'noSearchResultFor': '"{searchText}" için hiçbir sonuç bulunamadı',
+		'notSelected': 'seçili değil',
+		'outcomesHierarchicalTree': 'Kazanımlar Hiyerarşik Ağacı',
 		'removeAlignment': 'Hizalamayı kaldır',
-		'searchCleared': 'Search cleared',
-		'searchOutcomes': 'Search Outcomes',
-		'searchPlaceholder': 'Search...',
-		'searchResultFor': '{numOfResults} search results for "{searchText}"',
-		'searchResultsNumber': '{numOfResults} search results',
-		'selected': 'selected '
+		'searchCleared': 'Arama temizlendi',
+		'searchOutcomes': 'Kazanımları Ara',
+		'searchPlaceholder': 'Ara...',
+		'searchResultFor': '"{searchText}" için {numOfResults} arama sonucu',
+		'searchResultsNumber': '{numOfResults} arama sonucu',
+		'selected': 'seçildi'
 	}
 };
