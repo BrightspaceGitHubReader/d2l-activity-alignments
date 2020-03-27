@@ -2,7 +2,7 @@
   "description": "",
   "homepage": "https://github.com/Brightspace/d2l-activity-alignments",
   "name": "d2l-activity-alignments",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "main": "index.js",
   "scripts": {
     "lang:build": "lang-build -ec langtools/config.json",
