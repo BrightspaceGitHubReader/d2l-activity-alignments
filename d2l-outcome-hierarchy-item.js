@@ -482,7 +482,7 @@ Polymer({
 	},
 
 	_getIndeterminate: function(item) {
-		return this.partialAlignments.has(this.item.properties.objectiveId);
+		return this.partialAlignments.has(item.properties.objectiveId);
 	},
 
 	_redrawIcon: function(_collapsed) {
