@@ -67,6 +67,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 						tabindex="0"
 						item="[[displayedHierarchyItems]]"
 						alignments="[[alignments]]"
+						partial-alignments="[[partialAlignments]]"
 						current-level="[[level]]"
 						search-text="[[searchText]]"
 					></d2l-outcome-hierarchy-item>
@@ -92,6 +93,10 @@ Polymer({
 
 	properties: {
 		alignments: {
+			type: Set
+		},
+
+		partialAlignments: {
 			type: Set
 		},
 
