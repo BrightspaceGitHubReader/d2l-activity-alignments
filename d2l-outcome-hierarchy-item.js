@@ -146,7 +146,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 			aria-expanded$="[[_ariaExpanded]]">
 			<template is="dom-if" if="[[_isLeafNode(item)]]">
 				<div class="leaf-node-container">
-					<d2l-input-checkbox id="checkbox" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
+					<d2l-input-checkbox id="checkbox" tabindex="-1" not-tabbable="true" checked="[[_isSelected]]" indeterminate="[[_getIndeterminate(item)]]" on-change="_onOutcomeSelectChange" data-index$="[[index]]" >
 						<div class="d2l-outcome-wrap" aria-label$="[[_leafAriaLabel]]">
 							<template is="dom-if" if="[[_hasOutcomeIdentifier(item)]]">
 								<div class="d2l-outcome-identifier">
@@ -185,6 +185,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 										index="[[outcomesIndex]]"
 										tabindex="-1"
 										alignments="[[alignments]]"
+										partial-alignments="[[partialAlignments]]"
 										current-level="[[_nextLevel]]"
 										parentNode="[[root]]"
 										is-last="[[_getOutcomeIsLast(outcomesIndex)]]"
@@ -218,6 +219,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-outcome-hierarchy-i
 									index="[[outcomesIndex]]"
 									tabindex="-1"
 									alignments="[[alignments]]"
+									partial-alignments="[[partialAlignments]]"
 									current-level="[[_nextLevel]]"
 									parentNode="[[root]]"
 									is-last="[[_getOutcomeIsLast(outcomesIndex)]]"
@@ -254,6 +256,9 @@ Polymer({
 			type: Object
 		},
 		alignments: {
+			type: Set
+		},
+		partialAlignments: {
 			type: Set
 		},
 		_children: {
@@ -476,6 +481,10 @@ Polymer({
 		}
 	},
 
+	_getIndeterminate: function(item) {
+		return this.partialAlignments.has(item.properties.objectiveId);
+	},
+
 	_redrawIcon: function(_collapsed) {
 		return _collapsed ? 'd2l-tier1:arrow-expand' : 'd2l-tier1:arrow-collapse';
 	},
@@ -488,12 +497,14 @@ Polymer({
 				'--leaf-background-colour': 'var(--d2l-color-celestine-plus-2)',
 			});
 			this.alignments.add(this.item.properties.objectiveId);
+			this.partialAlignments.delete(this.item.properties.objectiveId);
 		} else {
 			this._isSelected = false;
 			this.updateStyles({
 				'--leaf-background-colour': 'transparent',
 			});
 			this.alignments.delete(this.item.properties.objectiveId);
+			this.partialAlignments.delete(this.item.properties.objectiveId);
 		}
 
 		this.dispatchEvent(new CustomEvent('d2l-alignment-list-changed', {

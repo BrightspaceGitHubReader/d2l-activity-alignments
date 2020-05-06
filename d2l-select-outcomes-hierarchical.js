@@ -105,6 +105,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes-hie
 					href="[[_getHierarchy(entity)]]"
 					token="[[token]]"
 					alignments="[[_alignments]]"
+					partial-alignments="[[_partialAlignments]]"
 					search-text="[[_searchText]]"
 					on-search-results-changed="_onSearchResultsChanged"
 					
@@ -143,6 +144,10 @@ Polymer({
 		_alignments: {
 			type: Map,
 			computed: '_getAlignments(entity)'
+		},
+		_partialAlignments: {
+			type: Map,
+			computed: '_getPartialAlignments(entity)'
 		},
 		_loading: {
 			type: Boolean,
@@ -222,6 +227,14 @@ Polymer({
 		}
 	},
 
+	_getPartialAlignments: function(entity) {
+		if (entity && entity.properties.partialDirectAlignments) {
+			return new Set(entity.properties.partialDirectAlignments);
+		} else {
+			return new Set();
+		}
+	},
+
 	_getAlignmentsSize: function(alignments) {
 		this._alignmentsSize = alignments.size;
 	},
@@ -236,8 +249,10 @@ Polymer({
 	_add: function() {
 		this._buttonsDisabled = true;
 		var action = this.entity.getActionByName('save-alignments');
-		var actionParam = action.getFieldByName('alignments');
-		actionParam.value = Array.from(this._alignments);
+		var alignmentsAction = action.getFieldByName('alignments');
+		alignmentsAction.value = Array.from(this._alignments);
+		var partialAlignmentsAction = action.getFieldByName('partialDirectAlignments');
+		partialAlignmentsAction.value = Array.from(this._partialAlignments);
 
 		this.performSirenAction(action)
 			.then(function() {
