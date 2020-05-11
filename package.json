@@ -41,7 +41,7 @@
     "type-detect": "1.0.0"
   },
   "dependencies": {
-    "@brightspace-ui-labs/multi-select": "^3",
+    "@brightspace-ui-labs/multi-select": "BrightspaceUILabs/multi-select#semver:^3",
     "@polymer/iron-a11y-announcer": "^3.0.2",
     "@polymer/polymer": "^3.0.0",
     "@polymer/iron-collapse": "^3.0.1",
