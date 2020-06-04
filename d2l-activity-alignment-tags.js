@@ -37,6 +37,10 @@ class ActivityAlignmentTags extends mixinBehaviors([
 				type: String,
 				value: null,
 				reflectToAttribute: true
+			},
+			deferredSave: {
+				type: Boolean,
+				value: false
 			}
 		};
 	}
@@ -57,6 +61,7 @@ class ActivityAlignmentTags extends mixinBehaviors([
 					read-only="[[readOnly]]"
 					empty="{{_tagListIsEmpty}}"
 					browse-outcomes-text="[[browseOutcomesText]]"
+					deferred-save="[[deferredSave]]"
 				></d2l-activity-alignment-tag-list>
 			</template>
 			<template is="dom-if" if="[[_showError]]">
