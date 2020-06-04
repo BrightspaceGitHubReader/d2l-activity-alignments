@@ -46,6 +46,10 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 				type: String,
 				value: null,
 				reflectToAttribute: true
+			},
+			deferredSave: {
+				type: Boolean,
+				value: false
 			}
 		};
 	}
@@ -178,7 +182,8 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 	_removeOutcome(event) {
 		const alignment = this._alignmentMap[event.model.item.alignmentHref];
 		if (!alignment) return;
-		const deleteAlignmentAction = alignment.getActionByName(this.HypermediaActions.alignments.removeAlignment);
+		const actionName = this.deferredSave ? this.HypermediaActions.alignments.deferredRemoveAlignment : this.HypermediaActions.alignments.removeAlignment;
+		const deleteAlignmentAction = alignment.getActionByName(actionName);
 		if (!deleteAlignmentAction) return;
 		this.performSirenAction(deleteAlignmentAction);
 	}
