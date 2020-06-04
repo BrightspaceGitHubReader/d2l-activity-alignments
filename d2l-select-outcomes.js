@@ -32,7 +32,7 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-select-outcomes">
 			}
 		</style>
 		<div class="d2l-select-outcomes-main">
-			<d2l-alignment-update empty="{{_alignmentsIsEmpty}}" href="[[_getAlignments(entity)]]" token="[[token]]"></d2l-alignment-update>
+			<d2l-alignment-update deferred-save="[[deferredSave]]" empty="{{_alignmentsIsEmpty}}" href="[[_getAlignments(entity)]]" token="[[token]]"></d2l-alignment-update>
 			<template is="dom-if" if="[[_showError]]">
 				<d2l-alert type="error">[[localize('error')]]</d2l-alert>
 			</template>
@@ -61,7 +61,10 @@ Polymer({
 			readOnly: true,
 			computed: '_isAlignmentsEmpty(_alignmentsIsEmpty)'
 		},
-
+		deferredSave: {
+			type: Boolean,
+			value: false
+		}
 	},
 
 	behaviors: [
