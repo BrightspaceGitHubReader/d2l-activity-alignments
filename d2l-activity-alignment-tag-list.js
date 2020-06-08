@@ -50,12 +50,24 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 			deferredSave: {
 				type: Boolean,
 				value: false
+			},
+			hideIndirectAlignments: {
+				type: Boolean,
+				value: false
 			}
 		};
 	}
 
 	static get template() {
 		return html`
+			<style>
+				[hidden] {
+					display: none;
+				}
+				d2l-labs-multi-select-list-item {
+					margin-top: 3px;
+				}
+			</style>
 			<d2l-labs-multi-select-list>
 				<template is="dom-repeat" items="[[_getAlignmentToOutcomeMap(_alignmentHrefs,_alignmentMap,_intentMap,_outcomeMap)]]">
 					<d2l-labs-multi-select-list-item
@@ -64,7 +76,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 						max-chars="40"
 						deletable="[[_canDelete(item,readOnly)]]"
 						on-d2l-labs-multi-select-list-item-deleted="_removeOutcome"
-						style="margin-top: 3px;"
+						hidden$="[[!_shouldShowAlignment(item, hideIndirectAlignments)]]"
 					></d2l-labs-multi-select-list-item>
 				</template>
 				<template is="dom-if" if="[[_canUpdate(entity,readOnly)]]">
@@ -203,6 +215,15 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 				}
 			)
 		);
+	}
+
+	_shouldShowAlignment(outcomeMapping, hideIndirectAlignments) {
+		if (hideIndirectAlignments) {
+			const alignment = this._alignmentMap[outcomeMapping.alignmentHref];
+			const isIndirectAlignment = alignment.properties && alignment.properties.relationshipType === 'referenced';
+			return !isIndirectAlignment;
+		}
+		return true;
 	}
 
 }
