@@ -40,7 +40,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 				type: Boolean,
 				notify: true,
 				readOnly: true,
-				computed: '_isEmptyList(_alignmentHrefs, _alignmentMap, _intentMap, _outcomeMap)'
+				computed: '_isEmptyList(_alignmentHrefs, _alignmentMap, _intentMap, _outcomeMap, hideIndirectAlignments)'
 			},
 			browseOutcomesText: {
 				type: String,
@@ -61,22 +61,18 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 	static get template() {
 		return html`
 			<style>
-				[hidden] {
-					display: none;
-				}
 				d2l-labs-multi-select-list-item {
 					margin-top: 3px;
 				}
 			</style>
 			<d2l-labs-multi-select-list>
-				<template is="dom-repeat" items="[[_getAlignmentToOutcomeMap(_alignmentHrefs,_alignmentMap,_intentMap,_outcomeMap)]]">
+				<template is="dom-repeat" items="[[_getAlignmentToOutcomeMap(_alignmentHrefs,_alignmentMap,_intentMap,_outcomeMap,hideIndirectAlignments)]]">
 					<d2l-labs-multi-select-list-item
 						text="[[_getOutcomeTextDescription(item)]]"
 						short-text="[[_getOutcomeShortDescription(item)]]"
 						max-chars="40"
 						deletable="[[_canDelete(item,readOnly)]]"
 						on-d2l-labs-multi-select-list-item-deleted="_removeOutcome"
-						hidden$="[[!_shouldShowAlignment(item, hideIndirectAlignments)]]"
 					></d2l-labs-multi-select-list-item>
 				</template>
 				<template is="dom-if" if="[[_canUpdate(entity,readOnly)]]">
@@ -149,11 +145,12 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 		);
 	}
 
-	_getAlignmentToOutcomeMap(alignmentHrefs, alignmentMap, intentMap, outcomeMap) {
+	_getAlignmentToOutcomeMap(alignmentHrefs, alignmentMap, intentMap, outcomeMap, hideIndirectAlignments) {
 		const mappings = [];
 		alignmentHrefs.forEach(alignmentHref => {
 			const alignment = alignmentMap[alignmentHref];
 			if (!alignment) return;
+			if (hideIndirectAlignments && this._isIndirectAlignment(alignment)) return;
 			const intent = intentMap[alignment.getLinkByRel(this.HypermediaRels.Outcomes.intent).href];
 			if (!intent) return;
 			const outcome = outcomeMap[intent.getLinkByRel(this.HypermediaRels.Outcomes.outcome).href];
@@ -166,8 +163,8 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 		return mappings;
 	}
 
-	_isEmptyList(alignmentHrefs, alignmentMap, intentMap, outcomeMap) {
-		return this._getAlignmentToOutcomeMap(alignmentHrefs, alignmentMap, intentMap, outcomeMap).length === 0;
+	_isEmptyList(alignmentHrefs, alignmentMap, intentMap, outcomeMap, hideIndirectAlignments) {
+		return this._getAlignmentToOutcomeMap(alignmentHrefs, alignmentMap, intentMap, outcomeMap, hideIndirectAlignments).length === 0;
 	}
 
 	_getOutcomeShortDescription(outcomeMapping) {
@@ -217,13 +214,8 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 		);
 	}
 
-	_shouldShowAlignment(outcomeMapping, hideIndirectAlignments) {
-		if (hideIndirectAlignments) {
-			const alignment = this._alignmentMap[outcomeMapping.alignmentHref];
-			const isIndirectAlignment = alignment.properties && alignment.properties.relationshipType === 'referenced';
-			return !isIndirectAlignment;
-		}
-		return true;
+	_isIndirectAlignment(alignment) {
+		return alignment && alignment.properties && alignment.properties.relationshipType === 'referenced';
 	}
 
 }
