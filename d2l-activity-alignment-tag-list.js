@@ -36,11 +36,16 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 			_alignmentMap: Object,
 			_intentMap: Object,
 			_outcomeMap: Object,
+			_mappings: {
+				type: Array,
+				value: [],
+				computed: '_getAlignmentToOutcomeMap(_alignmentHrefs, _alignmentMap, _intentMap, _outcomeMap, hideIndirectAlignments)'
+			},
 			empty: {
 				type: Boolean,
 				notify: true,
 				readOnly: true,
-				computed: '_isEmptyList(_alignmentHrefs, _alignmentMap, _intentMap, _outcomeMap, hideIndirectAlignments)'
+				computed: '_isEmptyList(_mappings)'
 			},
 			browseOutcomesText: {
 				type: String,
@@ -66,7 +71,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 				}
 			</style>
 			<d2l-labs-multi-select-list>
-				<template is="dom-repeat" items="[[_getAlignmentToOutcomeMap(_alignmentHrefs,_alignmentMap,_intentMap,_outcomeMap,hideIndirectAlignments)]]">
+				<template is="dom-repeat" items="[[_mappings]]">
 					<d2l-labs-multi-select-list-item
 						text="[[_getOutcomeTextDescription(item)]]"
 						short-text="[[_getOutcomeShortDescription(item)]]"
@@ -129,6 +134,12 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 		);
 
 		if (!entity) return [];
+
+		if (this.deferredSave) {
+			this._intentMap = {};
+			this._outcomeMap = {};
+		}
+
 		const alignmentEntities = entity.getSubEntitiesByClass('alignment');
 		return alignmentEntities.map(alignment => alignment.href);
 	}
@@ -146,6 +157,14 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 	}
 
 	_getAlignmentToOutcomeMap(alignmentHrefs, alignmentMap, intentMap, outcomeMap, hideIndirectAlignments) {
+		if (this.entity && this.deferredSave) {
+			const count = this.entity.getSubEntitiesByClass('alignment').length;
+
+			if (Object.keys(outcomeMap).length !== count || Object.keys(intentMap).length !== count) {
+				return this._mappings;
+			}
+		}
+
 		const mappings = [];
 		alignmentHrefs.forEach(alignmentHref => {
 			const alignment = alignmentMap[alignmentHref];
@@ -163,8 +182,8 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 		return mappings;
 	}
 
-	_isEmptyList(alignmentHrefs, alignmentMap, intentMap, outcomeMap, hideIndirectAlignments) {
-		return this._getAlignmentToOutcomeMap(alignmentHrefs, alignmentMap, intentMap, outcomeMap, hideIndirectAlignments).length === 0;
+	_isEmptyList(mappings) {
+		return mappings.length === 0;
 	}
 
 	_getOutcomeShortDescription(outcomeMapping) {
