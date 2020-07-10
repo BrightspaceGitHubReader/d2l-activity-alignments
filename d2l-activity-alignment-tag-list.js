@@ -136,6 +136,7 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 		if (!entity) return [];
 
 		if (this.deferredSave) {
+			this._alignmentMap = {};
 			this._intentMap = {};
 			this._outcomeMap = {};
 		}
