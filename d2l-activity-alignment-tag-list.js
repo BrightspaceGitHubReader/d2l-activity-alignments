@@ -135,13 +135,12 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 
 		if (!entity) return [];
 
-		if (this.deferredSave) {
-			this._alignmentMap = {};
-			this._intentMap = {};
-			this._outcomeMap = {};
+		const alignmentEntities = entity.getSubEntitiesByClass('alignment');
+
+		if (alignmentEntities.some(alignment => alignment.hasLinkByRel && alignment.hasLinkByRel('self'))) {
+			return alignmentEntities.map(alignment => alignment.getLinkByRel('self').href);
 		}
 
-		const alignmentEntities = entity.getSubEntitiesByClass('alignment');
 		return alignmentEntities.map(alignment => alignment.href);
 	}
 
@@ -158,14 +157,6 @@ class ActivityAlignmentTagList extends mixinBehaviors([
 	}
 
 	_getAlignmentToOutcomeMap(alignmentHrefs, alignmentMap, intentMap, outcomeMap, hideIndirectAlignments) {
-		if (this.entity && this.deferredSave) {
-			const count = this.entity.getSubEntitiesByClass('alignment').length;
-
-			if (Object.keys(outcomeMap).length !== count || Object.keys(intentMap).length !== count) {
-				return this._mappings;
-			}
-		}
-
 		const mappings = [];
 		alignmentHrefs.forEach(alignmentHref => {
 			const alignment = alignmentMap[alignmentHref];
