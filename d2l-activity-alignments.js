@@ -35,14 +35,14 @@ $_documentContainer.innerHTML = /*html*/`<dom-module id="d2l-activity-alignments
 			}
 		</style>
 		<div class="d2l-activity-alignments-main">
-			<template is="dom-if" if="[[_isUserActivityUsage(entity)]]">
+			<template is="dom-if" if="[[_isUserOrActorActivityUsage(entity)]]">
 				<d2l-user-alignment-list href="[[_getAlignments(entity)]]" token="[[token]]" read-only$="[[readOnly]]">
 					<slot name="outcomes-title" slot="outcomes-title"></slot>
 					<slot name="show-select-outcomes" slot="show-select-outcomes"></slot>
 					<slot name="describe-aligned-outcomes" slot="describe-aligned-outcomes"></slot>
 				</d2l-alignment-list>
 			</template>
-			<template is="dom-if" if="[[!_isUserActivityUsage(entity)]]">
+			<template is="dom-if" if="[[!_isUserOrActorActivityUsage(entity)]]">
 				<d2l-alignment-list href="[[_getAlignments(entity)]]" token="[[token]]" read-only$="[[readOnly]]" header-title="[[headerTitle]]">
 					<slot name="outcomes-title" slot="outcomes-title"></slot>
 					<slot name="show-select-outcomes" slot="show-select-outcomes"></slot>
@@ -102,11 +102,12 @@ Polymer({
 		return entity && entity.hasLinkByRel(Rels.Alignments.alignments) && entity.getLinkByRel(Rels.Alignments.alignments).href;
 	},
 
-	_isUserActivityUsage: function(entity) {
+	_isUserOrActorActivityUsage: function(entity) {
 		if (!entity) return undefined;
 		const selfLink = entity.getLinkByRel('self');
 		if (!selfLink) return undefined;
-		return selfLink.rel.some(rel => rel === Rels.Activities.userActivityUsage);
+		return selfLink.rel.some(rel => (rel === Rels.Activities.userActivityUsage ||
+			rel === Rels.Activities.actorActivityUsage));
 	}
 
 });
