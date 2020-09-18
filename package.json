@@ -14,7 +14,7 @@
     "test:lint:wc": "polymer lint",
     "serve": "FOR /F \"tokens=*\" %F IN ('hostname') DO polymer serve --hostname %F.desire2learn.d2l",
     "serve:local": "polymer serve",
-    "testcafe:chrome": "testcafe \"saucelabs:Chrome@73.0:Windows 10\" TestCafe/LOA_on_Outcomes.js --app \"polymer serve\"",
+    "testcafe:chrome": "testcafe \"saucelabs:Chrome@85.0:Windows 10\" TestCafe/LOA_on_Outcomes.js --app \"polymer serve\"",
     "testcafe:local:chrome": "testcafe chrome TestCafe/LOA_on_Outcomes.js --app \"polymer serve\""
   },
   "author": "D2L Corporation",
