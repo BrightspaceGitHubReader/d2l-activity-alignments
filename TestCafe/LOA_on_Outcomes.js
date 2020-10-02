@@ -5,7 +5,7 @@ fixture `Select`// eslint-disable-line no-undef
 	.beforeEach(async t => {
 		t.ctx.checkBox = Selector(() => {
 			const alignment = document.querySelector('d2l-select-outcomes').shadowRoot.querySelector('d2l-alignment-update').shadowRoot;
-			return alignment.querySelector('d2l-input-checkbox').shadowRoot.querySelector('label > input[type="checkbox"]');
+			return alignment.querySelector('d2l-input-checkbox').shadowRoot.querySelector('label input[type="checkbox"]');
 		});
 		t.ctx.addButton = Selector(() => {
 			const alignments = document.querySelector('d2l-select-outcomes').shadowRoot.querySelector('d2l-alignment-update').shadowRoot;

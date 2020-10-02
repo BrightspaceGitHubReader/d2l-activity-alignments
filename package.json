@@ -2,7 +2,7 @@
   "description": "",
   "homepage": "https://github.com/Brightspace/d2l-activity-alignments",
   "name": "d2l-activity-alignments",
-  "version": "2.0.20",
+  "version": "2.0.21",
   "main": "index.js",
   "scripts": {
     "lang:build": "lang-build -ec langtools/config.json",
@@ -41,7 +41,7 @@
     "type-detect": "1.0.0"
   },
   "dependencies": {
-    "@brightspace-ui-labs/multi-select": "BrightspaceUILabs/multi-select#semver:^3",
+    "@brightspace-ui-labs/multi-select": "BrightspaceUILabs/multi-select#semver:^4",
     "@polymer/iron-a11y-announcer": "^3.0.2",
     "@polymer/polymer": "^3.0.0",
     "@polymer/iron-collapse": "^3.0.1",
