@@ -7,7 +7,7 @@
    "cancel" : "Cancelar",
    "cancelLabel" : "Cancelar seleção",
    "collapsed" : "recolhido",
-   "directAlignments" : "{header-title} Alinhado diretamente a esta atividade",
+   "directAlignments" : "{headerTitle} Alinhado diretamente a esta atividade",
    "error" : "Ocorreu um erro",
    "expanded" : "expandido",
    "indirectAlignments" : "{headerTitle} Alinhado aos critérios de rubrica",
